@@ -35,4 +35,9 @@ class GamesTest < Minitest::Test
     assert_equal 20162017, @games.season_with_fewest_games
   end
 
+  def test_it_can_list_total_game_scores
+    game_scores = [5, 9, 9, 7, 4, 9]
+    assert_equal game_scores, @games.total_scores
+  end
+
 end

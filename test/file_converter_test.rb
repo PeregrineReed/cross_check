@@ -38,7 +38,3 @@ class FileConverterTest < Minitest::Test
   end
 
 end
-
-# file_name = './data/game_test.csv'
-# file_converter = FileConverter.new(file_name)
-# p file_converter.info_hash(file_name)
