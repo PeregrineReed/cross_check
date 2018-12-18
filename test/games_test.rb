@@ -49,7 +49,7 @@ class GamesTest < Minitest::Test
   end
 
   def test_it_can_find_the_largest_difference_in_scores
-    assert_equal 6, @games.blowout
+    assert_equal 3, @games.blowout
   end
 
 end

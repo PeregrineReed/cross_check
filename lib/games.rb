@@ -66,7 +66,11 @@ class Games
   end
 
   def blowout
-    max_score - min_score
+    hoa = home_game_scores.zip(away_game_scores)
+    hoa = hoa.map do |pair|
+      pair.max - pair.min
+    end
+    hoa.flatten.max
   end
 
 end
