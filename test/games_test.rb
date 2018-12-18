@@ -36,7 +36,7 @@ class GamesTest < Minitest::Test
   end
 
   def test_it_can_list_total_game_scores
-    game_scores = [5, 9, 9, 7, 4, 9]
+    game_scores = [5, 7, 3, 7, 4, 9]
     assert_equal game_scores, @games.total_scores
   end
 

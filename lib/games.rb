@@ -37,4 +37,12 @@ class Games
     season_games_count.key(least_games).to_s.to_i
   end
 
+  def total_scores
+    scores = []
+    @stats.values.each do |game_stats|
+      scores << (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
+    end
+    scores
+  end
+
 end
