@@ -62,4 +62,8 @@ class GamesTest < Minitest::Test
     assert_equal game_scores, @games.total_scores
   end
 
+  def test_it_can_list_all_venues
+    venues = ["TD Garden", "Madison Square Garden", "Amalie Arena", "PNC Arena", "MTS Centre"]
+    assert_equal venues, @games.venues
+  end
 end
