@@ -23,21 +23,21 @@ class GamesTest < Minitest::Test
 
   def test_it_can_list_all_seasons
     seasons = ["20122013", "20162017", "20172018",]
-    assert_equal seasons, @games.seasons
+    assert_equal seasons, @games.stat_collect(:season)
   end
 
   def test_it_can_count_games_by_season
     hash = {:"20122013" => 3, :"20172018" => 2, :"20162017" => 1}
 
-    assert_equal hash, @games.season_games_count
+    assert_equal hash, @games.stat_games_count(:season)
   end
 
   def test_it_can_determine_season_with_most_games
-    assert_equal 20122013, @games.season_with_most_games
+    assert_equal 20122013, @games.stat_with_most_games(:season)
   end
 
   def test_it_can_determine_season_with_fewest_games
-    assert_equal 20162017, @games.season_with_fewest_games
+    assert_equal 20162017, @games.stat_with_fewest_games(:season)
   end
 
   def test_it_can_list_total_game_scores
@@ -63,7 +63,7 @@ class GamesTest < Minitest::Test
   end
 
   def test_it_can_list_all_venues
-    venues = ["TD Garden", "Madison Square Garden", "Amalie Arena", "PNC Arena", "MTS Centre"]
-    assert_equal venues, @games.venues
+    venues = ["Amalie Arena", "MTS Centre", "Madison Square Garden", "PNC Arena", "TD Garden"]
+    assert_equal venues, @games.stat_collect(:venue)
   end
 end

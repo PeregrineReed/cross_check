@@ -6,40 +6,40 @@ class Games
     @stats = game_stats
   end
 
-  def season_games_count
-    season_games = {}
-    seasons.each do |season|
-      season = season.to_sym
-      season_games[season] = 0
+  def stat_games_count(stat)
+    games_collection = {}
+    stat_collect(stat).each do |collection|
+      collection = collection.to_sym
+      games_collection[collection] = 0
       @stats.values.each do |game_stats|
-        if game_stats[:season] == season.to_s
-          season_games[season] += 1
+        if game_stats[stat] == collection.to_s
+          games_collection[collection] += 1
         end
       end
     end
-    season_games
+    games_collection
   end
 
-  def seasons
-    seasons = []
+  def stat_collect(stat)
+    collection = []
     @stats.values.each do |game_stats|
       game_stats.each do |key, value|
-        if key == :season && !(seasons.include?(value))
-          seasons << value
+        if key == stat && !(collection.include?(value))
+          collection << value
         end
       end
     end
-    return seasons.sort
+    return collection.sort
   end
 
-  def season_with_most_games
-    most_games = season_games_count.values.max
-    season_games_count.key(most_games).to_s.to_i
+  def stat_with_most_games(stat)
+    most_games = stat_games_count(stat).values.max
+    stat_games_count(stat).key(most_games).to_s.to_i
   end
 
-  def season_with_fewest_games
-    least_games = season_games_count.values.min
-    season_games_count.key(least_games).to_s.to_i
+  def stat_with_fewest_games(stat)
+    least_games = stat_games_count(stat).values.min
+    stat_games_count(stat).key(least_games).to_s.to_i
   end
 
   def away_game_scores
@@ -77,5 +77,7 @@ class Games
     end
     hoa.flatten.max
   end
+
+
 
 end
