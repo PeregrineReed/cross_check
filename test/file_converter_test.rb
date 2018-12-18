@@ -30,8 +30,8 @@ class FileConverterTest < Minitest::Test
     ["2012030221","20122013","P","2013-05-16","3","6","2","3","home win OT","left","TD Garden","/api/v1/venues/null","America/New_York","-4","EDT"],
     ["2012030222","20122013","P","2013-05-19","3","6","2","5","home win REG","left","TD Garden","/api/v1/venues/null","America/New_York","-4","EDT"]]
 
-    hash = file_converter.info_hash(line_data)
-    # assert_equal {2012030221: {game_id: "2012030221"}, season: "20122013", }
+    hash = file_converter.info_hash(file_name)
+    #require 'pry';binding.pry
     assert_equal "20122013", hash[:"2012030221"][:season]
     assert_equal "2013-05-19", hash[:"2012030222"][:date_time]
     assert_equal "6", hash[:"2012030222"][:home_team_id]
