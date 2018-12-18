@@ -1,0 +1,19 @@
+{
+:"2012030221"=>
+	{:game_id=>"2012030221", :season=>"20122013", :type=>"P", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}, 
+
+:"2012030222"=>
+	{:game_id=>"2012030222", :season=>"20122013", :type=>"P", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}, 
+
+:"2012030223"=>
+	{:game_id=>"2012030223", :season=>"20122013", :type=>"P", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"2", :home_goals=>"1", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}, 
+
+:"2017020830"=>
+	{:game_id=>"2017020830", :season=>"20172018", :type=>"R", :date_time=>"2018-02-09", :away_team_id=>"23", :home_team_id=>"14", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"Amalie Arena", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}, 
+
+:"2017020227"=>
+	{:game_id=>"2017020227", :season=>"20172018", :type=>"R", :date_time=>"2017-11-08", :away_team_id=>"13", :home_team_id=>"12", :away_goals=>"1", :home_goals=>"3", :outcome=>"home win REG", :home_rink_side_start=>"right", :venue=>"PNC Arena", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}, 
+
+:"2016020050"=>
+	{:game_id=>"2016020050", :season=>"20162017", :type=>"R", :date_time=>"2016-10-20", :away_team_id=>"10", :home_team_id=>"52", :away_goals=>"4", :home_goals=>"5", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
+}
