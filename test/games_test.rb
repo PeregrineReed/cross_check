@@ -44,4 +44,8 @@ class GamesTest < Minitest::Test
     assert_equal 9, @games.max_score
   end
 
+  def test_it_can_find_the_min_game_score
+    assert_equal 3, @games.min_score
+  end
+
 end
