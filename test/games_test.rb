@@ -22,9 +22,13 @@ class GamesTest < Minitest::Test
   end
 
   def test_it_can_count_games_by_season
-    hash = {:"20122013" => 2, :"20172018" => 2, :"20162017" => 1}
+    hash = {:"20122013" => 3, :"20172018" => 2, :"20162017" => 1}
 
     assert_equal hash, @games.season_games_count
+  end
+
+  def test_it_can_determine_season_with_most_games
+    assert_equal 20122013, @games.season_with_most_games
   end
 
 end
