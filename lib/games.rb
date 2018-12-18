@@ -57,4 +57,8 @@ class Games
     hoa.flatten
   end
 
+  def max_score
+    total_scores.max
+  end
+
 end
