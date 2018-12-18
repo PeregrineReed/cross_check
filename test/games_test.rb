@@ -17,7 +17,7 @@ class GamesTest < Minitest::Test
   end
 
   def test_it_has_game_stats
-    keys = [:"2012030221", :"2012030222", :"2017020830", :"2017020227", :"2016020050"]
+    keys = [:"2012030221", :"2012030222", :"2012030223", :"2017020830", :"2017020227", :"2016020050"]
     assert_equal keys, @games.stats.keys
   end
 
@@ -29,6 +29,10 @@ class GamesTest < Minitest::Test
 
   def test_it_can_determine_season_with_most_games
     assert_equal 20122013, @games.season_with_most_games
+  end
+
+  def test_it_can_determine_season_with_fewest_games
+    assert_equal 20162017, @games.season_with_fewest_games
   end
 
 end

@@ -27,4 +27,14 @@ class Games
     season_games
   end
 
+  def season_with_most_games
+    most_games = season_games_count.values.max
+    season_games_count.key(most_games).to_s.to_i
+  end
+
+  def season_with_fewest_games
+    least_games = season_games_count.values.min
+    season_games_count.key(least_games).to_s.to_i
+  end
+
 end

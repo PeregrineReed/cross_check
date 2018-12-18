@@ -31,10 +31,14 @@ class FileConverterTest < Minitest::Test
     ["2012030222","20122013","P","2013-05-19","3","6","2","5","home win REG","left","TD Garden","/api/v1/venues/null","America/New_York","-4","EDT"]]
 
     hash = file_converter.info_hash(file_name)
-    require 'pry';binding.pry
+    #require 'pry';binding.pry
     assert_equal "20122013", hash[:"2012030221"][:season]
     assert_equal "2013-05-19", hash[:"2012030222"][:date_time]
     assert_equal "6", hash[:"2012030222"][:home_team_id]
   end
 
 end
+
+# file_name = './data/game_test.csv'
+# file_converter = FileConverter.new(file_name)
+# p file_converter.info_hash(file_name)
