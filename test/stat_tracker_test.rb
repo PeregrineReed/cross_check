@@ -2,9 +2,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/stat_tracker'
 require 'csv'
-# require './data/game_test'
-# require './data/team_info_test'
-# require './data/game_teams_stats_test'
 
 class StatTrackerTest < Minitest::Test
 
