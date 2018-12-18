@@ -61,4 +61,8 @@ class Games
     total_scores.max
   end
 
+  def min_score
+    total_scores.min
+  end
+
 end
