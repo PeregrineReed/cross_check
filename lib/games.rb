@@ -34,12 +34,20 @@ class Games
 
   def stat_with_most_games(stat)
     most_games = stat_games_count(stat).values.max
-    stat_games_count(stat).key(most_games).to_s.to_i
+    if stat == :season
+      stat_games_count(stat).key(most_games).to_s.to_i
+    elsif stat == :venue
+      stat_games_count(stat).key(most_games).to_s
+    end
   end
 
   def stat_with_fewest_games(stat)
     least_games = stat_games_count(stat).values.min
-    stat_games_count(stat).key(least_games).to_s.to_i
+    if stat == :season
+      stat_games_count(stat).key(least_games).to_s.to_i
+    elsif stat == :venue
+      stat_games_count(stat).key(least_games).to_s
+    end
   end
 
   def away_game_scores

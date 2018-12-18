@@ -66,4 +66,12 @@ class GamesTest < Minitest::Test
     venues = ["Amalie Arena", "MTS Centre", "Madison Square Garden", "PNC Arena", "TD Garden"]
     assert_equal venues, @games.stat_collect(:venue)
   end
+
+  def test_it_can_determine_venue_with_most_games
+    assert_equal "TD Garden", @games.stat_with_most_games(:venue)
+  end
+
+  def test_it_can_determine_venue_with_fewest_games
+    assert_equal "Amalie Arena", @games.stat_with_fewest_games(:venue)
+  end
 end
