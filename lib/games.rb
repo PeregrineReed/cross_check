@@ -37,12 +37,24 @@ class Games
     season_games_count.key(least_games).to_s.to_i
   end
 
-  def total_scores
-    scores = []
-    @stats.values.each do |game_stats|
-      scores << (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
+  def away_game_scores
+    @stats.values.map do |game_stats|
+      game_stats[:away_goals].to_i
     end
-    scores
+  end
+
+  def home_game_scores
+    @stats.values.map do |game_stats|
+      game_stats[:home_goals].to_i
+    end
+  end
+
+  def total_scores
+    hoa = home_game_scores.zip(away_game_scores)
+    hoa = hoa.map do |pair|
+      pair.sum
+    end
+    hoa.flatten
   end
 
 end
