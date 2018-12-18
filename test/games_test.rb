@@ -16,4 +16,15 @@ class GamesTest < Minitest::Test
     assert_instance_of Games, @games
   end
 
+  def test_it_has_game_stats
+    keys = [:"2012030221", :"2012030222", :"2017020830", :"2017020227", :"2016020050"]
+    assert_equal keys, @games.stats.keys
+  end
+
+  def test_it_can_count_games_by_season
+    hash = {:"20122013" => 2, :"20172018" => 2, :"20162017" => 1}
+
+    assert_equal hash, @games.season_games_count
+  end
+
 end
