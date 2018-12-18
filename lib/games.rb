@@ -65,4 +65,8 @@ class Games
     total_scores.min
   end
 
+  def blowout
+    max_score - min_score
+  end
+
 end
