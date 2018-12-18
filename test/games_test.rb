@@ -21,6 +21,11 @@ class GamesTest < Minitest::Test
     assert_equal keys, @games.stats.keys
   end
 
+  def test_it_can_list_all_seasons
+    seasons = ["20122013", "20162017", "20172018",]
+    assert_equal seasons, @games.seasons
+  end
+
   def test_it_can_count_games_by_season
     hash = {:"20122013" => 3, :"20172018" => 2, :"20162017" => 1}
 
@@ -50,6 +55,11 @@ class GamesTest < Minitest::Test
 
   def test_it_can_find_the_largest_difference_in_scores
     assert_equal 3, @games.blowout
+  end
+
+  def test_it_can_list_total_game_scores
+    game_scores = [5, 7, 3, 7, 4, 9]
+    assert_equal game_scores, @games.total_scores
   end
 
 end

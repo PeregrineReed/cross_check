@@ -7,16 +7,9 @@ class Games
   end
 
   def season_games_count
-    seasons = []
     season_games = {}
-    @stats.values.each do |game_stats|
-      game_stats.each do |key, value|
-        if key == :season && !(seasons.include?(value))
-          seasons << value.to_sym
-        end
-      end
-    end
     seasons.each do |season|
+      season = season.to_sym
       season_games[season] = 0
       @stats.values.each do |game_stats|
         if game_stats[:season] == season.to_s
@@ -25,6 +18,18 @@ class Games
       end
     end
     season_games
+  end
+
+  def seasons
+    seasons = []
+    @stats.values.each do |game_stats|
+      game_stats.each do |key, value|
+        if key == :season && !(seasons.include?(value))
+          seasons << value
+        end
+      end
+    end
+    return seasons.sort
   end
 
   def season_with_most_games
