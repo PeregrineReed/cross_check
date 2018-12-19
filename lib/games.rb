@@ -134,7 +134,14 @@ class Games
   end
 
   def away_wins_percent
-    100 - home_wins_percent
+    hoa = home_game_scores.zip(away_game_scores)
+    away_wins = 0
+    hoa.each do |pair|
+      if (pair[0] - pair[1]) < 0
+        away_wins += 1
+      end
+    end
+    (away_wins / @stats.count.to_f * 100).round(2)
   end
 
 
