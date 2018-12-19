@@ -79,13 +79,17 @@ class GamesTest < Minitest::Test
   def test_it_can_total_goals_by_season
     hash = {:"20122013" => 15, :"20162017" => 9, :"20172018" => 11}
 
-    assert_equal hash, @games.total_goals(:season)
+    assert_equal hash, @games.total_goals_season(:season)
   end
 
   def test_it_can_average_goals_by_season
     hash = {:"20122013" => 5, :"20162017" => 9, :"20172018" => 5.5}
 
-    assert_equal hash, @games.average_goals(:season)
+    assert_equal hash, @games.average_goals_season(:season)
+  end
+
+  def test_it_can_average_goals_per_game
+    assert_equal 5.83, @games.average_goals_game
   end
 
 
