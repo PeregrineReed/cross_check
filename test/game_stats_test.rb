@@ -57,8 +57,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_determine_season_with_most_games
-    skip
-    assert_equal 20122013, @game_stats.stat_with_most_games(:season)
+    assert_equal "20122013", @game_stats.season_with_most_games
   end
 
   def test_it_can_determine_season_with_fewest_games
