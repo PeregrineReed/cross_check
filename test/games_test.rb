@@ -106,8 +106,12 @@ class GamesTest < Minitest::Test
     assert_equal 6, @games.stats.count
   end
 
+  def test_it_can_calculate_percentage_of_home_wins
+    assert_equal 83.33, @games.home_wins_percent
+  end
 
-
-
+  def test_it_can_calculate_percentage_of_away_wins
+    assert_equal 16.67, @games.away_wins_percent
+  end
 
 end
