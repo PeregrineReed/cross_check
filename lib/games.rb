@@ -86,7 +86,7 @@ class Games
     hoa.flatten.max
   end
 
-  def average_goals(stat)
+  def total_goals(stat)
     goals_collection = {}
     stat_collect(stat).each do |collection|
       collection = collection.to_sym
@@ -100,6 +100,19 @@ class Games
     end
     goals_collection
   end
+
+  def average_goals(stat)
+    goals_collection = {}
+    stat_collect(stat).each do |collection|
+      collection = collection.to_sym
+      goals_collection[collection] = 0
+      average = total_goals(stat)[collection] / stat_games_count(stat)[collection].to_f
+      goals_collection[collection] = average
+    end
+    goals_collection
+  end
+
+
 
 
 
