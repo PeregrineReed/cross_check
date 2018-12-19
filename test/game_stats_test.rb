@@ -5,7 +5,7 @@ require './lib/file_converter'
 require './lib/game_stats'
 require 'pry'
 
-class GamesTest < Minitest::Test
+class GameStatsTest < Minitest::Test
 
   def setup
     @file_name = './test_data/game_test.csv'
