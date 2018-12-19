@@ -1,9 +1,9 @@
 class GameStats
 
-  attr_reader :stats
+  attr_reader :games
 
-  def initialize(game_stats)
-    @stats = game_stats
+  def initialize(games)
+    @games = games
   end
 
   def stat_games_count(stat)

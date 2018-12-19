@@ -32,11 +32,11 @@ class GameStatsTest < Minitest::Test
     assert_equal @games, @game_stats.games
   end
 
-  def test_it_has_game_stats
-    skip
-    keys = [:"2012030221", :"2012030222", :"2012030223", :"2017020830", :"2017020227", :"2016020050"]
-    assert_equal keys, @game_stats.stats.keys
-  end
+  # def test_it_has_game_stats
+  #   skip
+  #   keys = [:"2012030221", :"2012030222", :"2012030223", :"2017020830", :"2017020227", :"2016020050"]
+  #   assert_equal keys, @game_stats.stats.keys
+  # end
 
   def test_it_can_list_all_seasons
     skip
