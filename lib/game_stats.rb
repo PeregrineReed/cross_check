@@ -1,4 +1,4 @@
-class Games
+class GameStats
 
   attr_reader :stats
 
