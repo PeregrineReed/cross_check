@@ -3,7 +3,7 @@ class GameStats
   attr_reader :stats
 
   def initialize(game_stats)
-    @stats = game_stats
+    @game_stats = game_stats
   end
 
   def stat_games_count(stat)
@@ -11,7 +11,7 @@ class GameStats
     stat_collect(stat).each do |element|
       element = element.to_sym
       games_collection[element] = 0
-      @stats.values.each do |game_stats|
+      @game_stats.values.each do |game_stats|
         if game_stats[stat] == element.to_s
           games_collection[element] += 1
         end
@@ -22,7 +22,7 @@ class GameStats
 
   def stat_collect(stat)
     collection = []
-    @stats.values.each do |game_stats|
+    @game_stats.values.each do |game_stats|
       game_stats.each do |key, value|
         if key == stat && !(collection.include?(value))
           collection << value
@@ -51,13 +51,13 @@ class GameStats
   end
 
   def away_game_scores
-    @stats.values.map do |game_stats|
+    @game_stats.values.map do |game_stats|
       game_stats[:away_goals].to_i
     end
   end
 
   def home_game_scores
-    @stats.values.map do |game_stats|
+    @game_stats.values.map do |game_stats|
       game_stats[:home_goals].to_i
     end
   end
@@ -91,7 +91,7 @@ class GameStats
     stat_collect(stat).each do |element|
       element = element.to_sym
       goals_collection[element] = 0
-      @stats.values.each do |game_stats|
+      @game_stats.values.each do |game_stats|
         if game_stats[stat] == element.to_s
           total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
           goals_collection[element] += total_goals
@@ -112,7 +112,7 @@ class GameStats
   end
 
   def average_goals_game
-    (total_goals_stat(:season).values.sum / @stats.count.to_f).round(2)
+    (total_goals_stat(:season).values.sum / @game_stats.count.to_f).round(2)
   end
 
   def home_wins_percent
@@ -129,7 +129,7 @@ class GameStats
         ties += 1
       end
     end
-    (home_wins / @stats.count.to_f * 100).round(2)
+    (home_wins / @game_stats.count.to_f * 100).round(2)
   end
 
   def away_wins_percent
@@ -140,10 +140,7 @@ class GameStats
         away_wins += 1
       end
     end
-    (away_wins / @stats.count.to_f * 100).round(2)
+    (away_wins / @game_stats.count.to_f * 100).round(2)
   end
-
-
-
 
 end
