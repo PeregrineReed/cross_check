@@ -8,12 +8,12 @@ class Games
 
   def stat_games_count(stat)
     games_collection = {}
-    stat_collect(stat).each do |collection|
-      collection = collection.to_sym
-      games_collection[collection] = 0
+    stat_collect(stat).each do |element|
+      element = element.to_sym
+      games_collection[element] = 0
       @stats.values.each do |game_stats|
-        if game_stats[stat] == collection.to_s
-          games_collection[collection] += 1
+        if game_stats[stat] == element.to_s
+          games_collection[element] += 1
         end
       end
     end
@@ -88,13 +88,13 @@ class Games
 
   def total_goals_stat(stat)
     goals_collection = {}
-    stat_collect(stat).each do |collection|
-      collection = collection.to_sym
-      goals_collection[collection] = 0
+    stat_collect(stat).each do |element|
+      element = element.to_sym
+      goals_collection[element] = 0
       @stats.values.each do |game_stats|
-        if game_stats[stat] == collection.to_s
+        if game_stats[stat] == element.to_s
           total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
-          goals_collection[collection] += total_goals
+          goals_collection[element] += total_goals
         end
       end
     end
@@ -103,11 +103,10 @@ class Games
 
   def average_goals_stat(stat)
     goals_collection = {}
-    stat_collect(stat).each do |collection|
-      collection = collection.to_sym
-      goals_collection[collection] = 0
-      average = total_goals_stat(stat)[collection] / stat_games_count(stat)[collection].to_f
-      goals_collection[collection] = average
+    stat_collect(stat).each do |element|
+      element = element.to_sym
+      average = total_goals_stat(stat)[element] / stat_games_count(stat)[element].to_f
+      goals_collection[element] = average
     end
     goals_collection
   end

@@ -7,7 +7,7 @@ class StatTracker
   end
 
   def self.from_csv(locations)
-    StatTracker.new(locations)
+    new(locations)
   end
 
 end
