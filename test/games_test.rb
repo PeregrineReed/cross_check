@@ -3,6 +3,7 @@ require 'minitest/pride'
 require 'csv'
 require './lib/file_converter'
 require './lib/games'
+require 'pry'
 
 class GamesTest < Minitest::Test
 
@@ -74,4 +75,21 @@ class GamesTest < Minitest::Test
   def test_it_can_determine_venue_with_fewest_games
     assert_equal "Amalie Arena", @games.stat_with_fewest_games(:venue)
   end
+
+  def test_it_can_total_goals_by_season
+    hash = {:"20122013" => 15, :"20162017" => 9, :"20172018" => 11}
+
+    assert_equal hash, @games.total_goals(:season)
+  end
+
+  def test_it_can_average_goals_by_season
+    hash = {:"20122013" => 5, :"20162017" => 9, :"20172018" => 5.5}
+
+    assert_equal hash, @games.average_goals(:season)
+  end
+
+
+
+
+
 end

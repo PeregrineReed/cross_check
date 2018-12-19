@@ -86,6 +86,21 @@ class Games
     hoa.flatten.max
   end
 
+  def average_goals(stat)
+    goals_collection = {}
+    stat_collect(stat).each do |collection|
+      collection = collection.to_sym
+      goals_collection[collection] = 0
+      @stats.values.each do |game_stats|
+        if game_stats[stat] == collection.to_s
+          total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
+          goals_collection[collection] += total_goals
+        end
+      end
+    end
+    goals_collection
+  end
+
 
 
 end
