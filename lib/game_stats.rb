@@ -23,6 +23,11 @@ class GameStats
     season_games.key(most_games)
   end
 
+  def season_with_fewest_games
+    most_games = season_games.values.min
+    season_games.key(most_games)
+  end
+
   # def stat_games_count(stat)
   #   games_collection = {}
   #   stat_collect(stat).each do |element|
