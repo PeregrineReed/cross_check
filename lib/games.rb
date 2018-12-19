@@ -116,7 +116,26 @@ class Games
     (total_goals_stat(:season).values.sum / @stats.count.to_f).round(2)
   end
 
+  def home_wins_percent
+    hoa = home_game_scores.zip(away_game_scores)
+    home_wins = 0
+    away_wins = 0
+    ties = 0
+    hoa.each do |pair|
+      if (pair[0] - pair[1]) > 0
+        home_wins += 1
+      elsif (pair[0] - pair[1]) < 0
+        away_wins += 1
+      else
+        ties += 1
+      end
+    end
+    (home_wins / @stats.count.to_f * 100).round(2)
+  end
 
+  def away_wins_percent
+    100 - home_wins_percent
+  end
 
 
 
