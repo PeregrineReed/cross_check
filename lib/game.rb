@@ -38,4 +38,8 @@ class Game
     away_goals + home_goals
   end
 
+  def score_difference
+    away_goals - home_goals
+  end
+
 end
