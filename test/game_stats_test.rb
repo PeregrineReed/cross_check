@@ -61,8 +61,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_determine_season_with_fewest_games
-    skip
-    assert_equal 20162017, @game_stats.stat_with_fewest_games(:season)
+    assert_equal "20162017", @game_stats.season_with_fewest_games
   end
 
   def test_it_can_list_total_game_scores
