@@ -22,6 +22,12 @@ class GameStatsTest < Minitest::Test
               @game_6
              ]
     @game_stats = GameStats.new(@games)
+    @game_1.stubs(:season).returns("20122013")
+    @game_2.stubs(:season).returns("20122013")
+    @game_3.stubs(:season).returns("20122013")
+    @game_4.stubs(:season).returns("20162017")
+    @game_5.stubs(:season).returns("20172018")
+    @game_6.stubs(:season).returns("20172018")
   end
 
   def test_it_exists
@@ -39,16 +45,15 @@ class GameStatsTest < Minitest::Test
   # end
 
   def test_it_can_list_all_seasons
-    skip
     seasons = ["20122013", "20162017", "20172018",]
-    assert_equal seasons, @game_stats.stat_collect(:season)
+    @game_stats.seasons_list
+    assert_equal seasons, @game_stats.seasons
   end
 
   def test_it_can_count_games_by_season
-    skip
-    hash = {:"20122013" => 3, :"20172018" => 2, :"20162017" => 1}
+    expected = {"20122013" => 3,"20162017" => 1, "20172018" => 2}
 
-    assert_equal hash, @game_stats.stat_games_count(:season)
+    assert_equal expected, @game_stats.season_games
   end
 
   def test_it_can_determine_season_with_most_games

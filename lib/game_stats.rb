@@ -1,36 +1,52 @@
 class GameStats
 
-  attr_reader :games
+  attr_reader :games,
+              :seasons
 
   def initialize(games)
     @games = games
+    @seasons = []
   end
 
-  def stat_games_count(stat)
-    games_collection = {}
-    stat_collect(stat).each do |element|
-      element = element.to_sym
-      games_collection[element] = 0
-      @stats.values.each do |game_stats|
-        if game_stats[stat] == element.to_s
-          games_collection[element] += 1
-        end
-      end
+  def season_games
+    games_by_season = @games.group_by do |game|
+      game.season
     end
-    games_collection
+    games_by_season.each do |key, value|
+      games_by_season[key] = value.count
+    end
+    games_by_season
   end
 
-  def stat_collect(stat)
-    collection = []
-    @stats.values.each do |game_stats|
-      game_stats.each do |key, value|
-        if key == stat && !(collection.include?(value))
-          collection << value
-        end
-      end
+  # def stat_games_count(stat)
+  #   games_collection = {}
+  #   stat_collect(stat).each do |element|
+  #     element = element.to_sym
+  #     games_collection[element] = 0
+  #     @stats.values.each do |game_stats|
+  #       if game_stats[stat] == element.to_s
+  #         games_collection[element] += 1
+  #       end
+  #     end
+  #   end
+  #   games_collection
+  # end
+
+  def seasons_list
+    @games.each do |game|
+      @seasons << game.season
     end
-    return collection.sort
+    @seasons.uniq!.sort!
   end
+    # collection = []
+    # @stats.values.each do |game_stats|
+    #   game_stats.each do |key, value|
+    #     if key == stat && !(collection.include?(value))
+    #       collection << value
+    #     end
+    #   end
+    # end
+    # return collection.sort
 
   def stat_with_most_games(stat)
     most_games = stat_games_count(stat).values.max
