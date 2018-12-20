@@ -15,10 +15,4 @@ class Team
     @abbreviation = data[:abbreviation]
     @link = data[:link]
   end
-
-  # def team_info(info)
-  #   grouped_info = info.group_by do |key|
-  #
-  #     binding.pry
-  # end
 end
