@@ -80,28 +80,107 @@ class LeagueStatsTest < Minitest::Test
 
    @team_3.stubs(:team_id).returns("3")
    @team_3.stubs(:teamName).returns("Rangers")
+   @team_3.stubs(:total_goals_league).returns(0)
+   @team_3.stubs(:total_games_league).returns(0)
+   @team_3.stubs(:home_games_league).returns(0)
+   @team_3.stubs(:away_games_league).returns(0)
+   @team_3.stubs(:home_goals_league).returns(0)
+   @team_3.stubs(:away_goals_league).returns(0)
+   @team_3.stubs(:home_wins_league).returns(0)
+   @team_3.stubs(:away_wins_league).returns(0)
+   @team_3.stubs(:offense).returns(0)
+   @team_3.stubs(:total_goals_allowed_league).returns(0)
 
    @team_6.stubs(:team_id).returns("6")
    @team_6.stubs(:teamName).returns("Bruins")
+   @team_6.stubs(:total_goals_league).returns(0)
+   @team_6.stubs(:total_games_league).returns(0)
+   @team_6.stubs(:home_games_league).returns(0)
+   @team_6.stubs(:away_games_league).returns(0)
+   @team_6.stubs(:home_goals_league).returns(0)
+   @team_6.stubs(:away_goals_league).returns(0)
+   @team_6.stubs(:home_wins_league).returns(0)
+   @team_6.stubs(:away_wins_league).returns(0)
+   @team_6.stubs(:offense).returns(0)
+   @team_6.stubs(:total_goals_allowed_league).returns(0)
 
    @team_10.stubs(:team_id).returns("10")
    @team_10.stubs(:teamName).returns("Maple Leafs")
+   @team_10.stubs(:total_goals_league).returns(0)
+   @team_10.stubs(:total_games_league).returns(0)
+   @team_10.stubs(:home_games_league).returns(0)
+   @team_10.stubs(:away_games_league).returns(0)
+   @team_10.stubs(:home_goals_league).returns(0)
+   @team_10.stubs(:away_goals_league).returns(0)
+   @team_10.stubs(:home_wins_league).returns(0)
+   @team_10.stubs(:away_wins_league).returns(0)
+   @team_10.stubs(:offense).returns(0)
+   @team_10.stubs(:total_goals_allowed_league).returns(0)
 
    @team_12.stubs(:team_id).returns("12")
    @team_12.stubs(:teamName).returns("Hurricanes")
+   @team_12.stubs(:total_goals_league).returns(0)
+   @team_12.stubs(:total_games_league).returns(0)
+   @team_12.stubs(:home_games_league).returns(0)
+   @team_12.stubs(:away_games_league).returns(0)
+   @team_12.stubs(:home_goals_league).returns(0)
+   @team_12.stubs(:away_goals_league).returns(0)
+   @team_12.stubs(:home_wins_league).returns(0)
+   @team_12.stubs(:away_wins_league).returns(0)
+   @team_12.stubs(:offense).returns(0)
+   @team_12.stubs(:total_goals_allowed_league).returns(0)
 
    @team_13.stubs(:team_id).returns("13")
    @team_13.stubs(:teamName).returns("Panthers")
+   @team_13.stubs(:total_goals_league).returns(0)
+   @team_13.stubs(:total_games_league).returns(0)
+   @team_13.stubs(:home_games_league).returns(0)
+   @team_13.stubs(:away_games_league).returns(0)
+   @team_13.stubs(:home_goals_league).returns(0)
+   @team_13.stubs(:away_goals_league).returns(0)
+   @team_13.stubs(:home_wins_league).returns(0)
+   @team_13.stubs(:away_wins_league).returns(0)
+   @team_13.stubs(:offense).returns(0)
+   @team_13.stubs(:total_goals_allowed_league).returns(0)
 
    @team_14.stubs(:team_id).returns("14")
    @team_14.stubs(:teamName).returns("Lightning")
+   @team_14.stubs(:total_goals_league).returns(0)
+   @team_14.stubs(:total_games_league).returns(0)
+   @team_14.stubs(:home_games_league).returns(0)
+   @team_14.stubs(:away_games_league).returns(0)
+   @team_14.stubs(:home_goals_league).returns(0)
+   @team_14.stubs(:away_goals_league).returns(0)
+   @team_14.stubs(:home_wins_league).returns(0)
+   @team_14.stubs(:away_wins_league).returns(0)
+   @team_14.stubs(:offense).returns(0)
+   @team_14.stubs(:total_goals_allowed_league).returns(0)
 
    @team_23.stubs(:team_id).returns("23")
    @team_23.stubs(:teamName).returns("Canucks")
+   @team_23.stubs(:total_goals_league).returns(0)
+   @team_23.stubs(:total_games_league).returns(0)
+   @team_23.stubs(:home_games_league).returns(0)
+   @team_23.stubs(:away_games_league).returns(0)
+   @team_23.stubs(:home_goals_league).returns(0)
+   @team_23.stubs(:away_goals_league).returns(0)
+   @team_23.stubs(:home_wins_league).returns(0)
+   @team_23.stubs(:away_wins_league).returns(0)
+   @team_23.stubs(:offense).returns(0)
+   @team_23.stubs(:total_goals_allowed_league).returns(0)
 
    @team_52.stubs(:team_id).returns("52")
    @team_52.stubs(:teamName).returns("Jets")
-
+   @team_52.stubs(:total_goals_league).returns(0)
+   @team_52.stubs(:total_games_league).returns(0)
+   @team_52.stubs(:home_games_league).returns(0)
+   @team_52.stubs(:away_games_league).returns(0)
+   @team_52.stubs(:home_goals_league).returns(0)
+   @team_52.stubs(:away_goals_league).returns(0)
+   @team_52.stubs(:home_wins_league).returns(0)
+   @team_52.stubs(:away_wins_league).returns(0)
+   @team_52.stubs(:offense).returns(0)
+   @team_52.stubs(:total_goals_allowed_league).returns(0)
 
    @league_stats = LeagueStats.new(@games, @teams)
   end
@@ -118,24 +197,50 @@ class LeagueStatsTest < Minitest::Test
     assert_equal @teams, @league_stats.teams
   end
 
+  def test_it_calcs_total_league_games_per_team
+    #binding.pry
+    @league_stats.sort_total_league_games
+
+    assert_equal 3, @league_stats.team_3.total_games_league
+  end
+
   def test_it_calculates_offense
-    skip
-    assert_equal , @league_stats.offense
+    assert_equal 1.66, @league_stats.calculate_offense(@team_3)
+  end
+
+  def test_it_calculates_highest_offense
+    assert_equal "Lightning", @league_stats.highest_offense
+  end
+
+  def test_it_calculates_highest_offense
+    assert_equal "Panthers", @league_stats.lowest_offense
   end
 
   def test_it_calculates_defense
-    skip
-    assert_equal , @league_stats.defense
+    assert_equal 1.66, @league_stats.calculate_defense(@team_3)
   end
 
-  def test_it_calculates_highest_scoring_away_team
-    skip
-    assert_equal , @league_stats.high_scoring_away_team
+  def test_it_calculates_highest_defense
+    assert_equal "Lightning", @league_stats.highest_defense
   end
 
-  def test_it_calculates_highest_scoring_home_team
-    skip
-    assert_equal , @league_stats.high_scoring_home_team
+  def test_it_calculates_highest_defense
+    assert_equal "Panthers", @league_stats.lowest_defense
   end
+  #
+  # def test_it_calculates_defense
+  #   skip
+  #   assert_equal , @league_stats.defense
+  # end
+  #
+  # def test_it_calculates_highest_scoring_away_team
+  #   skip
+  #   assert_equal , @league_stats.high_scoring_away_team
+  # end
+  #
+  # def test_it_calculates_highest_scoring_home_team
+  #   skip
+  #   assert_equal , @league_stats.high_scoring_home_team
+  # end
 
 end

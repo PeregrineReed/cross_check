@@ -61,5 +61,9 @@ class TeamStatsTest < Minitest::Test
   def test_it_has_teams
     assert_equal @teams, @team_stats.teams
   end
-  
+
+  # def test_it_can_count_teams
+  #   assert_equal 8, @team_stats.teams.count
+  # end
+
 end
