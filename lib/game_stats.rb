@@ -162,20 +162,6 @@ end
 #   goals_collection
 # end
 #
-# def average_goals_stat(stat)
-#   goals_collection = {}
-#   stat_collect(stat).each do |element|
-#     element = element.to_sym
-#     average = total_goals_stat(stat)[element] / stat_games_count(stat)[element].to_f
-#     goals_collection[element] = average
-#   end
-#   goals_collection
-# end
-#
-# def average_goals_game
-#   (total_goals_stat(:season).values.sum / @game_stats.count.to_f).round(2)
-# end
-#
 # def home_wins_percent
 #   hoa = home_game_scores.zip(away_game_scores)
 #   home_wins = 0
