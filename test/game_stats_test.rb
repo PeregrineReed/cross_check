@@ -147,9 +147,9 @@ class GameStatsTest < Minitest::Test
 
   def test_it_can_average_goals_by_season
     skip
-    expected = {:"20122013" => 5, :"20162017" => 9, :"20172018" => 5.5}
+    expected = {"20122013" => 5.0, "20162017" => 7.0, "20172018" => 6.5}
 
-    assert_equal expected, @game_stats.average_goals_stat(:season)
+    assert_equal expected, @game_stats.average_goals_by_season
   end
 
   def test_it_can_average_goals_per_game
