@@ -1,14 +1,16 @@
 class GameStats
 
   attr_reader :games,
-              :seasons
+              :seasons,
+              :venues
 
   def initialize(games)
     @games = games
     @seasons = []
+    @venues = []
   end
 
-  def seasons_list
+  def list_seasons
     @games.each do |game|
       @seasons << game.season
     end
@@ -46,29 +48,6 @@ class GameStats
   def min_score
     total_scores.min
   end
-  # def stat_games_count(stat)
-  #   games_collection = {}
-  #   stat_collect(stat).each do |element|
-  #     element = element.to_sym
-  #     games_collection[element] = 0
-  #     @stats.values.each do |game_stats|
-  #       if game_stats[stat] == element.to_s
-  #         games_collection[element] += 1
-  #       end
-  #     end
-  #   end
-  #   games_collection
-  # end
-
-    # collection = []
-    # @stats.values.each do |game_stats|
-    #   game_stats.each do |key, value|
-    #     if key == stat && !(collection.include?(value))
-    #       collection << value
-    #     end
-    #   end
-    # end
-    # return collection.sort
 
   def stat_with_most_games(stat)
     most_games = stat_games_count(stat).values.max
@@ -108,61 +87,61 @@ class GameStats
     game_scores.flatten.max
   end
 
-  def total_goals_stat(stat)
-    goals_collection = {}
-    stat_collect(stat).each do |element|
-      element = element.to_sym
-      goals_collection[element] = 0
-      @game_stats.values.each do |game_stats|
-        if game_stats[stat] == element.to_s
-          total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
-          goals_collection[element] += total_goals
-        end
-      end
-    end
-    goals_collection
-  end
-
-  def average_goals_stat(stat)
-    goals_collection = {}
-    stat_collect(stat).each do |element|
-      element = element.to_sym
-      average = total_goals_stat(stat)[element] / stat_games_count(stat)[element].to_f
-      goals_collection[element] = average
-    end
-    goals_collection
-  end
-
-  def average_goals_game
-    (total_goals_stat(:season).values.sum / @game_stats.count.to_f).round(2)
-  end
-
-  def home_wins_percent
-    hoa = home_game_scores.zip(away_game_scores)
-    home_wins = 0
-    away_wins = 0
-    ties = 0
-    hoa.each do |pair|
-      if (pair[0] - pair[1]) > 0
-        home_wins += 1
-      elsif (pair[0] - pair[1]) < 0
-        away_wins += 1
-      else
-        ties += 1
-      end
-    end
-    (home_wins / @game_stats.count.to_f * 100).round(2)
-  end
-
-  def away_wins_percent
-    hoa = home_game_scores.zip(away_game_scores)
-    away_wins = 0
-    hoa.each do |pair|
-      if (pair[0] - pair[1]) < 0
-        away_wins += 1
-      end
-    end
-    (away_wins / @game_stats.count.to_f * 100).round(2)
-  end
+  # def total_goals_stat(stat)
+  #   goals_collection = {}
+  #   stat_collect(stat).each do |element|
+  #     element = element.to_sym
+  #     goals_collection[element] = 0
+  #     @game_stats.values.each do |game_stats|
+  #       if game_stats[stat] == element.to_s
+  #         total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
+  #         goals_collection[element] += total_goals
+  #       end
+  #     end
+  #   end
+  #   goals_collection
+  # end
+  #
+  # def average_goals_stat(stat)
+  #   goals_collection = {}
+  #   stat_collect(stat).each do |element|
+  #     element = element.to_sym
+  #     average = total_goals_stat(stat)[element] / stat_games_count(stat)[element].to_f
+  #     goals_collection[element] = average
+  #   end
+  #   goals_collection
+  # end
+  #
+  # def average_goals_game
+  #   (total_goals_stat(:season).values.sum / @game_stats.count.to_f).round(2)
+  # end
+  #
+  # def home_wins_percent
+  #   hoa = home_game_scores.zip(away_game_scores)
+  #   home_wins = 0
+  #   away_wins = 0
+  #   ties = 0
+  #   hoa.each do |pair|
+  #     if (pair[0] - pair[1]) > 0
+  #       home_wins += 1
+  #     elsif (pair[0] - pair[1]) < 0
+  #       away_wins += 1
+  #     else
+  #       ties += 1
+  #     end
+  #   end
+  #   (home_wins / @game_stats.count.to_f * 100).round(2)
+  # end
+  #
+  # def away_wins_percent
+  #   hoa = home_game_scores.zip(away_game_scores)
+  #   away_wins = 0
+  #   hoa.each do |pair|
+  #     if (pair[0] - pair[1]) < 0
+  #       away_wins += 1
+  #     end
+  #   end
+  #   (away_wins / @game_stats.count.to_f * 100).round(2)
+  # end
 
 end

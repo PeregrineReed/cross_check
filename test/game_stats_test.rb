@@ -25,27 +25,33 @@ class GameStatsTest < Minitest::Test
     @game_1.stubs(:season => "20122013",
                   :total_score => 5,
                   :home_goals => 3,
-                  :away_goals => 2)
+                  :away_goals => 2,
+                  :venue => "TD Garden")
     @game_2.stubs(:season => "20122013",
                   :total_score => 7,
                   :home_goals => 5,
-                  :away_goals => 2)
+                  :away_goals => 2,
+                  :venue => "TD Garden")
     @game_3.stubs(:season => "20122013",
                   :total_score => 3,
                   :home_goals => 1,
-                  :away_goals => 2)
+                  :away_goals => 2,
+                  :venue => "Madison Square Garden")
     @game_4.stubs(:season => "20162017",
                   :total_score => 7,
                   :home_goals => 5,
-                  :away_goals => 2)
+                  :away_goals => 2,
+                  :venue => "Amalie Arena")
     @game_5.stubs(:season => "20172018",
                   :total_score => 4,
                   :home_goals => 3,
-                  :away_goals => 1)
+                  :away_goals => 1,
+                  :venue => "PNC Arena")
     @game_6.stubs(:season => "20172018",
                   :total_score => 9,
                   :home_goals => 5,
-                  :away_goals => 4)
+                  :away_goals => 4,
+                  :venue => "MTS Centre")
   end
 
   def test_it_exists
@@ -64,7 +70,7 @@ class GameStatsTest < Minitest::Test
 
   def test_it_can_list_all_seasons
     seasons = ["20122013", "20162017", "20172018",]
-    @game_stats.seasons_list
+    @game_stats.list_seasons
     assert_equal seasons, @game_stats.seasons
   end
 
@@ -116,7 +122,6 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_list_all_venues
-    skip
     venues = ["Amalie Arena", "MTS Centre", "Madison Square Garden", "PNC Arena", "TD Garden"]
     assert_equal venues, @game_stats.stat_collect(:venue)
   end
