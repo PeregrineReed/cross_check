@@ -145,7 +145,7 @@ class LeagueStatsTest < Minitest::Test
 
    @team_14.stubs(:team_id).returns("14")
    @team_14.stubs(:teamName).returns("Lightning")
-   @team_14.stubs(:total_goals_league).returns(0)
+   @team_14.stubs(:total_goals_league).returns(:total_goals_league)
    @team_14.stubs(:total_games_league).returns(0)
    @team_14.stubs(:home_games_league).returns(0)
    @team_14.stubs(:away_games_league).returns(0)
@@ -197,11 +197,12 @@ class LeagueStatsTest < Minitest::Test
     assert_equal @teams, @league_stats.teams
   end
 
+  #TeamStats test
   def test_it_adds_team_total_league_game
     @team_3.total_games_league = 3
     add_league_game(@team_3)
 
-    assert_equal 4, @team_3.total_games_league
+    assert_equal 4, @team_stats.total_games_league(@team_3)
   end
 
 
@@ -218,9 +219,9 @@ class LeagueStatsTest < Minitest::Test
 
 
 
-
+  #TeamStats test
   def test_it_calculates_offense
-    assert_equal 1.66, @league_stats.calculate_offense(@team_3)
+    assert_equal 1.66, @team_stats.calculate_offense(@team_3)
   end
 
   def test_it_calculates_highest_offense
@@ -231,8 +232,9 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "Panthers", @league_stats.lowest_offense
   end
 
+  #TeamStats test
   def test_it_calculates_defense
-    assert_equal 1.66, @league_stats.calculate_defense(@team_3)
+    assert_equal 1.66, @team_stats.calculate_defense(@team_3)
   end
 
   def test_it_calculates_highest_defense
@@ -243,12 +245,30 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "Panthers", @league_stats.lowest_defense
   end
 
+  #TeamStats test
   def test_it_calculates_team_league_away_average_goals
-    assert_equal 2, @league_stats.league_away_average_goals(@team_3)
+    assert_equal 2, @team_stats.league_away_average_goals(@team_3)
   end
 
+  #TeamStats test
   def test_it_calculates_team_league_home_average_goals
-    assert_equal 4, @league_stats.league_home_average_goals(@team_6)
+    assert_equal 4, @team_stats.league_home_average_goals(@team_6)
+  end
+
+  def test_it_calculates_highest_scoring_away_team
+    assert_equal "", @league_stats.highest_scoring_when_away
+  end
+
+  def test_it_calculates_highest_scoring_home_team
+    assert_equal "", @league_stats.highest_scoring_when_home
+  end
+
+  def test_it_calculates_lowest_scoring_away_team
+    assert_equal "", @league_stats.lowest_scoring_when_away
+  end
+
+  def test_it_calculates_lowest_scoring_home_team
+    assert_equal "", @league_stats.lowest_scoring_when_home
   end
 
   # def test_it_calculates_highest_scoring_away_team
