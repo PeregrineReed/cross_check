@@ -23,17 +23,29 @@ class GameStatsTest < Minitest::Test
              ]
     @game_stats = GameStats.new(@games)
     @game_1.stubs(:season => "20122013",
-                  :total_score => 5)
+                  :total_score => 5,
+                  :home_goals => 3,
+                  :away_goals => 2)
     @game_2.stubs(:season => "20122013",
-                  :total_score => 7)
+                  :total_score => 7,
+                  :home_goals => 5,
+                  :away_goals => 2)
     @game_3.stubs(:season => "20122013",
-                  :total_score => 3)
+                  :total_score => 3,
+                  :home_goals => 1,
+                  :away_goals => 2)
     @game_4.stubs(:season => "20162017",
-                  :total_score => 7)
+                  :total_score => 7,
+                  :home_goals => 5,
+                  :away_goals => 2)
     @game_5.stubs(:season => "20172018",
-                  :total_score => 4)
+                  :total_score => 4,
+                  :home_goals => 3,
+                  :away_goals => 1)
     @game_6.stubs(:season => "20172018",
-                  :total_score => 9)
+                  :total_score => 9,
+                  :home_goals => 5,
+                  :away_goals => 4)
   end
 
   def test_it_exists
@@ -89,19 +101,16 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_list_away_game_scores
-    skip
     game_scores = [2, 2, 2, 2, 1, 4]
     assert_equal game_scores, @game_stats.away_game_scores
   end
 
   def test_it_can_list_home_game_scores
-    skip
     game_scores = [3, 5, 1, 5, 3, 5]
     assert_equal game_scores, @game_stats.home_game_scores
   end
 
   def test_it_can_list_total_game_scores
-    skip
     game_scores = [5, 7, 3, 7, 4, 9]
     assert_equal game_scores, @game_stats.total_scores
   end

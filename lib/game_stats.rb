@@ -89,23 +89,23 @@ class GameStats
   end
 
   def away_game_scores
-    @stats.values.map do |game_stats|
-      game_stats[:away_goals].to_i
+    @games.map do |game|
+      game.away_goals
     end
   end
 
   def home_game_scores
-    @stats.values.map do |game_stats|
-      game_stats[:home_goals].to_i
+    @games.map do |game|
+      game.home_goals
     end
   end
 
   def blowout
-    hoa = home_game_scores.zip(away_game_scores)
-    hoa = hoa.map do |pair|
+    game_scores = home_game_scores.zip(away_game_scores)
+    game_scores = game_scores.map do |pair|
       pair.max - pair.min
     end
-    hoa.flatten.max
+    game_scores.flatten.max
   end
 
   def total_goals_stat(stat)
@@ -113,7 +113,7 @@ class GameStats
     stat_collect(stat).each do |element|
       element = element.to_sym
       goals_collection[element] = 0
-      @stats.values.each do |game_stats|
+      @game_stats.values.each do |game_stats|
         if game_stats[stat] == element.to_s
           total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
           goals_collection[element] += total_goals
@@ -134,7 +134,7 @@ class GameStats
   end
 
   def average_goals_game
-    (total_goals_stat(:season).values.sum / @stats.count.to_f).round(2)
+    (total_goals_stat(:season).values.sum / @game_stats.count.to_f).round(2)
   end
 
   def home_wins_percent
@@ -151,7 +151,7 @@ class GameStats
         ties += 1
       end
     end
-    (home_wins / @stats.count.to_f * 100).round(2)
+    (home_wins / @game_stats.count.to_f * 100).round(2)
   end
 
   def away_wins_percent
@@ -162,10 +162,7 @@ class GameStats
         away_wins += 1
       end
     end
-    (away_wins / @stats.count.to_f * 100).round(2)
+    (away_wins / @game_stats.count.to_f * 100).round(2)
   end
-
-
-
 
 end
