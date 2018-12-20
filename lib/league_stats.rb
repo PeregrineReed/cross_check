@@ -12,7 +12,8 @@ class LeagueStats
         if game.home_team_id == team.team_id
           team.total_goals_league += game.home_goals
           team.home_goals_league += game.home_goals
-          team.total_games_league += 1
+          #team.total_games_league += 1
+        add_league_game(team)
           team.home_games_league += 1
           if game.home_goals > game.away_goals
             team.home_wins_league += 1
@@ -20,10 +21,10 @@ class LeagueStats
             team.total_goals_allowed_league += game.away_goals
           end
         elsif game.away_team_id == team.team_id
-          #binding.pry
           team.total_goals_league += game.away_goals
           team.away_goals_league += game.away_goals
-          team.total_games_league += 1
+          #team.total_games_league += 1
+        add_league_game(team)
           team.away_games_league += 1
           if game.away_goals > game.home_goals
             team.away_wins_league += 1
@@ -35,6 +36,11 @@ class LeagueStats
     end
   end
 
+  def add_league_game(team)
+    team.total_games_league += 1
+  end
+
+  #Team Stat method
   def calculate_offense(team)
     team.total_goals_league / team.total_games_league
   end
@@ -53,6 +59,7 @@ class LeagueStats
     team.teamName
   end
 
+  #Team Stat method
   def calculate_defense(team)
     team.total_goals_allowed_league / team.total_games_league
   end
@@ -70,5 +77,41 @@ class LeagueStats
     end
     team.teamName
   end
+
+  #Team stat method
+  def league_away_average_goals
+    @team.away_goals_league / @team.total_games_league
+  end
+
+  #Team stat method
+  def league_home_average_goals
+    @team.away_goals_league / @team.total_games_league
+  end
+
+  def highest_scoring_when_away
+    @teams.max_by do |team|
+      team_stats.league_away_average_goals
+    end.teamName
+  end
+
+  def highest_scoring_when_home
+    @teams.max_by do |team|
+      team_stats.league_home_average_goals
+    end.teamName
+  end
+
+  def lowest_scoring_when_away
+    @teams.min_by do |team|
+      team_stats.league_away_average_goals
+    end.teamName
+  end
+
+  def lowest_scoring_when_home
+    @teams.min_by do |team|
+      team_stats.league_home_average_goals
+    end.teamName
+  end
+
+
 
 end

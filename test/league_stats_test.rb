@@ -243,12 +243,12 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "Panthers", @league_stats.lowest_defense
   end
 
-  def test_it_calculates_team_league_away_average
-    assert_equal 2, @team_3.league_away_average
+  def test_it_calculates_team_league_away_average_goals
+    assert_equal 2, @league_stats.league_away_average_goals(@team_3)
   end
 
-  def test_it_calculates_team_league_home_average
-    assert_equal 4, @team_6.league_away_average
+  def test_it_calculates_team_league_home_average_goals
+    assert_equal 4, @league_stats.league_home_average_goals(@team_6)
   end
 
   # def test_it_calculates_highest_scoring_away_team
