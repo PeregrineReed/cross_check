@@ -46,8 +46,4 @@ class Game
     score_difference.abs
   end
 
-  def winner
-    outcome[0..3]
-  end
-
 end

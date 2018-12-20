@@ -102,8 +102,4 @@ class GameTest < Minitest::Test
     assert_equal 3, @game_2.blowout
   end
 
-  def test_it_has_a_winner
-    assert_equal "home", @game_2.winner
-  end
-
 end
