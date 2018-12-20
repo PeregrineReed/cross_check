@@ -8,6 +8,13 @@ class GameStats
     @seasons = []
   end
 
+  def seasons_list
+    @games.each do |game|
+      @seasons << game.season
+    end
+    @seasons.uniq!.sort!
+  end
+
   def season_games
     games_by_season = @games.group_by do |game|
       game.season
@@ -28,6 +35,17 @@ class GameStats
     season_games.key(most_games)
   end
 
+  def total_scores
+    @games.map { |game| game.total_score }
+  end
+
+  def max_score
+    total_scores.max
+  end
+
+  def min_score
+    total_scores.min
+  end
   # def stat_games_count(stat)
   #   games_collection = {}
   #   stat_collect(stat).each do |element|
@@ -42,12 +60,6 @@ class GameStats
   #   games_collection
   # end
 
-  def seasons_list
-    @games.each do |game|
-      @seasons << game.season
-    end
-    @seasons.uniq!.sort!
-  end
     # collection = []
     # @stats.values.each do |game_stats|
     #   game_stats.each do |key, value|
@@ -86,22 +98,6 @@ class GameStats
     @stats.values.map do |game_stats|
       game_stats[:home_goals].to_i
     end
-  end
-
-  def total_scores
-    hoa = home_game_scores.zip(away_game_scores)
-    hoa = hoa.map do |pair|
-      pair.sum
-    end
-    hoa.flatten
-  end
-
-  def max_score
-    total_scores.max
-  end
-
-  def min_score
-    total_scores.min
   end
 
   def blowout

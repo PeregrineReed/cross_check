@@ -22,12 +22,18 @@ class GameStatsTest < Minitest::Test
               @game_6
              ]
     @game_stats = GameStats.new(@games)
-    @game_1.stubs(:season).returns("20122013")
-    @game_2.stubs(:season).returns("20122013")
-    @game_3.stubs(:season).returns("20122013")
-    @game_4.stubs(:season).returns("20162017")
-    @game_5.stubs(:season).returns("20172018")
-    @game_6.stubs(:season).returns("20172018")
+    @game_1.stubs(:season => "20122013",
+                  :total_score => 5)
+    @game_2.stubs(:season => "20122013",
+                  :total_score => 7)
+    @game_3.stubs(:season => "20122013",
+                  :total_score => 3)
+    @game_4.stubs(:season => "20162017",
+                  :total_score => 7)
+    @game_5.stubs(:season => "20172018",
+                  :total_score => 4)
+    @game_6.stubs(:season => "20172018",
+                  :total_score => 9)
   end
 
   def test_it_exists
@@ -65,18 +71,15 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_list_total_game_scores
-    skip
     game_scores = [5, 7, 3, 7, 4, 9]
     assert_equal game_scores, @game_stats.total_scores
   end
 
   def test_it_can_find_the_max_game_score
-    skip
     assert_equal 9, @game_stats.max_score
   end
 
   def test_it_can_find_the_min_game_score
-    skip
     assert_equal 3, @game_stats.min_score
   end
 
