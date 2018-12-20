@@ -37,8 +37,8 @@ class GameStats
   end
 
   def season_with_fewest_games
-    most_games = list_season_games.values.min
-    list_season_games.key(most_games)
+    fewest_games = list_season_games.values.min
+    list_season_games.key(fewest_games)
   end
 
   def total_scores
