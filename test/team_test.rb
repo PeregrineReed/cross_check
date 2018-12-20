@@ -58,8 +58,7 @@ class TeamTest < Minitest::Test
     assert_equal hash, @team_1.team_info
   end
 #We need to run this to make sure it works
-  def test_it_calculates_team_league_wins
+  def test_league_wins_starts_with_0
     assert_equal 0, @team_3.total_wins_league
-    assert_equal 3, @team_6.total_wins_league
   end
 end

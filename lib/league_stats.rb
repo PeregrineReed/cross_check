@@ -112,10 +112,6 @@ class LeagueStats
     end.teamName
   end
 
-  ##Team method
-  def total_wins_league
-    home_wins_league + away_wins_league
-  end
 
   #Team stat method
   def league_win_percentage(team)
