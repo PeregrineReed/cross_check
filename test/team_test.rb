@@ -57,4 +57,9 @@ class TeamTest < Minitest::Test
     hash = {:team_id => "1", :franchiseId=>"23", :shortName=>"New Jersey", :teamName=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
     assert_equal hash, @team_1.team_info
   end
+#We need to run this to make sure it works
+  def test_it_calculates_team_league_wins
+    assert_equal 0, @team_3.total_wins_league
+    assert_equal 3, @team_6.total_wins_league
+  end
 end
