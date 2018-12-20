@@ -271,6 +271,16 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "", @league_stats.lowest_scoring_when_home
   end
 
+  #TeamStats test
+  def test_it_calculates_team_league_win_percentage
+    assert_equal 0.0, @team_stats.league_win_percentage(@team_3)
+    assert_equal 1.0, @team_stats.league_win_percentage(@team_6)
+  end
+
+  def test_it_calculates_highest_league_win_percentage
+    assert_equal "Bruins", @league_stats.highest_win_percentage
+  end
+
   # def test_it_calculates_highest_scoring_away_team
   #   skip
   #   assert_equal , @league_stats.high_scoring_away_team
