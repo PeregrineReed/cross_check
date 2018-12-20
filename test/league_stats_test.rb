@@ -197,12 +197,27 @@ class LeagueStatsTest < Minitest::Test
     assert_equal @teams, @league_stats.teams
   end
 
+  def test_it_adds_team_total_league_game
+    @team_3.total_games_league = 3
+    add_league_game(@team_3)
+
+    assert_equal 4, @team_3.total_games_league
+  end
+
+
+
+
+
+
   def test_it_calcs_total_league_games_per_team
-    #binding.pry
     @league_stats.sort_total_league_games
 
     assert_equal 3, @league_stats.team_3.total_games_league
   end
+
+
+
+
 
   def test_it_calculates_offense
     assert_equal 1.66, @league_stats.calculate_offense(@team_3)
@@ -227,12 +242,15 @@ class LeagueStatsTest < Minitest::Test
   def test_it_calculates_highest_defense
     assert_equal "Panthers", @league_stats.lowest_defense
   end
-  #
-  # def test_it_calculates_defense
-  #   skip
-  #   assert_equal , @league_stats.defense
-  # end
-  #
+
+  def test_it_calculates_team_league_away_average
+    assert_equal 2, @team_3.league_away_average
+  end
+
+  def test_it_calculates_team_league_home_average
+    assert_equal 4, @team_6.league_away_average
+  end
+
   # def test_it_calculates_highest_scoring_away_team
   #   skip
   #   assert_equal , @league_stats.high_scoring_away_team
