@@ -276,6 +276,16 @@ class LeagueStatsTest < Minitest::Test
     assert_equal 0.0, @team_stats.league_win_percentage(@team_3)
     assert_equal 1.0, @team_stats.league_win_percentage(@team_6)
   end
+  #TeamStats test
+  def test_it_calculates_team_home_league_win_percentage
+    assert_equal 0.0, @team_stats.league_home_win_percentage(@team_3)
+    assert_equal 1.0, @team_stats.league_home_win_percentage(@team_6)
+  end
+  #TeamStats test
+  def test_it_calculates_team_away_league_win_percentage
+    assert_equal 0.0, @team_stats.league_away_win_percentage(@team_3)
+    assert_equal 1.0, @team_stats.league_away_win_percentage(@team_6)
+  end
 
   def test_it_calculates_highest_league_win_percentage
     assert_equal "Bruins", @league_stats.highest_win_percentage
@@ -285,6 +295,16 @@ class LeagueStatsTest < Minitest::Test
   def test_it_calculates_team_league_wins
     assert_equal 0, @team_3.total_wins_league
     assert_equal 3, @team_6.total_wins_league
+  end
+
+  #TeamStats test
+  def test_it_calculates_fan_rating
+    assert_equal 0.0, @team_stats.league_win_percentage(@team_3)
+    assert_equal 1.0, @team_stats.league_win_percentage(@team_6)
+  end
+
+  def test_it_calculates_best_fans
+    assert_equal "", @league_stats.highest_fans_rating
   end
 
   # def test_it_calculates_highest_scoring_away_team
