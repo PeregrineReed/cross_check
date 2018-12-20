@@ -118,4 +118,24 @@ class LeagueStatsTest < Minitest::Test
     assert_equal @teams, @league_stats.teams
   end
 
+  def test_it_calculates_offense
+    skip
+    assert_equal , @league_stats.offense
+  end
+
+  def test_it_calculates_defense
+    skip
+    assert_equal , @league_stats.defense
+  end
+
+  def test_it_calculates_highest_scoring_away_team
+    skip
+    assert_equal , @league_stats.high_scoring_away_team
+  end
+
+  def test_it_calculates_highest_scoring_home_team
+    skip
+    assert_equal , @league_stats.high_scoring_home_team
+  end
+
 end
