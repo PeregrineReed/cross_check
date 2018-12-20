@@ -161,19 +161,12 @@ class GameStatsTest < Minitest::Test
     assert_equal 5.83, @game_stats.average_game_goals
   end
 
-  def test_it_can_count_all_games
-    skip
-    assert_equal 6, @game_stats.stats.count
-  end
-
   def test_it_can_calculate_percentage_of_home_wins
-    skip
-    assert_equal 83.33, @game_stats.home_wins_percent
+    assert_equal 83.33, @game_stats.wins_percentage("home")
   end
 
   def test_it_can_calculate_percentage_of_away_wins
-    skip
-    assert_equal 16.67, @game_stats.away_wins_percent
+    assert_equal 16.67, @game_stats.wins_percentage("away")
   end
 
 end

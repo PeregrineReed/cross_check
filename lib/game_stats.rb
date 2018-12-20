@@ -127,4 +127,11 @@ class GameStats
     average.round(2)
   end
 
+  def wins_percentage(team)
+    wins = @games.reject do |game|
+      game.outcome[0..3] != team
+    end
+    percentage = wins.size / @games.size.to_f
+    (percentage * 100).round(2)
+  end
 end
