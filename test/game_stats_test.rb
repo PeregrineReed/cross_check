@@ -14,56 +14,68 @@ class GameStatsTest < Minitest::Test
     @game_5 = mock
     @game_6 = mock
     @games = [
-              @game_1,
-              @game_2,
-              @game_3,
-              @game_4,
-              @game_5,
-              @game_6
-             ]
+      @game_1,
+      @game_2,
+      @game_3,
+      @game_4,
+      @game_5,
+      @game_6
+    ]
     @game_stats = GameStats.new(@games)
-    @game_1.stubs(:season => "20122013",
-                  :total_score => 5,
-                  :home_goals => 3,
-                  :away_goals => 2,
-                  :blowout => 1,
-                  :outcome => "home win OT",
-                  :venue => "TD Garden")
-    @game_2.stubs(:season => "20122013",
-                  :total_score => 7,
-                  :home_goals => 5,
-                  :away_goals => 2,
-                  :blowout => 3,
-                  :outcome => "home win REG",
-                  :venue => "TD Garden")
-    @game_3.stubs(:season => "20122013",
-                  :total_score => 3,
-                  :home_goals => 1,
-                  :away_goals => 2,
-                  :blowout => 1,
-                  :outcome => "away win REG",
-                  :venue => "TD Garden")
-    @game_4.stubs(:season => "20162017",
-                  :total_score => 7,
-                  :home_goals => 5,
-                  :away_goals => 2,
-                  :blowout => 3,
-                  :outcome => "home win REG",
-                  :venue => "Amalie Arena")
-    @game_5.stubs(:season => "20172018",
-                  :total_score => 4,
-                  :home_goals => 3,
-                  :away_goals => 1,
-                  :blowout => 2,
-                  :outcome => "home win REG",
-                  :venue => "MTS Centre")
-    @game_6.stubs(:season => "20172018",
-                  :total_score => 9,
-                  :home_goals => 5,
-                  :away_goals => 4,
-                  :blowout => 1,
-                  :outcome => "home win OT",
-                  :venue => "MTS Centre")
+    @game_1.stubs(
+      :season => "20122013",
+      :total_score => 5,
+      :home_goals => 3,
+      :away_goals => 2,
+      :blowout => 1,
+      :outcome => "home win OT",
+      :venue => "TD Garden"
+    )
+    @game_2.stubs(
+      :season => "20122013",
+      :total_score => 7,
+      :home_goals => 5,
+      :away_goals => 2,
+      :blowout => 3,
+      :outcome => "home win REG",
+      :venue => "TD Garden"
+    )
+    @game_3.stubs(
+      :season => "20122013",
+      :total_score => 3,
+      :home_goals => 1,
+      :away_goals => 2,
+      :blowout => 1,
+      :outcome => "away win REG",
+      :venue => "TD Garden"
+    )
+    @game_4.stubs(
+      :season => "20162017",
+      :total_score => 7,
+      :home_goals => 5,
+      :away_goals => 2,
+      :blowout => 3,
+      :outcome => "home win REG",
+      :venue => "Amalie Arena"
+    )
+    @game_5.stubs(
+      :season => "20172018",
+      :total_score => 4,
+      :home_goals => 3,
+      :away_goals => 1,
+      :blowout => 2,
+      :outcome => "home win REG",
+      :venue => "MTS Centre"
+    )
+    @game_6.stubs(
+      :season => "20172018",
+      :total_score => 9,
+      :home_goals => 5,
+      :away_goals => 4,
+      :blowout => 1,
+      :outcome => "home win OT",
+      :venue => "MTS Centre"
+    )
   end
 
   def test_it_exists
@@ -73,12 +85,6 @@ class GameStatsTest < Minitest::Test
   def test_it_has_games
     assert_equal @games, @game_stats.games
   end
-
-  # def test_it_has_game_stats
-  #   skip
-  #   keys = [:"2012030221", :"2012030222", :"2012030223", :"2017020830", :"2017020227", :"2016020050"]
-  #   assert_equal keys, @game_stats.stats.keys
-  # end
 
   def test_it_can_list_all_seasons
     seasons = ["20122013", "20162017", "20172018",]
