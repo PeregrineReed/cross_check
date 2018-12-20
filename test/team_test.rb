@@ -50,9 +50,4 @@ class TeamTest < Minitest::Test
     assert_equal "NJD", @team_1.abbreviation
     assert_equal "/api/v1/teams/1", @team_1.link
   end
-#
-#   def test_it_has_a_total_score
-#     assert_equal 5, @game_1.total_score
-#   end
-#
 end
