@@ -42,4 +42,9 @@ class Game
     away_goals - home_goals
   end
 
+  def blowout
+    hoa = [home_goals, away_goals]
+    hoa.max - hoa.min
+  end
+
 end
