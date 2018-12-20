@@ -26,31 +26,37 @@ class GameStatsTest < Minitest::Test
                   :total_score => 5,
                   :home_goals => 3,
                   :away_goals => 2,
+                  :blowout => 1,
                   :venue => "TD Garden")
     @game_2.stubs(:season => "20122013",
                   :total_score => 7,
                   :home_goals => 5,
                   :away_goals => 2,
+                  :blowout => 3,
                   :venue => "TD Garden")
     @game_3.stubs(:season => "20122013",
                   :total_score => 3,
                   :home_goals => 1,
                   :away_goals => 2,
-                  :venue => "Madison Square Garden")
+                  :blowout => 1,
+                  :venue => "TD Garden")
     @game_4.stubs(:season => "20162017",
                   :total_score => 7,
                   :home_goals => 5,
                   :away_goals => 2,
+                  :blowout => 3,
                   :venue => "Amalie Arena")
     @game_5.stubs(:season => "20172018",
                   :total_score => 4,
                   :home_goals => 3,
                   :away_goals => 1,
-                  :venue => "PNC Arena")
+                  :blowout => 2,
+                  :venue => "MTS Centre")
     @game_6.stubs(:season => "20172018",
                   :total_score => 9,
                   :home_goals => 5,
                   :away_goals => 4,
+                  :blowout => 1,
                   :venue => "MTS Centre")
   end
 
@@ -77,7 +83,7 @@ class GameStatsTest < Minitest::Test
   def test_it_can_count_games_by_season
     expected = {"20122013" => 3,"20162017" => 1, "20172018" => 2}
 
-    assert_equal expected, @game_stats.season_games
+    assert_equal expected, @game_stats.list_season_games
   end
 
   def test_it_can_determine_season_with_most_games
@@ -102,7 +108,6 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_find_the_largest_difference_in_scores
-    skip
     assert_equal 3, @game_stats.blowout
   end
 
@@ -122,32 +127,29 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_list_all_venues
-    venues = ["Amalie Arena", "MTS Centre", "Madison Square Garden", "PNC Arena", "TD Garden"]
-    assert_equal venues, @game_stats.stat_collect(:venue)
+    venues = ["Amalie Arena", "MTS Centre", "TD Garden"]
+    assert_equal venues, @game_stats.list_venues
   end
 
   def test_it_can_determine_venue_with_most_games
-    skip
-    assert_equal "TD Garden", @game_stats.stat_with_most_games(:venue)
+    assert_equal "TD Garden", @game_stats.venue_with_most_games
   end
 
   def test_it_can_determine_venue_with_fewest_games
-    skip
-    assert_equal "Amalie Arena", @game_stats.stat_with_fewest_games(:venue)
+    assert_equal "Amalie Arena", @game_stats.venue_with_fewest_games
   end
 
   def test_it_can_total_goals_by_season
-    skip
-    hash = {:"20122013" => 15, :"20162017" => 9, :"20172018" => 11}
+    expected = {"20122013" => 15, "20162017" => 7, "20172018" => 13}
 
-    assert_equal hash, @game_stats.total_goals_stat(:season)
+    assert_equal expected, @game_stats.total_season_goals
   end
 
   def test_it_can_average_goals_by_season
     skip
-    hash = {:"20122013" => 5, :"20162017" => 9, :"20172018" => 5.5}
+    expected = {:"20122013" => 5, :"20162017" => 9, :"20172018" => 5.5}
 
-    assert_equal hash, @game_stats.average_goals_stat(:season)
+    assert_equal expected, @game_stats.average_goals_stat(:season)
   end
 
   def test_it_can_average_goals_per_game
