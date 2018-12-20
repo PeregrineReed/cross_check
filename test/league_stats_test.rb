@@ -281,6 +281,12 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "Bruins", @league_stats.highest_win_percentage
   end
 
+  #Team test
+  def test_it_calculates_team_league_wins
+    assert_equal 0, @team_3.total_wins_league
+    assert_equal 3, @team_6.total_wins_league
+  end
+
   # def test_it_calculates_highest_scoring_away_team
   #   skip
   #   assert_equal , @league_stats.high_scoring_away_team

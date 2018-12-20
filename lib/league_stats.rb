@@ -13,7 +13,7 @@ class LeagueStats
           team.total_goals_league += game.home_goals
           team.home_goals_league += game.home_goals
           #team.total_games_league += 1
-        add_league_game(team)
+          add_league_game(team)
           team.home_games_league += 1
           if game.home_goals > game.away_goals
             team.home_wins_league += 1
@@ -24,7 +24,7 @@ class LeagueStats
           team.total_goals_league += game.away_goals
           team.away_goals_league += game.away_goals
           #team.total_games_league += 1
-        add_league_game(team)
+          add_league_game(team)
           team.away_games_league += 1
           if game.away_goals > game.home_goals
             team.away_wins_league += 1
@@ -79,13 +79,13 @@ class LeagueStats
   end
 
   #Team stat method
-  def league_away_average_goals
-    @team.away_goals_league / @team.total_games_league
+  def league_away_average_goals(team)
+    team.away_goals_league / team.total_games_league
   end
 
   #Team stat method
-  def league_home_average_goals
-    @team.away_goals_league / @team.total_games_league
+  def league_home_average_goals(team)
+    team.away_goals_league / team.total_games_league
   end
 
   def highest_scoring_when_away
@@ -111,6 +111,24 @@ class LeagueStats
       team_stats.league_home_average_goals
     end.teamName
   end
+
+  ##Team method
+  def total_wins_league
+    home_wins_league + away_wins_league
+  end
+
+  #Team stat method
+  def league_win_percentage(team)
+    team.total_wins_league / team.total_games_league
+  end
+
+  def highest_league_win_percentage
+    @teams.max_by do |team|
+      team_stats.league_win_percentage(team)
+    end.teamName
+  end
+
+
 
 
 
