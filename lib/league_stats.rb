@@ -121,11 +121,40 @@ class LeagueStats
   def league_win_percentage(team)
     team.total_wins_league / team.total_games_league
   end
+  #Team stat method
+  def league_home_win_percentage(team)
+    team.home_wins_league / team.total_games_league
+  end
+  #Team stat method
+  def league_away_win_percentage(team)
+    team.away_wins_league / team.total_games_league
+  end
 
   def highest_league_win_percentage
     @teams.max_by do |team|
       team_stats.league_win_percentage(team)
     end.teamName
+  end
+
+  #Team stat method
+  def fans_rating(team)
+    team_stats.league_home_win_percentage(team) - team_stats.league_away_win_percentage(team)
+  end
+
+  def highest_fans_rating
+    @teams.max_by do |team|
+      team_stats.fans_rating(team)
+    end.teamName
+  end
+
+  def bad_fan_teams
+    bad_fans = []
+    @teams.each do |team|
+      if team_stats.fans_rating(team) < 0
+        bad_fans << team.teamName
+      end
+    end
+    bad_fans
   end
 
 

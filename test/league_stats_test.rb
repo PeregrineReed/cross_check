@@ -307,6 +307,10 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "", @league_stats.highest_fans_rating
   end
 
+  def test_it_lists_bad_fan_teams
+    assert_equal [], @league_stats.bad_fan_teams
+  end
+
   # def test_it_calculates_highest_scoring_away_team
   #   skip
   #   assert_equal , @league_stats.high_scoring_away_team
