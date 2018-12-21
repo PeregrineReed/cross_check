@@ -8,27 +8,27 @@ class TeamTest < Minitest::Test
   def setup
     @team_data_1 = {
       :team_id=>"1",
-      :franchise_id=>"23",
-      :short_name=>"New Jersey",
-      :team_name=>"Devils",
+      :franchiseId=>"23",
+      :shortName=>"New Jersey",
+      :teamName=>"Devils",
       :abbreviation=>"NJD",
       :link=>"/api/v1/teams/1"
     }
 
     @team_data_2 = {
       :team_id=>"4",
-      :franchise_id=>"16",
-      :short_name=>"Philadelphia",
-      :team_name=>"Flyers",
+      :franchiseId=>"16",
+      :shortName=>"Philadelphia",
+      :teamName=>"Flyers",
       :abbreviation=>"PHI",
       :link=>"/api/v1/teams/4"
     }
 
     @team_data_3 = {
       :team_id=>"26",
-      :franchise_id=>"14",
-      :short_name=>"Los Angeles",
-      :team_name=>"Kings",
+      :franchiseId=>"14",
+      :shortName=>"Los Angeles",
+      :teamName=>"Kings",
       :abbreviation=>"LAK",
       :link=>"/api/v1/teams/26"
     }
@@ -54,7 +54,11 @@ class TeamTest < Minitest::Test
 #for each of the attributes of a team.
   def test_it_has_team_info
 
-    hash = {:team_id => "1", :franchise_id=>"23", :short_name=>"New Jersey", :team_name=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
-    assert_equal assert_equal hash, @team_1.team_info(@team_data_1)
+    hash = {:team_id => "1", :franchiseId=>"23", :shortName=>"New Jersey", :teamName=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
+    assert_equal hash, @team_1.team_info
+  end
+#We need to run this to make sure it works
+  def test_league_wins_starts_with_0
+    assert_equal 0, @team_3.total_wins_league
   end
 end

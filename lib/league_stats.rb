@@ -40,11 +40,6 @@ class LeagueStats
     team.total_games_league += 1
   end
 
-  #Team Stat method
-  def calculate_offense(team)
-    team.total_goals_league / team.total_games_league
-  end
-
   def highest_offense
     @teams.max_by do |team|
       calculate_offense(team)
@@ -59,11 +54,6 @@ class LeagueStats
     team.teamName
   end
 
-  #Team Stat method
-  def calculate_defense(team)
-    team.total_goals_allowed_league / team.total_games_league
-  end
-
   def highest_defense
     @teams.max_by do |team|
       calculate_defense(team)
@@ -76,16 +66,6 @@ class LeagueStats
       calculate_defense(team)
     end
     team.teamName
-  end
-
-  #Team stat method
-  def league_away_average_goals(team)
-    team.away_goals_league / team.total_games_league
-  end
-
-  #Team stat method
-  def league_home_average_goals(team)
-    team.away_goals_league / team.total_games_league
   end
 
   def highest_scoring_when_away
@@ -112,33 +92,10 @@ class LeagueStats
     end.teamName
   end
 
-  ##Team method
-  def total_wins_league
-    home_wins_league + away_wins_league
-  end
-
-  #Team stat method
-  def league_win_percentage(team)
-    team.total_wins_league / team.total_games_league
-  end
-  #Team stat method
-  def league_home_win_percentage(team)
-    team.home_wins_league / team.total_games_league
-  end
-  #Team stat method
-  def league_away_win_percentage(team)
-    team.away_wins_league / team.total_games_league
-  end
-
   def highest_league_win_percentage
     @teams.max_by do |team|
       team_stats.league_win_percentage(team)
     end.teamName
-  end
-
-  #Team stat method
-  def fans_rating(team)
-    team_stats.league_home_win_percentage(team) - team_stats.league_away_win_percentage(team)
   end
 
   def highest_fans_rating
@@ -156,9 +113,5 @@ class LeagueStats
     end
     bad_fans
   end
-
-
-
-
 
 end
