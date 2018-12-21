@@ -197,13 +197,6 @@ class LeagueStatsTest < Minitest::Test
     assert_equal @teams, @league_stats.teams
   end
 
-  #TeamStats test
-  def test_it_adds_team_total_league_game
-    @team_3.total_games_league = 3
-    add_league_game(@team_3)
-
-    assert_equal 4, @team_stats.total_games_league(@team_3)
-  end
 
 
 
@@ -218,12 +211,6 @@ class LeagueStatsTest < Minitest::Test
 
 
 
-
-  #TeamStats test
-  def test_it_calculates_offense
-    assert_equal 1.66, @team_stats.calculate_offense(@team_3)
-  end
-
   def test_it_calculates_highest_offense
     assert_equal "Lightning", @league_stats.highest_offense
   end
@@ -232,27 +219,12 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "Panthers", @league_stats.lowest_offense
   end
 
-  #TeamStats test
-  def test_it_calculates_defense
-    assert_equal 1.66, @team_stats.calculate_defense(@team_3)
-  end
-
   def test_it_calculates_highest_defense
     assert_equal "Lightning", @league_stats.highest_defense
   end
 
   def test_it_calculates_highest_defense
     assert_equal "Panthers", @league_stats.lowest_defense
-  end
-
-  #TeamStats test
-  def test_it_calculates_team_league_away_average_goals
-    assert_equal 2, @team_stats.league_away_average_goals(@team_3)
-  end
-
-  #TeamStats test
-  def test_it_calculates_team_league_home_average_goals
-    assert_equal 4, @team_stats.league_home_average_goals(@team_6)
   end
 
   def test_it_calculates_highest_scoring_away_team
@@ -271,36 +243,8 @@ class LeagueStatsTest < Minitest::Test
     assert_equal "", @league_stats.lowest_scoring_when_home
   end
 
-  #TeamStats test
-  def test_it_calculates_team_league_win_percentage
-    assert_equal 0.0, @team_stats.league_win_percentage(@team_3)
-    assert_equal 1.0, @team_stats.league_win_percentage(@team_6)
-  end
-  #TeamStats test
-  def test_it_calculates_team_home_league_win_percentage
-    assert_equal 0.0, @team_stats.league_home_win_percentage(@team_3)
-    assert_equal 1.0, @team_stats.league_home_win_percentage(@team_6)
-  end
-  #TeamStats test
-  def test_it_calculates_team_away_league_win_percentage
-    assert_equal 0.0, @team_stats.league_away_win_percentage(@team_3)
-    assert_equal 1.0, @team_stats.league_away_win_percentage(@team_6)
-  end
-
   def test_it_calculates_highest_league_win_percentage
     assert_equal "Bruins", @league_stats.highest_win_percentage
-  end
-
-  #Team test
-  def test_it_calculates_team_league_wins
-    assert_equal 0, @team_3.total_wins_league
-    assert_equal 3, @team_6.total_wins_league
-  end
-
-  #TeamStats test
-  def test_it_calculates_fan_rating
-    assert_equal 0.0, @team_stats.league_win_percentage(@team_3)
-    assert_equal 1.0, @team_stats.league_win_percentage(@team_6)
   end
 
   def test_it_calculates_best_fans
@@ -310,15 +254,5 @@ class LeagueStatsTest < Minitest::Test
   def test_it_lists_bad_fan_teams
     assert_equal [], @league_stats.bad_fan_teams
   end
-
-  # def test_it_calculates_highest_scoring_away_team
-  #   skip
-  #   assert_equal , @league_stats.high_scoring_away_team
-  # end
-  #
-  # def test_it_calculates_highest_scoring_home_team
-  #   skip
-  #   assert_equal , @league_stats.high_scoring_home_team
-  # end
 
 end
