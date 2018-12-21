@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require 'mocha/minitest'
 require './lib/team_stats'
 require './lib/team'
@@ -15,9 +14,9 @@ class TeamStatsTest < Minitest::Test
     @team_1 = Team.new(team_1_info)
     @team_4 = Team.new(team_4_info)
     @teams = [
-              @team_1,
-              @team_4,
-             ]
+      @team_1,
+      @team_4,
+    ]
 
    @team_stats = TeamStats.new(@teams)
 

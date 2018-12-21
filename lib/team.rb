@@ -11,9 +11,6 @@ class Team
   attr_accessor :home_wins_league,
                 :away_wins_league
 
-
-
-
   def initialize(data)
     @team_info = data
     @team_id = data[:team_id]
