@@ -20,31 +20,23 @@ class LeagueStats
   end
 
   def home_team_league_stat_collector(team, game)
-    #team.total_goals_league += game.home_goals
     team.home_goals_league += game.home_goals
-    add_league_game(team)
+    team.total_games_league += 1
     team.home_games_league += 1
+    team.total_goals_allowed_league += game.away_goals
     if game.home_goals > game.away_goals
       team.home_wins_league += 1
-    elsif game.home_goals < game.away_goals
-      team.total_goals_allowed_league += game.away_goals
     end
   end
 
   def away_team_league_stat_collector(team, game)
-    #team.total_goals_league += game.away_goals
     team.away_goals_league += game.away_goals
-    add_league_game(team)
+    team.total_games_league += 1
     team.away_games_league += 1
+    team.total_goals_allowed_league += game.home_goals
     if game.away_goals > game.home_goals
       team.away_wins_league += 1
-    elsif game.away_goals < game.home_goals
-      team.total_goals_allowed_league += game.home_goals
     end
-  end
-
-  def add_league_game(team)
-    team.total_games_league += 1
   end
 
   def team_league_totals(team)
@@ -55,73 +47,75 @@ class LeagueStats
 
   def highest_offense
     @teams.max_by do |team|
-      calculate_offense(team)
-    end
-    team.teamName
+      if team.calculate_offense.class != Float
+        next
+      else
+        team.calculate_offense
+      end
+    end.team_name
   end
 
   def lowest_offense
     @teams.min_by do |team|
-      calculate_offense(team)
-    end
-    team.teamName
+      team.calculate_offense
+    end.team_name
   end
 
   def highest_defense
     @teams.max_by do |team|
-      calculate_defense(team)
-    end
-    team.teamName
+      team.calculate_defense
+    end.team_name
   end
 
   def lowest_defense
     @teams.min_by do |team|
-      calculate_defense(team)
-    end
-    team.teamName
+      team.calculate_defense
+    end.team_name
   end
+
 
   def highest_scoring_when_away
     @teams.max_by do |team|
-      team_stats.league_away_average_goals
-    end.teamName
+      team.league_away_average_goals
+    end.team_name
   end
+
 
   def highest_scoring_when_home
     @teams.max_by do |team|
-      team_stats.league_home_average_goals
-    end.teamName
+      team.league_home_average_goals
+    end.team_name
   end
 
   def lowest_scoring_when_away
     @teams.min_by do |team|
-      team_stats.league_away_average_goals
-    end.teamName
+      team.league_away_average_goals
+    end.team_name
   end
 
   def lowest_scoring_when_home
     @teams.min_by do |team|
-      team_stats.league_home_average_goals
-    end.teamName
+      team.league_home_average_goals
+    end.team_name
   end
 
-  def highest_league_win_percentage
+  def highest_win_percentage
     @teams.max_by do |team|
-      team_stats.league_win_percentage(team)
-    end.teamName
+      team.league_win_percentage
+    end.team_name
   end
 
   def highest_fans_rating
     @teams.max_by do |team|
-      team_stats.fans_rating(team)
-    end.teamName
+      team.fans_rating
+    end.team_name
   end
 
   def bad_fan_teams
     bad_fans = []
     @teams.each do |team|
-      if team_stats.fans_rating(team) < 0
-        bad_fans << team.teamName
+      if team.fans_rating < 0
+        bad_fans << team.team_name
       end
     end
     bad_fans

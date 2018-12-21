@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+rrequire './test/test_helper'
 require 'mocha/minitest'
 require './lib/team_stats'
 require './lib/team'

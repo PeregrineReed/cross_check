@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require './lib/team'
 require 'pry'
 
@@ -53,8 +52,8 @@ class TeamTest < Minitest::Test
 #A hash with key/value pairs
 #for each of the attributes of a team.
   def test_it_has_team_info
-
     hash = {:team_id => "1", :franchiseId=>"23", :shortName=>"New Jersey", :teamName=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
+
     assert_equal hash, @team_1.team_info
   end
 
