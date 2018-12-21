@@ -1,73 +1,48 @@
 class GameStats
 
-  attr_reader :stats
+  attr_reader :games,
+              :seasons,
+              :venues
 
-  def initialize(game_stats)
-    @stats = game_stats
+  def initialize(games)
+    @games = games
+    @seasons = []
+    @venues = []
   end
 
-  def stat_games_count(stat)
-    games_collection = {}
-    stat_collect(stat).each do |element|
-      element = element.to_sym
-      games_collection[element] = 0
-      @stats.values.each do |game_stats|
-        if game_stats[stat] == element.to_s
-          games_collection[element] += 1
-        end
-      end
+  def list_seasons
+    @games.each do |game|
+      @seasons << game.season
     end
-    games_collection
+    @seasons.uniq!.sort!
   end
 
-  def stat_collect(stat)
-    collection = []
-    @stats.values.each do |game_stats|
-      game_stats.each do |key, value|
-        if key == stat && !(collection.include?(value))
-          collection << value
-        end
-      end
-    end
-    return collection.sort
-  end
-
-  def stat_with_most_games(stat)
-    most_games = stat_games_count(stat).values.max
-    if stat == :season
-      stat_games_count(stat).key(most_games).to_s.to_i
-    elsif stat == :venue
-      stat_games_count(stat).key(most_games).to_s
+  def games_by_season
+    @games.group_by do |game|
+      game.season
     end
   end
 
-  def stat_with_fewest_games(stat)
-    least_games = stat_games_count(stat).values.min
-    if stat == :season
-      stat_games_count(stat).key(least_games).to_s.to_i
-    elsif stat == :venue
-      stat_games_count(stat).key(least_games).to_s
+  def list_season_games
+    season_games = {}
+    games_by_season.each do |season, games|
+      season_games[season] = games.count
     end
+    season_games
   end
 
-  def away_game_scores
-    @stats.values.map do |game_stats|
-      game_stats[:away_goals].to_i
-    end
+  def season_with_most_games
+    most_games = list_season_games.values.max
+    list_season_games.key(most_games)
   end
 
-  def home_game_scores
-    @stats.values.map do |game_stats|
-      game_stats[:home_goals].to_i
-    end
+  def season_with_fewest_games
+    fewest_games = list_season_games.values.min
+    list_season_games.key(fewest_games)
   end
 
   def total_scores
-    hoa = home_game_scores.zip(away_game_scores)
-    hoa = hoa.map do |pair|
-      pair.sum
-    end
-    hoa.flatten
+    @games.map { |game| game.total_score }
   end
 
   def max_score
@@ -78,72 +53,85 @@ class GameStats
     total_scores.min
   end
 
+  def away_game_scores
+    @games.map do |game|
+      game.away_goals
+    end
+  end
+
+  def home_game_scores
+    @games.map do |game|
+      game.home_goals
+    end
+  end
+
   def blowout
-    hoa = home_game_scores.zip(away_game_scores)
-    hoa = hoa.map do |pair|
-      pair.max - pair.min
+    games_blowouts = @games.map do |game|
+      game.blowout
     end
-    hoa.flatten.max
+    games_blowouts.max
   end
 
-  def total_goals_stat(stat)
-    goals_collection = {}
-    stat_collect(stat).each do |element|
-      element = element.to_sym
-      goals_collection[element] = 0
-      @stats.values.each do |game_stats|
-        if game_stats[stat] == element.to_s
-          total_goals = (game_stats[:away_goals].to_i + game_stats[:home_goals].to_i)
-          goals_collection[element] += total_goals
-        end
+  def list_venues
+    @games.each do |game|
+      @venues << game.venue
+    end
+    @venues.uniq!.sort!
+  end
+
+  def games_by_venue
+    @games.group_by do |game|
+      game.venue
+    end
+  end
+
+  def list_games_by_venue
+    venues = {}
+    games_by_venue.each do |venue, games|
+      venues[venue] = games.size
+    end
+    venues
+  end
+
+  def venue_with_most_games
+    most_games = list_games_by_venue.values.max
+    list_games_by_venue.key(most_games)
+  end
+
+  def venue_with_fewest_games
+    fewest_games = list_games_by_venue.values.min
+    list_games_by_venue.key(fewest_games)
+  end
+
+  def total_season_goals
+    season_goals = {}
+    games_by_season.each do |season, games|
+      season_goals[season] = games.sum do |game|
+        game.total_score
       end
     end
-    goals_collection
+    season_goals
   end
 
-  def average_goals_stat(stat)
-    goals_collection = {}
-    stat_collect(stat).each do |element|
-      element = element.to_sym
-      average = total_goals_stat(stat)[element] / stat_games_count(stat)[element].to_f
-      goals_collection[element] = average
+  def average_goals_by_season
+    season_average = {}
+    total_season_goals.each do |season, total|
+      games = games_by_season[season].size
+      season_average[season] = (total.to_f / games)
     end
-    goals_collection
+    season_average
   end
 
-  def average_goals_game
-    (total_goals_stat(:season).values.sum / @stats.count.to_f).round(2)
+  def average_game_goals
+    average = total_scores.sum / @games.size.to_f
+    average.round(2)
   end
 
-  def home_wins_percent
-    hoa = home_game_scores.zip(away_game_scores)
-    home_wins = 0
-    away_wins = 0
-    ties = 0
-    hoa.each do |pair|
-      if (pair[0] - pair[1]) > 0
-        home_wins += 1
-      elsif (pair[0] - pair[1]) < 0
-        away_wins += 1
-      else
-        ties += 1
-      end
+  def wins_percentage(team)
+    wins = @games.reject do |game|
+      game.outcome[0..3] != team
     end
-    (home_wins / @stats.count.to_f * 100).round(2)
+    percentage = wins.size / @games.size.to_f
+    (percentage * 100).round(2)
   end
-
-  def away_wins_percent
-    hoa = home_game_scores.zip(away_game_scores)
-    away_wins = 0
-    hoa.each do |pair|
-      if (pair[0] - pair[1]) < 0
-        away_wins += 1
-      end
-    end
-    (away_wins / @stats.count.to_f * 100).round(2)
-  end
-
-
-
-
 end

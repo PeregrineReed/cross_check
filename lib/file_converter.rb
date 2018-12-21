@@ -13,7 +13,6 @@ class FileConverter
   def info_hash
     # full_hash = {}
     csv_contents = parse_csv(file)
-      
     csv_contents.each do |row|
 
     end
