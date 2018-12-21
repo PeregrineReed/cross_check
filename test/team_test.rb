@@ -34,8 +34,8 @@ class TeamTest < Minitest::Test
     }
 
     @team_1 = Team.new(@team_data_1)
-    @team_2 = Team.new(@team_data_2)
-    @team_3 = Team.new(@team_data_3)
+    @team_4 = Team.new(@team_data_2)
+    @team_26 = Team.new(@team_data_3)
   end
 
   def test_it_exists
@@ -57,8 +57,16 @@ class TeamTest < Minitest::Test
     hash = {:team_id => "1", :franchiseId=>"23", :shortName=>"New Jersey", :teamName=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
     assert_equal hash, @team_1.team_info
   end
-#We need to run this to make sure it works
-  def test_league_wins_starts_with_0
-    assert_equal 0, @team_3.total_wins_league
+
+  def test_league_stats_start_with_0
+    assert_equal 0, @team_1.home_wins_league
+    assert_equal 0, @team_1.away_wins_league
+    assert_equal 0, @team_1.away_goals_league
+    assert_equal 0, @team_1.home_goals_league
+    assert_equal 0, @team_1.total_wins_league
+    assert_equal 0, @team_1.total_games_league
+    assert_equal 0, @team_1.total_goals_league
+    assert_equal 0, @team_1.total_goals_allowed_league
   end
+
 end

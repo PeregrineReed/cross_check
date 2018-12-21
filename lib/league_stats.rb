@@ -10,34 +10,47 @@ class LeagueStats
     @teams.each do |team|
       @games.each do |game|
         if game.home_team_id == team.team_id
-          team.total_goals_league += game.home_goals
-          team.home_goals_league += game.home_goals
-          #team.total_games_league += 1
-          add_league_game(team)
-          team.home_games_league += 1
-          if game.home_goals > game.away_goals
-            team.home_wins_league += 1
-          elsif game.home_goals < game.away_goals
-            team.total_goals_allowed_league += game.away_goals
-          end
+          home_team_league_stat_collector(team, game)
         elsif game.away_team_id == team.team_id
-          team.total_goals_league += game.away_goals
-          team.away_goals_league += game.away_goals
-          #team.total_games_league += 1
-          add_league_game(team)
-          team.away_games_league += 1
-          if game.away_goals > game.home_goals
-            team.away_wins_league += 1
-          elsif game.away_goals < game.home_goals
-            team.total_goals_allowed_league += game.home_goals
-          end
+          away_team_league_stat_collector(team, game)
         end
       end
+    team_league_totals(team)
+    end
+  end
+
+  def home_team_league_stat_collector(team, game)
+    #team.total_goals_league += game.home_goals
+    team.home_goals_league += game.home_goals
+    add_league_game(team)
+    team.home_games_league += 1
+    if game.home_goals > game.away_goals
+      team.home_wins_league += 1
+    elsif game.home_goals < game.away_goals
+      team.total_goals_allowed_league += game.away_goals
+    end
+  end
+
+  def away_team_league_stat_collector(team, game)
+    #team.total_goals_league += game.away_goals
+    team.away_goals_league += game.away_goals
+    add_league_game(team)
+    team.away_games_league += 1
+    if game.away_goals > game.home_goals
+      team.away_wins_league += 1
+    elsif game.away_goals < game.home_goals
+      team.total_goals_allowed_league += game.home_goals
     end
   end
 
   def add_league_game(team)
     team.total_games_league += 1
+  end
+
+  def team_league_totals(team)
+    team.total_wins_league = team.home_wins_league + team.away_wins_league
+    team.total_games_league = team.home_games_league + team.away_games_league
+    team.total_goals_league = team.home_goals_league + team.away_goals_league
   end
 
   def highest_offense
