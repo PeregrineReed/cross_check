@@ -1,4 +1,4 @@
-rrequire './test/test_helper'
+require './test/test_helper'
 require 'mocha/minitest'
 require './lib/team_stats'
 require './lib/team'
@@ -29,36 +29,5 @@ class TeamStatsTest < Minitest::Test
   def test_it_has_teams
     assert_equal @teams, @team_stats.teams
   end
-
-
-
-  # def test_it_calculates_team_league_away_average_goals
-  #   assert_equal 2, @team_stats.league_away_average_goals(@team_1)
-  # end
-  #
-  # def test_it_calculates_team_league_home_average_goals
-  #   assert_equal 4, @team_stats.league_home_average_goals(@team_4)
-  # end
-  #
-  # def test_it_calculates_team_league_win_percentage
-  #   assert_equal 0.0, @team_stats.league_win_percentage(@team_1)
-  #   assert_equal 1.0, @team_stats.league_win_percentage(@team_4)
-  # end
-  #
-  # def test_it_calculates_team_home_league_win_percentage
-  #   assert_equal 0.0, @team_stats.league_home_win_percentage(@team_1)
-  #   assert_equal 1.0, @team_stats.league_home_win_percentage(@team_4)
-  # end
-  #
-  # def test_it_calculates_team_away_league_win_percentage
-  #   assert_equal 0.0, @team_stats.league_away_win_percentage(@team_1)
-  #   assert_equal 1.0, @team_stats.league_away_win_percentage(@team_4)
-  # end
-  #
-  # def test_it_calculates_fan_rating
-  #   assert_equal 0.0, @team_stats.league_win_percentage(@team_1)
-  #   assert_equal 1.0, @team_stats.league_win_percentage(@team_4)
-  # end
-
 
 end

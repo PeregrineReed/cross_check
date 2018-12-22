@@ -40,10 +40,8 @@ class LeagueStatsTest < Minitest::Test
               @team_13,
               @team_14,
               @team_23,
-              @team_52,
+              @team_52
              ]
-
-    #@team_stats = TeamStats.new(@teams)
 
     game_1_info = {:game_id=>"2012030221", :season=>"20122013", :type=>"P", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
     game_2_info = {:game_id=>"2012030222", :season=>"20122013", :type=>"P", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
@@ -60,11 +58,6 @@ class LeagueStatsTest < Minitest::Test
     game_12_info = {:game_id=>"2014020016", :season=>"20142015", :type=>"R", :date_time=>"2014-10-10", :away_team_id=>"52", :home_team_id=>"53", :away_goals=>"5", :home_goals=>"1", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
     game_13_info = {:game_id=>"test", :season=>"20142015", :type=>"R", :date_time=>"2014-10-10", :away_team_id=>"53", :home_team_id=>"52", :away_goals=>"1", :home_goals=>"0", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
 
-
-
-
-
-
     @game_1 = Game.new(game_1_info)
     @game_2 = Game.new(game_2_info)
     @game_3 = Game.new(game_3_info)
@@ -78,7 +71,6 @@ class LeagueStatsTest < Minitest::Test
     @game_11 = Game.new(game_11_info)
     @game_12 = Game.new(game_12_info)
     @game_13 = Game.new(game_13_info)
-
 
     @games = [
               @game_1,
@@ -124,44 +116,6 @@ class LeagueStatsTest < Minitest::Test
     assert_equal 5, @team_3.total_goals_league
     assert_equal 10, @team_3.total_goals_allowed_league
   end
-
-  #Team method tests
-  def test_it_calculates_offense
-    assert_equal 1.67, @team_3.calculate_offense
-  end
-
-  def test_it_calculates_defense
-    assert_equal 3.33, @team_3.calculate_defense
-  end
-
-  def test_it_calculates_team_league_away_average_goals
-    assert_equal 2, @team_3.league_away_average_goals
-  end
-
-  def test_it_calculates_team_league_home_average_goals
-    assert_equal 4, @team_6.league_home_average_goals
-  end
-
-  def test_it_calculates_team_league_win_percentage
-    assert_equal 0.0, @team_3.league_win_percentage
-    assert_equal 1.0, @team_6.league_win_percentage
-  end
-
-  def test_it_calculates_team_home_league_win_percentage
-    assert_equal 0.0, @team_3.league_home_win_percentage
-    assert_equal 1.0, @team_6.league_home_win_percentage
-  end
-
-  def test_it_calculates_team_away_league_win_percentage
-    assert_equal 0.0, @team_3.league_away_win_percentage
-    assert_equal 1.0, @team_6.league_away_win_percentage
-  end
-
-  def test_it_calculates_fan_rating
-    assert_equal 0.0, @team_3.league_win_percentage
-    assert_equal 1.0, @team_6.league_win_percentage
-  end
-
 
   #league stat method tests
   def test_it_calculates_highest_offense
