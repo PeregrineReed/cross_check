@@ -28,7 +28,7 @@ class FileConverterTest < Minitest::Test
     all_games = @file_converter.games.all? do |game|
       game.class == Game
     end
-
+binding.pry
     assert_equal true, all_games
   end
 
