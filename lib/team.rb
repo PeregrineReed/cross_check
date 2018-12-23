@@ -14,9 +14,9 @@ class Team
   def initialize(data)
     @team_info = data
     @team_id = data[:team_id]
-    @franchise_id = data[:franchiseId]
-    @short_name = data[:shortName]
-    @team_name = data[:teamName]
+    @franchise_id = data[:franchise_id]
+    @short_name = data[:short_name]
+    @team_name = data[:team_name]
     @abbreviation = data[:abbreviation]
     @link = data[:link]
     @home_wins_league = 0
