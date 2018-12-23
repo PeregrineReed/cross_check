@@ -1,17 +1,12 @@
 require './test/test_helper'
-require 'mocha/minitest'
 require './lib/team'
 require './lib/game'
-require './lib/game_stats'
-require './lib/league_stats'
-require 'pry'
+require './lib/team_stat_sorter'
 
-class LeagueStatsTest < Minitest::Test
+class TeamStatSorterTest < Minitest::Test
 
   def setup
-    #team_1_info = {team_id: "1", franchiseId: "23", shortName: "New Jersey", teamName: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
     team_3_info = {team_id: "3", franchiseId: "23", shortName: "", teamName: "Rangers", abbreviation: "NJD", link: "/api/v1/teams/1"}
-    #team_4_info = {team_id: "4", franchiseId: "16", shortName: "Philadelphia", teamName: "Flyers", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_6_info = {team_id: "6", franchiseId: "16", shortName: "", teamName: "Bruins", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_10_info = {team_id: "10", franchiseId: "16", shortName: "", teamName: "Maple Leafs", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_12_info = {team_id: "12", franchiseId: "16", shortName: "", teamName: "Hurricanes", abbreviation: "PHI", link: "/api/v1/teams/4"}
@@ -20,9 +15,7 @@ class LeagueStatsTest < Minitest::Test
     team_23_info = {team_id: "23", franchiseId: "16", shortName: "", teamName: "Canucks", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_52_info = {team_id: "52", franchiseId: "16", shortName: "", teamName: "Jets", abbreviation: "PHI", link: "/api/v1/teams/4"}
 
-    #@team_1 = Team.new(team_1_info)
     @team_3 = Team.new(team_3_info)
-    #@team_4 = Team.new(team_4_info)
     @team_6 = Team.new(team_6_info)
     @team_10 = Team.new(team_10_info)
     @team_12 = Team.new(team_12_info)
@@ -31,9 +24,7 @@ class LeagueStatsTest < Minitest::Test
     @team_23 = Team.new(team_23_info)
     @team_52 = Team.new(team_52_info)
     @teams = [
-              #@team_1,
               @team_3,
-              #@team_4,
               @team_6,
               @team_10,
               @team_12,
@@ -43,9 +34,9 @@ class LeagueStatsTest < Minitest::Test
               @team_52
              ]
 
-    game_1_info = {:game_id=>"2012030221", :season=>"20122013", :type=>"P", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_2_info = {:game_id=>"2012030222", :season=>"20122013", :type=>"P", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_3_info = {:game_id=>"2012030223", :season=>"20122013", :type=>"P", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"2", :home_goals=>"1", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
+    game_1_info = {:game_id=>"2012030221", :season=>"20122013", :type=>"R", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
+    game_2_info = {:game_id=>"2012030222", :season=>"20122013", :type=>"R", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
+    game_3_info = {:game_id=>"2012030223", :season=>"20122013", :type=>"R", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"2", :home_goals=>"1", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
     game_4_info = {:game_id=>"2017020830", :season=>"20172018", :type=>"R", :date_time=>"2018-02-09", :away_team_id=>"23", :home_team_id=>"14", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"Amalie Arena", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
     game_5_info = {:game_id=>"2017020227", :season=>"20172018", :type=>"R", :date_time=>"2017-11-08", :away_team_id=>"13", :home_team_id=>"12", :away_goals=>"1", :home_goals=>"3", :outcome=>"home win REG", :home_rink_side_start=>"right", :venue=>"PNC Arena", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
     game_6_info = {:game_id=>"2016020050", :season=>"20162017", :type=>"R", :date_time=>"2016-10-20", :away_team_id=>"10", :home_team_id=>"52", :away_goals=>"4", :home_goals=>"6", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
@@ -57,6 +48,11 @@ class LeagueStatsTest < Minitest::Test
     game_11_info = {:game_id=>"2014020548", :season=>"20142015", :type=>"R", :date_time=>"2015-01-01", :away_team_id=>"12", :home_team_id=>"5", :away_goals=>"1", :home_goals=>"7", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
     game_12_info = {:game_id=>"2014020016", :season=>"20142015", :type=>"R", :date_time=>"2014-10-10", :away_team_id=>"52", :home_team_id=>"53", :away_goals=>"5", :home_goals=>"1", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
     game_13_info = {:game_id=>"test", :season=>"20142015", :type=>"R", :date_time=>"2014-10-10", :away_team_id=>"53", :home_team_id=>"52", :away_goals=>"1", :home_goals=>"0", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
+
+    game_14_info = {:game_id=>"test2", :season=>"20122013", :type=>"P", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"4", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
+    game_15_info = {:game_id=>"test3", :season=>"20122013", :type=>"P", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"6", :home_goals=>"2", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
+    game_16_info = {:game_id=>"test4", :season=>"20122013", :type=>"P", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"1", :home_goals=>"2", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
+    game_17_info = {:game_id=>"test5", :season=>"20122013", :type=>"P", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"2", :home_goals=>"1", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
 
     @game_1 = Game.new(game_1_info)
     @game_2 = Game.new(game_2_info)
@@ -71,6 +67,10 @@ class LeagueStatsTest < Minitest::Test
     @game_11 = Game.new(game_11_info)
     @game_12 = Game.new(game_12_info)
     @game_13 = Game.new(game_13_info)
+    @game_14 = Game.new(game_14_info)
+    @game_15 = Game.new(game_15_info)
+    @game_16 = Game.new(game_16_info)
+    @game_17 = Game.new(game_17_info)
 
     @games = [
               @game_1,
@@ -85,26 +85,31 @@ class LeagueStatsTest < Minitest::Test
               @game_10,
               @game_11,
               @game_12,
-              @game_13
+              @game_13,
+              @game_14,
+              @game_15,
+              @game_16,
+              @game_17
              ]
 
-    @league_stats = LeagueStats.new(@games, @teams)
-    @league_stats.sort_total_league_games
+    @team_stat_sorter = TeamStatSorter.new(@games, @teams)
   end
 
   def test_it_exists
-    assert_instance_of LeagueStats, @league_stats
+    assert_instance_of TeamStatSorter, @team_stat_sorter
   end
 
   def test_it_has_games
-    assert_equal @games, @league_stats.games
+    assert_equal @games, @team_stat_sorter.games
   end
 
   def test_it_has_teams
-    assert_equal @teams, @league_stats.teams
+    assert_equal @teams, @team_stat_sorter.teams
   end
 
   def test_it_sorts_team_league_games
+    @team_stat_sorter.sort_team_games
+
     assert_equal 2, @team_6.home_wins_league
     assert_equal 1, @team_6.away_wins_league
     assert_equal 2, @team_6.away_goals_league
@@ -117,50 +122,17 @@ class LeagueStatsTest < Minitest::Test
     assert_equal 10, @team_3.total_goals_allowed_league
   end
 
-  #league stat method tests
-  def test_it_calculates_highest_offense
-    assert_equal "Jets", @league_stats.highest_offense
-  end
+  def test_it_sorts_team_season_games
+    @team_stat_sorter.sort_team_games
 
-  def test_it_calculates_lowest_offense
-    assert_equal "Rangers", @league_stats.lowest_offense
-  end
-
-  def test_it_calculates_highest_defense
-    assert_equal "Maple Leafs", @league_stats.highest_defense
-  end
-
-  def test_it_calculates_lowest_defense
-    assert_equal "Bruins", @league_stats.lowest_defense
-  end
-
-  def test_it_calculates_highest_scoring_away_team
-    assert_equal "Jets", @league_stats.highest_scoring_when_away
-  end
-
-  def test_it_calculates_highest_scoring_home_team
-
-    assert_equal "Lightning", @league_stats.highest_scoring_when_home
-  end
-
-  def test_it_calculates_lowest_scoring_away_team
-    assert_equal "Hurricanes", @league_stats.lowest_scoring_when_away
-  end
-
-  def test_it_calculates_lowest_scoring_home_team
-    assert_equal "Rangers", @league_stats.lowest_scoring_when_home
-  end
-
-  def test_it_calculates_highest_league_win_percentage
-    assert_equal "Bruins", @league_stats.highest_win_percentage
-  end
-
-  def test_it_calculates_best_fans
-    assert_equal "Hurricanes", @league_stats.highest_fans_rating
-  end
-
-  def test_it_lists_bad_fan_teams
-    assert_equal ["Jets"], @league_stats.bad_fan_teams
+    assert_equal 3, @team_3.total_wins_preseason
+    assert_equal 1, @team_6.total_wins_preseason
+    assert_equal 4, @team_3.total_games_preseason
+    assert_equal 4, @team_6.total_games_preseason
+    assert_equal 13, @team_3.total_goals_preseason
+    assert_equal 8, @team_6.total_goals_preseason
+    assert_equal 8, @team_3.total_goals_allowed_preseason
+    assert_equal 13, @team_6.total_goals_allowed_preseason
   end
 
 end
