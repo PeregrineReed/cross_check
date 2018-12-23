@@ -61,7 +61,6 @@ class Team
   end
 
   def fans_rating
-    binding.pry
     (home_win_percentage - away_win_percentage.to_f).round(2)
   end
 

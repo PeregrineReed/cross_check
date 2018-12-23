@@ -1,7 +1,5 @@
 require './test/test_helper'
-require 'mocha/minitest'
 require './lib/game_stats'
-require 'pry'
 
 class GameStatsTest < Minitest::Test
 
