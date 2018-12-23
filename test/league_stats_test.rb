@@ -9,9 +9,9 @@ require 'pry'
 class LeagueStatsTest < Minitest::Test
 
   def setup
-    #team_1_info = {team_id: "1", franchiseId: "23", shortName: "New Jersey", teamName: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
+    team_1_info = {team_id: "1", franchiseId: "23", shortName: "New Jersey", teamName: "Devils", abbreviation: "NJD", link: "/api/v1/teams/1"}
     team_3_info = {team_id: "3", franchiseId: "23", shortName: "", teamName: "Rangers", abbreviation: "NJD", link: "/api/v1/teams/1"}
-    #team_4_info = {team_id: "4", franchiseId: "16", shortName: "Philadelphia", teamName: "Flyers", abbreviation: "PHI", link: "/api/v1/teams/4"}
+    team_4_info = {team_id: "4", franchiseId: "16", shortName: "Philadelphia", teamName: "Flyers", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_6_info = {team_id: "6", franchiseId: "16", shortName: "", teamName: "Bruins", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_10_info = {team_id: "10", franchiseId: "16", shortName: "", teamName: "Maple Leafs", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_12_info = {team_id: "12", franchiseId: "16", shortName: "", teamName: "Hurricanes", abbreviation: "PHI", link: "/api/v1/teams/4"}
@@ -20,9 +20,9 @@ class LeagueStatsTest < Minitest::Test
     team_23_info = {team_id: "23", franchiseId: "16", shortName: "", teamName: "Canucks", abbreviation: "PHI", link: "/api/v1/teams/4"}
     team_52_info = {team_id: "52", franchiseId: "16", shortName: "", teamName: "Jets", abbreviation: "PHI", link: "/api/v1/teams/4"}
 
-    #@team_1 = Team.new(team_1_info)
+    @team_1 = Team.new(team_1_info)
     @team_3 = Team.new(team_3_info)
-    #@team_4 = Team.new(team_4_info)
+    @team_4 = Team.new(team_4_info)
     @team_6 = Team.new(team_6_info)
     @team_10 = Team.new(team_10_info)
     @team_12 = Team.new(team_12_info)
@@ -31,17 +31,17 @@ class LeagueStatsTest < Minitest::Test
     @team_23 = Team.new(team_23_info)
     @team_52 = Team.new(team_52_info)
     @teams = [
-              #@team_1,
-              @team_3,
-              #@team_4,
-              @team_6,
-              @team_10,
-              @team_12,
-              @team_13,
-              @team_14,
-              @team_23,
-              @team_52
-             ]
+      @team_1,
+      @team_3,
+      @team_4,
+      @team_6,
+      @team_10,
+      @team_12,
+      @team_13,
+      @team_14,
+      @team_23,
+      @team_52
+     ]
 
     game_1_info = {:game_id=>"2012030221", :season=>"20122013", :type=>"P", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
     game_2_info = {:game_id=>"2012030222", :season=>"20122013", :type=>"P", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
@@ -73,20 +73,20 @@ class LeagueStatsTest < Minitest::Test
     @game_13 = Game.new(game_13_info)
 
     @games = [
-              @game_1,
-              @game_2,
-              @game_3,
-              @game_4,
-              @game_5,
-              @game_6,
-              @game_7,
-              @game_8,
-              @game_9,
-              @game_10,
-              @game_11,
-              @game_12,
-              @game_13
-             ]
+      @game_1,
+      @game_2,
+      @game_3,
+      @game_4,
+      @game_5,
+      @game_6,
+      @game_7,
+      @game_8,
+      @game_9,
+      @game_10,
+      @game_11,
+      @game_12,
+      @game_13
+     ]
 
     @league_stats = LeagueStats.new(@games, @teams)
     @league_stats.sort_total_league_games
@@ -105,16 +105,16 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_it_sorts_team_league_games
-    assert_equal 2, @team_6.home_wins_league
-    assert_equal 1, @team_6.away_wins_league
-    assert_equal 2, @team_6.away_goals_league
-    assert_equal 8, @team_6.home_goals_league
-    assert_equal 2, @team_3.away_games_league
-    assert_equal 1, @team_3.home_games_league
-    assert_equal 3, @team_6.total_wins_league
-    assert_equal 3, @team_3.total_games_league
-    assert_equal 5, @team_3.total_goals_league
-    assert_equal 10, @team_3.total_goals_allowed_league
+    assert_equal 2, @team_6.home_wins
+    assert_equal 1, @team_6.away_wins
+    assert_equal 2, @team_6.away_goals
+    assert_equal 8, @team_6.home_goals
+    assert_equal 2, @team_3.away_games
+    assert_equal 1, @team_3.home_games
+    assert_equal 3, @team_6.total_wins
+    assert_equal 3, @team_3.total_games
+    assert_equal 5, @team_3.total_goals
+    assert_equal 10, @team_3.total_goals_allowed
   end
 
   #league stat method tests

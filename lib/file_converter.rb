@@ -1,8 +1,11 @@
 class FileConverter
 
-  attr_reader :games,
+  attr_reader :games_file,
+              :games,
+              :teams_file,
               :teams,
-              :game_teams
+              :game_teams_file,
+              :games_teams
 
   def initialize(files)
     @games_file = files[:games]
