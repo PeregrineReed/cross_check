@@ -151,4 +151,32 @@ class TeamTest < Minitest::Test
     assert_equal 0.46, @team_1.calculate_surprise
   end
 
+  def test_it_makes_season_summary
+    @team_1.total_wins_preseason = 5
+    @team_1.total_games_preseason = 9
+    @team_1.total_goals_preseason = 18
+    @team_1.total_goals_allowed_preseason = 16
+    @team_1.total_wins_league = 187
+    @team_1.total_games_league = 205
+    @team_1.total_goals_league = 412
+    @team_1.total_goals_allowed_league = 363
+
+    summary = {
+              preseason:
+                {
+                  win_percentage:0.6,
+                  goals_scored: 18,
+                  goals_against: 16
+                },
+              regular_season:
+                {
+                  win_percentage:0.93,
+                  goals_scored: 412,
+                  goals_against: 363
+                }
+              }
+
+    assert_equal summary, @team_1.season_summary
+  end
+
 end
