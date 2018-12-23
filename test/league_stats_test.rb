@@ -1,10 +1,8 @@
 require './test/test_helper'
-require 'mocha/minitest'
 require './lib/team'
 require './lib/game'
 require './lib/game_stats'
 require './lib/league_stats'
-require 'pry'
 
 class LeagueStatsTest < Minitest::Test
 
