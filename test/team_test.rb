@@ -142,4 +142,13 @@ class TeamTest < Minitest::Test
     assert_equal 0.46, @team_1.calculate_bust
   end
 
+  def test_it_calculates_surprise
+    @team_1.total_wins_preseason = 5
+    @team_1.total_games_preseason = 9
+    @team_1.total_wins_league = 187
+    @team_1.total_games_league = 205
+
+    assert_equal 0.46, @team_1.calculate_surprise
+  end
+
 end
