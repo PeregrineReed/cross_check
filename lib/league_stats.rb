@@ -10,105 +10,112 @@ class LeagueStats
     @teams.each do |team|
       @games.each do |game|
         if game.home_team_id == team.team_id
-          team.total_goals_league += game.home_goals
-          team.home_goals_league += game.home_goals
-          #team.total_games_league += 1
-          add_league_game(team)
-          team.home_games_league += 1
-          if game.home_goals > game.away_goals
-            team.home_wins_league += 1
-          elsif game.home_goals < game.away_goals
-            team.total_goals_allowed_league += game.away_goals
-          end
+          home_team_league_stat_collector(team, game)
         elsif game.away_team_id == team.team_id
-          team.total_goals_league += game.away_goals
-          team.away_goals_league += game.away_goals
-          #team.total_games_league += 1
-          add_league_game(team)
-          team.away_games_league += 1
-          if game.away_goals > game.home_goals
-            team.away_wins_league += 1
-          elsif game.away_goals < game.home_goals
-            team.total_goals_allowed_league += game.home_goals
-          end
+          away_team_league_stat_collector(team, game)
         end
       end
+    team_league_totals(team)
     end
   end
 
-  def add_league_game(team)
-    team.total_games_league += 1
+  def home_team_league_stat_collector(team, game)
+    team.home_goals += game.home_goals
+    team.total_games += 1
+    team.home_games += 1
+    team.total_goals_allowed += game.away_goals
+    if game.home_goals > game.away_goals
+      team.home_wins += 1
+    end
+  end
+
+  def away_team_league_stat_collector(team, game)
+    team.away_goals += game.away_goals
+    team.total_games += 1
+    team.away_games += 1
+    team.total_goals_allowed += game.home_goals
+    if game.away_goals > game.home_goals
+      team.away_wins += 1
+    end
+  end
+
+  def team_league_totals(team)
+    team.total_wins = team.home_wins + team.away_wins
+    team.total_games = team.home_games + team.away_games
+    team.total_goals = team.home_goals + team.away_goals
   end
 
   def highest_offense
     @teams.max_by do |team|
-      calculate_offense(team)
-    end
-    team.teamName
+      # if team.calculate_offense.class != Float
+      #   next
+      # else
+        team.calculate_offense
+      # end
+    end.team_name
   end
 
   def lowest_offense
     @teams.min_by do |team|
-      calculate_offense(team)
-    end
-    team.teamName
+      team.calculate_offense
+    end.team_name
   end
 
   def highest_defense
     @teams.max_by do |team|
-      calculate_defense(team)
-    end
-    team.teamName
+      team.calculate_defense
+    end.team_name
   end
 
   def lowest_defense
     @teams.min_by do |team|
-      calculate_defense(team)
-    end
-    team.teamName
+      team.calculate_defense
+    end.team_name
   end
+
 
   def highest_scoring_when_away
     @teams.max_by do |team|
-      team_stats.league_away_average_goals
-    end.teamName
+      team.away_average_goals
+    end.team_name
   end
+
 
   def highest_scoring_when_home
     @teams.max_by do |team|
-      team_stats.league_home_average_goals
-    end.teamName
+      team.home_average_goals
+    end.team_name
   end
 
   def lowest_scoring_when_away
     @teams.min_by do |team|
-      team_stats.league_away_average_goals
-    end.teamName
+      team.away_average_goals
+    end.team_name
   end
 
   def lowest_scoring_when_home
     @teams.min_by do |team|
-      team_stats.league_home_average_goals
-    end.teamName
+      team.home_average_goals
+    end.team_name
   end
 
-  def highest_league_win_percentage
+  def highest_win_percentage
     @teams.max_by do |team|
-      team_stats.league_win_percentage(team)
-    end.teamName
+      team.win_percentage
+    end.team_name
   end
 
   def highest_fans_rating
     @teams.max_by do |team|
-      team_stats.fans_rating(team)
-    end.teamName
+      team.fans_rating
+    end.team_name
   end
 
   def bad_fan_teams
     bad_fans = []
     @teams.each do |team|
-      if team_stats.fans_rating(team) < 0
-        bad_fans << team.teamName
+      if team.fans_rating <= 0
+        bad_fans << team.team_name
       end
     end
     bad_fans
