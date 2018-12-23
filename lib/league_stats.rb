@@ -47,11 +47,11 @@ class LeagueStats
 
   def highest_offense
     @teams.max_by do |team|
-      if team.calculate_offense.class != Float
-        next
-      else
+      # if team.calculate_offense.class != Float
+      #   next
+      # else
         team.calculate_offense
-      end
+      # end
     end.team_name
   end
 
@@ -76,32 +76,32 @@ class LeagueStats
 
   def highest_scoring_when_away
     @teams.max_by do |team|
-      team.league_away_average_goals
+      team.away_average_goals
     end.team_name
   end
 
 
   def highest_scoring_when_home
     @teams.max_by do |team|
-      team.league_home_average_goals
+      team.home_average_goals
     end.team_name
   end
 
   def lowest_scoring_when_away
     @teams.min_by do |team|
-      team.league_away_average_goals
+      team.away_average_goals
     end.team_name
   end
 
   def lowest_scoring_when_home
     @teams.min_by do |team|
-      team.league_home_average_goals
+      team.home_average_goals
     end.team_name
   end
 
   def highest_win_percentage
     @teams.max_by do |team|
-      team.league_win_percentage
+      team.win_percentage
     end.team_name
   end
 
@@ -114,7 +114,7 @@ class LeagueStats
   def bad_fan_teams
     bad_fans = []
     @teams.each do |team|
-      if team.fans_rating < 0
+      if team.fans_rating <= 0
         bad_fans << team.team_name
       end
     end

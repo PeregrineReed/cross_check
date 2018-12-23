@@ -6,9 +6,9 @@ class TeamTest < Minitest::Test
   def setup
     team_1_info = {
       :team_id=>"1",
-      :franchiseId=>"23",
-      :shortName=>"New Jersey",
-      :teamName=>"Devils",
+      :franchiseid=>"23",
+      :shortname=>"New Jersey",
+      :teamname=>"Devils",
       :abbreviation=>"NJD",
       :link=>"/api/v1/teams/1"
     }

@@ -36,6 +36,8 @@ class Team
       abbreviation: abbreviation,
       link: link
     }
+    @home_wins = 0
+    @away_wins = 0
     @total_wins = 0
     @total_games = 0
     @away_goals = 0
@@ -46,27 +48,28 @@ class Team
     @total_goals_allowed = 0
   end
 
-  def league_win_percentage
+  def win_percentage
     (total_wins / total_games.to_f).round(2)
   end
 
-  def league_home_win_percentage
+  def home_win_percentage
     (home_wins / home_games.to_f).round(2)
   end
 
-  def league_away_win_percentage
+  def away_win_percentage
     (away_wins / away_games.to_f).round(2)
   end
 
   def fans_rating
-    (league_home_win_percentage - league_away_win_percentage.to_f).round(2)
+    binding.pry
+    (home_win_percentage - away_win_percentage.to_f).round(2)
   end
 
-  def league_away_average_goals
+  def away_average_goals
     (away_goals / away_games.to_f).round(2)
   end
 
-  def league_home_average_goals
+  def home_average_goals
     (home_goals / home_games.to_f).round(2)
   end
 
