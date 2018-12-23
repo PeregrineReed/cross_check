@@ -30,47 +30,56 @@ class TeamStatsTest < Minitest::Test
     assert_equal @teams, @team_stats.teams
   end
 
-  def test_it_adds_team_total_league_game
-    @team_1.total_games_league = 3
-    add_league_game(@team_1)
+  def test_it_adds_team_total_game
+    skip
+    @team_1.total_games = 3
+    add_game(@team_1)
 
-    assert_equal 4, @team_stats.total_games_league(@team_1)
+    assert_equal 4, @team_stats.total_games(@team_1)
   end
 
   def test_it_calculates_offense
+    skip
     assert_equal 1.66, @team_stats.calculate_offense(@team_1)
   end
 
   def test_it_calculates_defense
+    skip
     assert_equal 1.66, @team_stats.calculate_defense(@team_1)
   end
 
-  def test_it_calculates_team_league_away_average_goals
-    assert_equal 2, @team_stats.league_away_average_goals(@team_1)
+  def test_it_calculates_team_away_average_goals
+    skip
+    assert_equal 2, @team_stats.away_average_goals(@team_1)
   end
 
-  def test_it_calculates_team_league_home_average_goals
-    assert_equal 4, @team_stats.league_home_average_goals(@team_4)
+  def test_it_calculates_team_home_average_goals
+    skip
+    assert_equal 4, @team_stats.home_average_goals(@team_4)
   end
 
-  def test_it_calculates_team_league_win_percentage
-    assert_equal 0.0, @team_stats.league_win_percentage(@team_1)
-    assert_equal 1.0, @team_stats.league_win_percentage(@team_4)
+  def test_it_calculates_team_win_percentage
+    skip
+    assert_equal 0.0, @team_stats.win_percentage(@team_1)
+    assert_equal 1.0, @team_stats.win_percentage(@team_4)
   end
 
-  def test_it_calculates_team_home_league_win_percentage
-    assert_equal 0.0, @team_stats.league_home_win_percentage(@team_1)
-    assert_equal 1.0, @team_stats.league_home_win_percentage(@team_4)
+  def test_it_calculates_team_home_win_percentage
+    skip
+    assert_equal 0.0, @team_stats.home_win_percentage(@team_1)
+    assert_equal 1.0, @team_stats.home_win_percentage(@team_4)
   end
 
-  def test_it_calculates_team_away_league_win_percentage
-    assert_equal 0.0, @team_stats.league_away_win_percentage(@team_1)
-    assert_equal 1.0, @team_stats.league_away_win_percentage(@team_4)
+  def test_it_calculates_team_away_win_percentage
+    skip
+    assert_equal 0.0, @team_stats.away_win_percentage(@team_1)
+    assert_equal 1.0, @team_stats.away_win_percentage(@team_4)
   end
 
   def test_it_calculates_fan_rating
-    assert_equal 0.0, @team_stats.league_win_percentage(@team_1)
-    assert_equal 1.0, @team_stats.league_win_percentage(@team_4)
+    skip
+    assert_equal 0.0, @team_stats.win_percentage(@team_1)
+    assert_equal 1.0, @team_stats.win_percentage(@team_4)
   end
 
 
