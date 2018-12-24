@@ -66,5 +66,9 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of LeagueStats, @stat_tracker.league_stats
   end
 
+  def test_it_can_determine_highest_total_score
+    assert_equal 9, @stat_tracker.highest_total_score
+  end
+
 
 end
