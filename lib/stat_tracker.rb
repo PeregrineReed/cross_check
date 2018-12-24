@@ -39,4 +39,8 @@ class StatTracker
 #Compile season stats, game teams stats
 # ======================================
 
+  def highest_total_score
+    game_stats.max_score
+  end
+
 end
