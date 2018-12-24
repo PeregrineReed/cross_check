@@ -82,4 +82,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal "TD Garden", @stat_tracker.most_popular_venue
   end
 
+  def test_it_can_determine_least_popular_venue
+    assert_equal "Amalie Arena", @stat_tracker.least_popular_venue
+  end
+
 end
