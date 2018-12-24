@@ -63,4 +63,8 @@ class StatTracker
     game_stats.wins_percentage("home")
   end
 
+  def percentage_visitor_wins
+    game_stats.wins_percentage("away")
+  end
+
 end
