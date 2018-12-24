@@ -78,4 +78,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal 3, @stat_tracker.biggest_blowout
   end
 
+  def test_it_can_determine_most_popular_venue
+    assert_equal "TD Garden", @stat_tracker.most_popular_venue
+  end
+
 end
