@@ -1,29 +1,37 @@
 class FileConverter
 
-  def initialize(file_name)
-    @file_name = file_name
+  attr_reader :games,
+              :teams,
+              :game_teams
+
+  def initialize(files)
+    @games_file = files[:games]
+    @games = convert_games
+    @teams_file = files[:teams]
+    @teams = convert_teams
+    @game_teams_file = files[:game_teams]
   end
 
-  def parse_csv(file_name)
-    CSV.readlines(file_name)
+  def parse_csv(file)
+    CSV.open(file, headers: true, header_converters: :symbol) #converters: :numeric
   end
 
-
-  def info_hash(file_name)
-    full_hash = {}
-    full_array = parse_csv(file_name)
-    header_array = full_array.shift
-
-    full_array.each do |data_array|
-      index = 0
-      inner_hash = {}
-      data_array.each do |data|
-        inner_hash[header_array[index].to_sym] = data
-        index += 1
-      end
-      full_hash[data_array[0].to_sym] = inner_hash
+  def convert_games
+    game_data = parse_csv(@games_file)
+    games = []
+    game_data.each do |game|
+      games << Game.new(game)
     end
-    full_hash
+  games
+  end
+
+  def convert_teams
+    teams_data = parse_csv(@teams_file)
+    teams = []
+    teams_data.each do |team|
+      teams << Team.new(team)
+    end
+  teams
   end
 
 end
