@@ -79,4 +79,8 @@ class StatTracker
     game_stats.list_season_games
   end
 
+  def average_goals_per_game
+    game_stats.average_game_goals
+  end
+
 end
