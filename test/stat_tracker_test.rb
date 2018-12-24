@@ -90,8 +90,12 @@ class StatTrackerTest < Minitest::Test
     assert_equal 83.33, @stat_tracker.percentage_home_wins
   end
 
-  def percentage_visitor_wins
+  def test_it_can_determine_percentage_visitor_wins
     assert_equal 16.67, @stat_tracker.percentage_visitor_wins
+  end
+
+  def test_it_can_determine_season_with_most_games
+    assert_equal "20122013", @stat_tracker.season_with_most_games
   end
 
 end
