@@ -70,5 +70,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal 9, @stat_tracker.highest_total_score
   end
 
+  def test_it_can_determine_lowest_total_score
+    assert_equal 3, @stat_tracker.lowest_total_score
+  end
 
 end
