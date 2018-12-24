@@ -13,4 +13,9 @@ class StatTracker
     FileConverter.new(files)
   end
 
+  def compile_game_stats
+    games = convert_files.games
+    GameStats.new(games)
+  end
+
 end
