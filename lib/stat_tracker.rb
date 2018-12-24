@@ -9,4 +9,8 @@ class StatTracker
     new(files)
   end
 
+  def convert_files
+    FileConverter.new(files)
+  end
+
 end
