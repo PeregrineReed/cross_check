@@ -75,4 +75,8 @@ class StatTracker
     game_stats.season_with_fewest_games
   end
 
+  def count_of_games_by_season
+    game_stats.list_season_games
+  end
+
 end
