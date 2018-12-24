@@ -9,6 +9,8 @@ class StatTracker
     new(files)
   end
 
+  # StatCompiler superclass
+  # ======================================
   def convert_files
     FileConverter.new(files)
   end
@@ -22,5 +24,13 @@ class StatTracker
     teams = convert_files.teams
     TeamStats.new(teams)
   end
+
+  def compile_league_stats
+    games = convert_files.games
+    teams = convert_files.teams
+    LeagueStats.new(games, teams)
+  end
+#Compile season stats, game teams stats
+# ======================================
 
 end

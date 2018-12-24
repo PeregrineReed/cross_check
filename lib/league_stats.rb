@@ -19,6 +19,14 @@ class LeagueStats
     end
   end
 
+  # home_games = @games.group_by do |game|
+  #   game.home_team_id
+  # end
+  #
+  # away_games = @games.group_by do |game|
+  #   game.away_team_id
+  # end
+
   def home_team_league_stat_collector(team, game)
     team.home_goals += game.home_goals
     team.total_games += 1
