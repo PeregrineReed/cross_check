@@ -55,4 +55,7 @@ class StatTracker
     game_stats.venue_with_most_games
   end
 
+  def least_popular_venue
+    game_stats.venue_with_fewest_games
+  end
 end
