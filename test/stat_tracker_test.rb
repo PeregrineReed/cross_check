@@ -102,4 +102,9 @@ class StatTrackerTest < Minitest::Test
     assert_equal "20162017", @stat_tracker.season_with_fewest_games
   end
 
+  def test_it_can_determine_count_of_games_by_season
+    expected = {"20122013" => 3, "20162017" => 1, "20172018" => 2}
+    assert_equal expected, @stat_tracker.count_of_games_by_season
+  end
+
 end
