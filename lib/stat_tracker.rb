@@ -58,4 +58,9 @@ class StatTracker
   def least_popular_venue
     game_stats.venue_with_fewest_games
   end
+
+  def percentage_home_wins
+    game_stats.wins_percentage("home")
+  end
+
 end
