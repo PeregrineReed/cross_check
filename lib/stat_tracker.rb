@@ -67,4 +67,8 @@ class StatTracker
     game_stats.wins_percentage("away")
   end
 
+  def season_with_most_games
+    game_stats.season_with_most_games
+  end
+
 end
