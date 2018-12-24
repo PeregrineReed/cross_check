@@ -18,4 +18,9 @@ class StatTracker
     GameStats.new(games)
   end
 
+  def compile_team_stats
+    teams = convert_files.teams
+    TeamStats.new(teams)
+  end
+
 end
