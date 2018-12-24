@@ -1,6 +1,8 @@
 require './test/test_helper'
 require './lib/game'
+require './lib/game_stats'
 require './lib/team'
+require './lib/team_stats'
 require './lib/file_converter'
 require './lib/stat_tracker'
 require 'csv'
@@ -38,6 +40,10 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_convert_files
     assert_instance_of FileConverter, @stat_tracker.convert_files
-  end  
+  end
+
+  def test_it_can_compile_game_stats
+    assert_instance_of GameStats, compile_game_stats
+  end
 
 end
