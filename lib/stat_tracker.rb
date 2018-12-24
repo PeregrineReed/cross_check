@@ -1,12 +1,12 @@
 class StatTracker
-  attr_reader :locations
+  attr_reader :files
 
-  def initialize(locations)
-    @locations = locations
+  def initialize(files)
+    @files = files
   end
 
-  def self.from_csv(locations)
-    new(locations)
+  def self.from_csv(files)
+    new(files)
   end
 
 end
