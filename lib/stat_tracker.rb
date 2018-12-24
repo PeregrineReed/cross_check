@@ -47,4 +47,8 @@ class StatTracker
     game_stats.min_score
   end
 
+  def biggest_blowout
+    game_stats.blowout
+  end
+
 end
