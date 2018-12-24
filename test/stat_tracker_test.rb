@@ -60,6 +60,11 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of LeagueStats, @stat_tracker.compile_league_stats
   end
 
-  def test_it_can
+  def test_it_has_stats_as_attributes
+    assert_instance_of GameStats, @stat_tracker.game_stats
+    assert_instance_of TeamStats, @stat_tracker.team_stats
+    assert_instance_of LeagueStats, @stat_tracker.league_stats
+  end
+
 
 end
