@@ -86,4 +86,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Amalie Arena", @stat_tracker.least_popular_venue
   end
 
+  def test_it_can_determine_percentage_home_wins
+    assert_equal 83.33, @stat_tracker.percentage_home_wins
+  end
+
 end
