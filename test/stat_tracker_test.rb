@@ -3,6 +3,7 @@ require './lib/game'
 require './lib/game_stats'
 require './lib/team'
 require './lib/team_stats'
+require './lib/league_stats'
 require './lib/file_converter'
 require './lib/stat_tracker'
 require 'csv'
@@ -48,6 +49,15 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_compile_team_stats
     assert_instance_of TeamStats, @stat_tracker.compile_team_stats
+  end
+
+  def test_it_can_compile_game_team_stats
+    skip
+    assert_instance_of GameTeamStats, @stat_tracker.compile_game_team_stats
+  end
+
+  def test_it_can_compile_league_stats
+    assert_instance_of LeagueStats, @stat_tracker.compile_league_stats
   end
 
 end
