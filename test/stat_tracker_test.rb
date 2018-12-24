@@ -46,4 +46,8 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of GameStats, @stat_tracker.compile_game_stats
   end
 
+  def test_it_can_compile_team_stats
+    assert_instance_of TeamStats, @stat_tracker.compile_team_stats
+  end
+
 end
