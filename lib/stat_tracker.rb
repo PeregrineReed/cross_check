@@ -51,4 +51,8 @@ class StatTracker
     game_stats.blowout
   end
 
+  def most_popular_venue
+    game_stats.venue_with_most_games
+  end
+
 end
