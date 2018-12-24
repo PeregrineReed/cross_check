@@ -1,8 +1,14 @@
 class StatTracker
-  attr_reader :files
+  attr_reader :files,
+              :game_stats,
+              :team_stats,
+              :league_stats
 
   def initialize(files)
     @files = files
+    @game_stats = compile_game_stats
+    @team_stats = compile_team_stats
+    @league_stats = compile_league_stats
   end
 
   def self.from_csv(files)
