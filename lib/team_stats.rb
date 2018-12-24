@@ -6,6 +6,8 @@ class TeamStats
   end
 
   #League Statistic Methods
+
+  #Review why this doesn't work
   def highest_offense
     @teams.max_by do |team|
       if team.calculate_offense.class != Float
@@ -81,6 +83,6 @@ class TeamStats
   end
 
   # Season Statistic Methods
-  
+
 
 end
