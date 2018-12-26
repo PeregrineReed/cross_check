@@ -22,6 +22,7 @@ class TeamStats
 
   def lowest_offense
     @teams.min_by do |team|
+      # Updated to account for a zero
       if team.total_goals == 0
         return team.team_name
       else
