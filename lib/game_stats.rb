@@ -1,20 +1,15 @@
 class GameStats
 
-  attr_reader :games,
-              :seasons,
-              :venues
+  attr_reader :games
 
   def initialize(games)
     @games = games
-    @seasons = []
-    @venues = []
   end
 
   def list_seasons
-    @games.each do |game|
-      @seasons << game.season
-    end
-    @seasons.uniq!.sort!
+    @games.map do |game|
+      game.season
+    end.uniq!.sort!
   end
 
   def games_by_season
@@ -66,17 +61,15 @@ class GameStats
   end
 
   def blowout
-    games_blowouts = @games.map do |game|
+    @games.map do |game|
       game.blowout
-    end
-    games_blowouts.max
+    end.max
   end
 
   def list_venues
-    @games.each do |game|
-      @venues << game.venue
-    end
-    @venues.uniq!.sort!
+    @games.map do |game|
+      game.venue
+    end.uniq!.sort!
   end
 
   def games_by_venue
@@ -123,15 +116,13 @@ class GameStats
   end
 
   def average_game_goals
-    average = total_scores.sum / @games.size.to_f
-    average.round(2)
+    (total_scores.sum / @games.size.to_f).round(2)
   end
 
-  def wins_percentage(team)
+  def wins_percentage(site)
     wins = @games.reject do |game|
-      game.outcome[0..3] != team
+      game.outcome[0..3] != site
     end
-    percentage = wins.size / @games.size.to_f
-    (percentage * 100).round(2)
+    (wins.size / @games.size.to_f * 100).round(2)
   end
 end

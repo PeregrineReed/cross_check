@@ -85,8 +85,7 @@ class GameStatsTest < Minitest::Test
 
   def test_it_can_list_all_seasons
     seasons = ["20122013", "20162017", "20172018",]
-    @game_stats.list_seasons
-    assert_equal seasons, @game_stats.seasons
+    assert_equal seasons, @game_stats.list_seasons
   end
 
   def test_it_can_count_games_by_season
