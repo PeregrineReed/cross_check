@@ -88,38 +88,8 @@ class TeamStatsTest < Minitest::Test
     @team_23 = Team.new(team_23_info)
     @team_52 = Team.new(team_52_info)
 
-    @teams = [
-<<<<<<< HEAD
-              @team_3,
-              @team_6,
-              @team_10,
-              @team_12,
-              @team_13,
-              @team_14,
-              @team_23,
-              @team_52
-             ]
-
-    game_1_info = {:game_id=>"2012030221", :season=>"20122013", :type=>"R", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_2_info = {:game_id=>"2012030222", :season=>"20122013", :type=>"R", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_3_info = {:game_id=>"2012030223", :season=>"20122013", :type=>"R", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"2", :home_goals=>"1", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_4_info = {:game_id=>"2017020830", :season=>"20172018", :type=>"R", :date_time=>"2018-02-09", :away_team_id=>"23", :home_team_id=>"14", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"Amalie Arena", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_5_info = {:game_id=>"2017020227", :season=>"20172018", :type=>"R", :date_time=>"2017-11-08", :away_team_id=>"13", :home_team_id=>"12", :away_goals=>"1", :home_goals=>"3", :outcome=>"home win REG", :home_rink_side_start=>"right", :venue=>"PNC Arena", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_6_info = {:game_id=>"2016020050", :season=>"20162017", :type=>"R", :date_time=>"2016-10-20", :away_team_id=>"10", :home_team_id=>"52", :away_goals=>"4", :home_goals=>"6", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-
-    game_7_info = {:game_id=>"2013020674", :season=>"20132014", :type=>"R", :date_time=>"2014-01-11", :away_team_id=>"19", :home_team_id=>"23", :away_goals=>"1", :home_goals=>"2", :outcome=>"home win REG", :home_rink_side_start=>"right", :venue=>"Rogers Arena", :venue_link=>"/api/v1/venues/null", :venue_time_zone_id=>"America/Vancouver", :venue_time_zone_offset=>"-7", :venue_time_zone_tz=>"PDT"}
-    game_8_info = {:game_id=>"2013020221", :season=>"20132014", :type=>"R", :date_time=>"2013-11-06", :away_team_id=>"22", :home_team_id=>"13", :away_goals=>"4", :home_goals=>"1", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-    game_9_info = {:game_id=>"2013020727", :season=>"20132014", :type=>"R", :date_time=>"2014-01-19", :away_team_id=>"8", :home_team_id=>"10", :away_goals=>"3", :home_goals=>"2", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-    game_10_info = {:game_id=>"2012020381", :season=>"20122013", :type=>"R", :date_time=>"2013-03-12", :away_team_id=>"14", :home_team_id=>"13", :away_goals=>"2", :home_goals=>"5", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-    game_11_info = {:game_id=>"2014020548", :season=>"20142015", :type=>"R", :date_time=>"2015-01-01", :away_team_id=>"12", :home_team_id=>"5", :away_goals=>"1", :home_goals=>"7", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-    game_12_info = {:game_id=>"2014020016", :season=>"20142015", :type=>"R", :date_time=>"2014-10-10", :away_team_id=>"52", :home_team_id=>"53", :away_goals=>"5", :home_goals=>"1", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-    game_13_info = {:game_id=>"test", :season=>"20142015", :type=>"R", :date_time=>"2014-10-10", :away_team_id=>"53", :home_team_id=>"52", :away_goals=>"1", :home_goals=>"0", :outcome=>"home win OT", :home_rink_side_start=>"right", :venue=>"MTS Centre", :venue_link=>"/api/v1/venues/	null", :venue_time_zone_id=>"America/Winnipeg", :venue_time_zone_offset=>"-5", :venue_time_zone_tz=>"CDT"}
-
-    game_14_info = {:game_id=>"test2", :season=>"20122013", :type=>"P", :date_time=>"2013-05-16", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"4", :home_goals=>"3", :outcome=>"home win OT", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_15_info = {:game_id=>"test3", :season=>"20122013", :type=>"P", :date_time=>"2013-05-19", :away_team_id=>"3", :home_team_id=>"6", :away_goals=>"6", :home_goals=>"2", :outcome=>"home win REG", :home_rink_side_start=>"left", :venue=>"TD Garden", :venue_link=>"/api/v1/venues/		null", :venue_time_zone_id=>"America New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_16_info = {:game_id=>"test4", :season=>"20122013", :type=>"P", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"1", :home_goals=>"2", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-    game_17_info = {:game_id=>"test5", :season=>"20122013", :type=>"P", :date_time=>"2013-05-21", :away_team_id=>"6", :home_team_id=>"3", :away_goals=>"1", :home_goals=>"2", :outcome=>"away win REG", :home_rink_side_start=>"right", :venue=>"Madison Square Garden", :venue_link=>"/api/v1/	venues/null", :venue_time_zone_id=>"America/New_York", :venue_time_zone_offset=>"-4", :venue_time_zone_tz=>"EDT"}
-=======
+    @teams =
+    [
       @team_3,
       @team_6,
       @team_10,
@@ -435,8 +405,6 @@ class TeamStatsTest < Minitest::Test
       :venue_time_zone_offset=>"-4",
       :venue_time_zone_tz=>"EDT"
     }
-
->>>>>>> b43c1373c2f4f9a40a6130f599f73823408adefd
 
     @game_1 = Game.new(game_1_info)
     @game_2 = Game.new(game_2_info)
