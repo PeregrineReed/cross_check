@@ -1,11 +1,10 @@
 require './test/test_helper'
 require './lib/team'
-require 'pry'
 
 class TeamTest < Minitest::Test
 
   def setup
-    @team_data_1 = {
+    team_1_info = {
       :team_id=>"1",
       :franchiseid=>"23",
       :shortname=>"New Jersey",
@@ -52,12 +51,29 @@ class TeamTest < Minitest::Test
 #A hash with key/value pairs
 #for each of the attributes of a team.
   def test_it_has_team_info
+    expected = {:team_id => "1", :franchise_id=>"23", :short_name=>"New Jersey", :team_name=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
 
+<<<<<<< HEAD
     hash = {:team_id => "1", :franchise_id=>"23", :short_name=>"New Jersey", :team_name=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
     assert_equal hash, @team_1.team_info
   end
 #We need to run this to make sure it works
   def test_league_wins_starts_with_0
     assert_equal 0, @team_3.total_wins
+=======
+    assert_equal expected, @team_1.team_info
   end
+
+  def test_league_stats_start_at_zero
+    assert_equal 0, @team_1.home_wins
+    assert_equal 0, @team_1.away_wins
+    assert_equal 0, @team_1.away_goals
+    assert_equal 0, @team_1.home_goals
+    assert_equal 0, @team_1.total_wins
+    assert_equal 0, @team_1.total_games
+    assert_equal 0, @team_1.total_goals
+    assert_equal 0, @team_1.total_goals_allowed
+>>>>>>> master
+  end
+
 end

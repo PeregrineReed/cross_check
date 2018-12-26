@@ -1,6 +1,5 @@
 require './test/test_helper'
 require './lib/game'
-require 'pry'
 
 class GameTest < Minitest::Test
 
@@ -40,7 +39,6 @@ class GameTest < Minitest::Test
       :venue_time_zone_offset=>"-4",
       :venue_time_zone_tz=>"EDT"
     }
-
 
     @game_data_3 = {
       :game_id=>"2012030223",

@@ -24,6 +24,12 @@ class FileConverterTest < Minitest::Test
     assert_instance_of FileConverter, @file_converter
   end
 
+  def test_it_has_files
+    assert_equal @games_data, @file_converter.games_file
+    assert_equal @teams_data, @file_converter.teams_file
+    assert_equal @game_teams_data, @file_converter.game_teams_file
+  end
+
   def test_it_has_games
     all_games = @file_converter.games.all? do |game|
       game.class == Game
