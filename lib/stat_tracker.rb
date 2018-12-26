@@ -98,4 +98,8 @@ class StatTracker
     team_stats.highest_offense
   end
 
+  def worst_offense
+    team_stats.lowest_offense
+  end
+
 end

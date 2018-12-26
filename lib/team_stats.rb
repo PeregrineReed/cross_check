@@ -11,9 +11,9 @@ class TeamStats
   def highest_offense
     @teams.max_by do |team|
       # Possible alternative:
-      if team.total_goals == 0 || team.total_games == 0
+      if team.total_goals == 0
       # if team.calculate_offense.class != Float
-      #   next
+        next
       else
         team.calculate_offense
       end
@@ -22,7 +22,11 @@ class TeamStats
 
   def lowest_offense
     @teams.min_by do |team|
-      team.calculate_offense
+      if team.total_goals == 0
+        return team.team_name
+      else
+        team.calculate_offense
+      end
     end.team_name
   end
 

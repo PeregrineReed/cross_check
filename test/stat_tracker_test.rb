@@ -3,7 +3,7 @@ require './lib/game'
 require './lib/game_stats'
 require './lib/team'
 require './lib/team_stats'
-require './lib/league_stats'
+require './lib/team_stat_sorter'
 require './lib/file_converter'
 require './lib/stat_tracker'
 require 'csv'
@@ -122,6 +122,10 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_determine_the_best_offense
     assert_equal "Devils", @stat_tracker.best_offense
+  end
+
+  def test_it_can_determine_worst_offense
+    assert_equal "Devils", @stat_tracker.worst_offense
   end
 
 end
