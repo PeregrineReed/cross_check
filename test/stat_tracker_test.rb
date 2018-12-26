@@ -120,4 +120,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal 2, @stat_tracker.count_of_teams
   end
 
+  def test_it_can_determine_the_best_offense
+    assert_equal "Devils", @stat_tracker.best_offense
+  end
+
 end

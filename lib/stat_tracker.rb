@@ -91,7 +91,11 @@ class StatTracker
   # League Statistics
   # ======================================
   def count_of_teams
-    @team_stats.teams.count
+    team_stats.teams.count
+  end
+
+  def best_offense
+    team_stats.highest_offense
   end
 
 end
