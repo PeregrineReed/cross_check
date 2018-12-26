@@ -1,8 +1,11 @@
 class FileConverter
 
-  attr_reader :games,
+  attr_reader :games_file,
+              :games,
+              :teams_file,
               :teams,
-              :game_teams
+              :game_teams_file,
+              :games_teams
 
   def initialize(files)
     @games_file = files[:games]
@@ -18,20 +21,16 @@ class FileConverter
 
   def convert_games
     game_data = parse_csv(@games_file)
-    games = []
-    game_data.each do |game|
-      games << Game.new(game)
+    game_data.map do |game|
+      Game.new(game)
     end
-  games
   end
 
   def convert_teams
     teams_data = parse_csv(@teams_file)
-    teams = []
-    teams_data.each do |team|
-      teams << Team.new(team)
+    teams_data.map do |team|
+      Team.new(team)
     end
-  teams
   end
 
 end

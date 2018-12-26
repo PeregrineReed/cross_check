@@ -10,6 +10,8 @@ class TeamStats
   #Review why this doesn't work
   def highest_offense
     @teams.max_by do |team|
+      # Possible alternative:
+      # if team.total_goals == 0 || team.total_games == 0
       if team.calculate_offense.class != Float
         next
       else
@@ -38,31 +40,31 @@ class TeamStats
 
   def highest_scoring_when_away
     @teams.max_by do |team|
-      team.league_away_average_goals
+      team.away_average_goals
     end.team_name
   end
 
   def highest_scoring_when_home
     @teams.max_by do |team|
-      team.league_home_average_goals
+      team.home_average_goals
     end.team_name
   end
 
   def lowest_scoring_when_away
     @teams.min_by do |team|
-      team.league_away_average_goals
+      team.away_average_goals
     end.team_name
   end
 
   def lowest_scoring_when_home
     @teams.min_by do |team|
-      team.league_home_average_goals
+      team.home_average_goals
     end.team_name
   end
 
   def highest_win_percentage
     @teams.max_by do |team|
-      team.league_win_percentage
+      team.win_percentage
     end.team_name
   end
 
@@ -81,8 +83,5 @@ class TeamStats
     end
     bad_fans
   end
-
-  # Season Statistic Methods
-
 
 end
