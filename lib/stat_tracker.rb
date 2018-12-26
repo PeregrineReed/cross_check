@@ -36,9 +36,10 @@ class StatTracker
     teams = convert_files.teams
     LeagueStats.new(games, teams)
   end
-#Compile season stats, game teams stats
-# ======================================
+# Compile season stats, game teams stats
 
+# Game Statistics
+# ======================================
   def highest_total_score
     game_stats.max_score
   end
@@ -85,6 +86,12 @@ class StatTracker
 
   def average_goals_by_season
     game_stats.average_goals_by_season
+  end
+
+  # League Statistics
+  # ======================================
+  def count_of_teams
+    @team_stats.teams.count
   end
 
 end

@@ -117,7 +117,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_count_all_teams
-    assert_equal 1, @stat_tracker.count_of_teams
+    assert_equal 2, @stat_tracker.count_of_teams
   end
 
 end
