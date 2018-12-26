@@ -6,9 +6,12 @@ class StatTracker
 
   def initialize(files)
     @files = files
-    @game_stats = compile_game_stats
-    @team_stats = compile_team_stats
-    @league_stats = compile_league_stats
+    @games = convert_files.games
+    @teams = convert_files.teams
+    @game_stats = compile_stats[:games]
+    @team_stats = compile_stats[:teams]
+    @league_stats = compile_stats[:league]
+    @league_stats.sort_team_games
   end
 
   def self.from_csv(files)
@@ -21,21 +24,21 @@ class StatTracker
     FileConverter.new(files)
   end
 
-  def compile_game_stats
-    games = convert_files.games
-    GameStats.new(games)
+  def compile_stats
+    {
+    games: GameStats.new(@games),
+    teams: TeamStats.new(@teams),
+    league: TeamStatSorter.new(@games, @teams)
+    }
   end
 
-  def compile_team_stats
-    teams = convert_files.teams
-    TeamStats.new(teams)
-  end
-
-  def compile_league_stats
-    games = convert_files.games
-    teams = convert_files.teams
-    LeagueStats.new(games, teams)
-  end
+  # def compile_team_stats
+  # end
+  #
+  # def compile_league_stats
+  #   games = convert_files.games
+  #   teams = convert_files.teams
+  # end
 # Compile season stats, game teams stats
 
 # Game Statistics
