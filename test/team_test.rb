@@ -53,14 +53,6 @@ class TeamTest < Minitest::Test
   def test_it_has_team_info
     expected = {:team_id => "1", :franchise_id=>"23", :short_name=>"New Jersey", :team_name=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
 
-<<<<<<< HEAD
-    hash = {:team_id => "1", :franchise_id=>"23", :short_name=>"New Jersey", :team_name=>"Devils", :abbreviation=>"NJD", :link=>"/api/v1/teams/1"}
-    assert_equal hash, @team_1.team_info
-  end
-#We need to run this to make sure it works
-  def test_league_wins_starts_with_0
-    assert_equal 0, @team_3.total_wins
-=======
     assert_equal expected, @team_1.team_info
   end
 
@@ -73,7 +65,6 @@ class TeamTest < Minitest::Test
     assert_equal 0, @team_1.total_games
     assert_equal 0, @team_1.total_goals
     assert_equal 0, @team_1.total_goals_allowed
->>>>>>> master
   end
 
 end
