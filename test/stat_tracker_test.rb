@@ -116,4 +116,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal expected, @stat_tracker.average_goals_by_season
   end
 
+  def test_it_can_count_all_teams
+    assert_equal 1, @stat_tracker.count_of_teams
+  end
+
 end
