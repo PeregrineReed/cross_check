@@ -11,10 +11,9 @@ class GameStats
   end
 
   def list_seasons
-    @games.each do |game|
-      @seasons << game.season
-    end
-    @seasons.uniq!.sort!
+    @games.map do |game|
+      game.season
+    end.uniq!.sort!
   end
 
   def games_by_season
@@ -117,7 +116,7 @@ class GameStats
     season_average = {}
     total_season_goals.each do |season, total|
       games = games_by_season[season].size
-      season_average[season] = (total.to_f / games)
+      season_average[season] = (total.to_f / games).round(2)
     end
     season_average
   end
