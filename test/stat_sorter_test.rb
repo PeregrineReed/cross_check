@@ -1,4 +1,5 @@
-require 'test/test_helper'
+require './test/test_helper'
+require './lib/stat_sorter'
 
 class StatSorterTest < Minitest::Test
 
