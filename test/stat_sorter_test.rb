@@ -250,7 +250,14 @@ class StatSorterTest < Minitest::Test
   end
 
   def test_it_can_access_home_game_stats
-    binding.pry
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 3
+    }
+    @stat_sorter.home_team(@game_1)
+    assert_equal expected, @team_1.home
   end
 
 end

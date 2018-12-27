@@ -16,4 +16,14 @@ class StatSorter
     teams
   end
 
+  def home_team(game)
+    team = teams_by_id[game.home_team_id]
+    team.home[:goals] += game.home_goals
+    team.home[:games] += 1
+    team.home[:goals_against] += game.away_goals
+    if game.home_goals > game.away_goals
+      team.home[:wins] += 1
+    end
+  end
+
 end
