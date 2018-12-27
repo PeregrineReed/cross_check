@@ -324,4 +324,23 @@ class StatSorterTest < Minitest::Test
     assert_equal expected, @team_2.preseason
   end
 
+  def test_it_can_update_regular_home_games
+    expected = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    assert_equal expected, @team_5.preseason
+
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 4
+    }
+    @stat_sorter.regular_home(@game_3)
+    assert_equal expected, @team_5.regular
+  end
+
 end
