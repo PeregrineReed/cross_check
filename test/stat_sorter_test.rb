@@ -286,7 +286,7 @@ class StatSorterTest < Minitest::Test
     assert_equal expected, @team_2.away
   end
 
-  def test_it_can_update_preseason_stats
+  def test_it_can_update_preseason_home_game_stats
     expected = {
       wins: 0,
       goals: 0,
@@ -301,8 +301,10 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
-    @stat_sorter.preseason_team(@game_1)
+    @stat_sorter.preseason_home(@game_1)
     assert_equal expected, @team_1.preseason
   end
+
+  
 
 end
