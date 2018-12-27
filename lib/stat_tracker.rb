@@ -32,15 +32,6 @@ class StatTracker
     }
   end
 
-  # def compile_team_stats
-  # end
-  #
-  # def compile_league_stats
-  #   games = convert_files.games
-  #   teams = convert_files.teams
-  # end
-# Compile season stats, game teams stats
-
 # Game Statistics
 # ======================================
   def highest_total_score
