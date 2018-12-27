@@ -11,8 +11,7 @@ class Team
   attr_accessor :home,
                 :away,
                 :preseason,
-                :regular,
-                :total
+                :regular
 
   def initialize(data)
     @team_info = data
@@ -47,11 +46,14 @@ class Team
       games: 0,
       goals_against: 0
     }
-    @total = {
-      wins: home[:wins] + away[:wins],
-      goals: home[:goals] + home[:goals],
-      games: home[:games] + away[:games],
-      goals_against: home[:goals_against] + away[:goals_against]
+  end
+
+  def total
+    {
+      wins: @home[:wins] + @away[:wins],
+      goals: @home[:goals] + @away[:goals],
+      games: @home[:games] + @away[:games],
+      goals_against: @home[:goals_against] + @away[:goals_against]
     }
   end
 

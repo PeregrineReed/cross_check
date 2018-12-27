@@ -11,7 +11,7 @@ class StatTracker
     @game_stats = compile_stats[:games]
     @team_stats = compile_stats[:teams]
     @league_stats = compile_stats[:league]
-    @league_stats.sort_team_games
+    @league_stats.update_stats
   end
 
   def self.from_csv(files)
@@ -28,7 +28,7 @@ class StatTracker
     {
     games: GameStats.new(@games),
     teams: TeamStats.new(@teams),
-    league: TeamStatSorter.new(@games, @teams)
+    league: LeagueStats.new(@games, @teams)
     }
   end
 
@@ -89,11 +89,11 @@ class StatTracker
   end
 
   def best_offense
-    team_stats.highest_offense
+    league_stats.highest_offense
   end
 
   def worst_offense
-    team_stats.lowest_offense
+    league_stats.lowest_offense
   end
 
 end

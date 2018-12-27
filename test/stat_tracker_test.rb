@@ -3,7 +3,8 @@ require './lib/game'
 require './lib/game_stats'
 require './lib/team'
 require './lib/team_stats'
-require './lib/team_stat_sorter'
+require './lib/stat_sorter'
+require './lib/league_stats'
 require './lib/file_converter'
 require './lib/stat_tracker'
 require 'csv'
@@ -64,7 +65,7 @@ class StatTrackerTest < Minitest::Test
   def test_it_has_stats_as_attributes
     assert_instance_of GameStats, @stat_tracker.game_stats
     assert_instance_of TeamStats, @stat_tracker.team_stats
-    assert_instance_of TeamStatSorter, @stat_tracker.league_stats
+    assert_instance_of LeagueStats, @stat_tracker.league_stats
   end
 
   def test_it_can_determine_highest_total_score
@@ -124,11 +125,11 @@ class StatTrackerTest < Minitest::Test
 
   def test_it_can_determine_the_best_offense
 
-    assert_equal "Devils", @stat_tracker.best_offense
+    assert_equal "Lightning", @stat_tracker.best_offense
   end
 
   def test_it_can_determine_worst_offense
-    assert_equal "Devils", @stat_tracker.worst_offense
+    assert_equal "Panthers", @stat_tracker.worst_offense
   end
 
 end

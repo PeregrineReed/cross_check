@@ -75,8 +75,8 @@ class TeamTest < Minitest::Test
   end
 
   def test_it_calculates_team_league_win_percentage
-    @team_1.total[:wins] = 3
-    @team_1.total[:games] = 9
+    @team_1.away[:wins] = 3
+    @team_1.away[:games] = 9
 
     assert_equal 0.33, @team_1.win_percentage
   end
@@ -119,15 +119,15 @@ class TeamTest < Minitest::Test
   end
 
   def test_it_calculates_offense
-    @team_1.total[:goals] = 100
-    @team_1.total[:games] = 205
+    @team_1.home[:goals] = 100
+    @team_1.away[:games] = 205
 
     assert_equal 0.49, @team_1.calculate_offense
   end
 
   def test_it_calculates_defense
-    @team_1.total[:goals_against] = 95
-    @team_1.total[:games] = 205
+    @team_1.away[:goals_against] = 95
+    @team_1.home[:games] = 205
 
     assert_equal 0.46, @team_1.calculate_defense
   end
@@ -154,8 +154,8 @@ class TeamTest < Minitest::Test
     skip # No Method Error
     @team_1.preseason[:wins] = 5
     @team_1.preseason[:games] = 9
-    @team_1.total[:wins] = 187
-    @team_1.total[:games] = 205
+    @team_1.regular[:wins] = 187
+    @team_1.regular[:games] = 205
 
     assert_equal 0.46, @team_1.calculate_surprise
   end
