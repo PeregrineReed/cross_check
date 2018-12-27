@@ -45,6 +45,11 @@ class StatSorterTest < Minitest::Test
     assert_instance_of StatSorter, @stat_sorter
   end
 
+  def test_it_has_attributes
+    assert_equal @games, @stat_sorter.games
+    assert_equal @teams, @stat_sorter.teams
+  end
+
   def test_it_can_group_teams_by_id
     expected = {
       "1" => @team_1,

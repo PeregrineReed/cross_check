@@ -1,8 +1,10 @@
 class StatSorter
 
-  attr_reader :teams
+  attr_reader :games,
+              :teams
 
   def initialize(games, teams)
+    @games = games
     @teams = teams
   end
 
