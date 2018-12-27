@@ -18,6 +18,42 @@ class StatSorterTest < Minitest::Test
       @game_5, # teams 4, 5
     ]
 
+    @game_1.stubs(
+      :type => "P",
+      :home_team_id => "1",
+      :away_team_id => "2",
+      :home_goals => 2,
+      :away_goals => 3
+    )
+    @game_2.stubs(
+      :type => "P",
+      :home_team_id => "3",
+      :away_team_id => "4",
+      :home_goals => 4,
+      :away_goals => 2
+    )
+    @game_3.stubs(
+      :type => "R",
+      :home_team_id => "5",
+      :away_team_id => "1",
+      :home_goals => 2,
+      :away_goals => 4
+    )
+    @game_4.stubs(
+      :type => "R",
+      :home_team_id => "2",
+      :away_team_id => "3",
+      :home_goals => 3,
+      :away_goals => 1
+    )
+    @game_5.stubs(
+      :type => "R",
+      :home_team_id => "4",
+      :away_team_id => "5",
+      :home_goals => 1,
+      :away_goals => 2
+    )
+
     @team_1 = mock
     @team_2 = mock
     @team_3 = mock
@@ -32,11 +68,162 @@ class StatSorterTest < Minitest::Test
       @team_5
     ]
 
-    @team_1.stubs(:team_id => "1")
-    @team_2.stubs(:team_id => "2")
-    @team_3.stubs(:team_id => "3")
-    @team_4.stubs(:team_id => "4")
-    @team_5.stubs(:team_id => "5")
+    @team_1_home = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_1_away = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_1_preseason = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_1_regular = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_2_home = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_2_away = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_2_preseason = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_2_regular = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_3_home = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_3_away = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_3_preseason = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_3_regular = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_4_home = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_4_away = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_4_preseason = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_4_regular = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_5_home = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_5_away = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_5_preseason = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @team_5_regular = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+
+    @team_1.stubs(
+      :team_id => "1",
+      :home => @team_1_home,
+      :away => @team_1_away,
+      :preseason => @team_1_preseason,
+      :regular => @team_1_regular
+    )
+    @team_2.stubs(
+      :team_id => "2",
+      :home => @team_2_home,
+      :away => @team_2_away,
+      :preseason => @team_2_preseason,
+      :regular => @team_2_regular
+    )
+    @team_3.stubs(
+      :team_id => "3",
+      :home => @team_3_home,
+      :away => @team_3_away,
+      :preseason => @team_3_preseason,
+      :regular => @team_3_regular
+    )
+    @team_4.stubs(
+      :team_id => "4",
+      :home => @team_4_home,
+      :away => @team_4_away,
+      :preseason => @team_4_preseason,
+      :regular => @team_4_regular
+    )
+    @team_5.stubs(
+      :team_id => "5",
+      :home => @team_5_home,
+      :away => @team_5_away,
+      :preseason => @team_5_preseason,
+      :regular => @team_5_regular
+    )
 
     @stat_sorter = StatSorter.new(@games, @teams)
   end
@@ -60,6 +247,10 @@ class StatSorterTest < Minitest::Test
     }
 
     assert_equal expected, @stat_sorter.teams_by_id
+  end
+
+  def test_it_can_access_home_game_stats
+    binding.pry
   end
 
 end
