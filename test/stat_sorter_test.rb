@@ -32,11 +32,29 @@ class StatSorterTest < Minitest::Test
       team_5
     ]
 
+    team_1.stubs(:team_id => "1")
+    team_2.stubs(:team_id => "2")
+    team_3.stubs(:team_id => "3")
+    team_4.stubs(:team_id => "4")
+    team_5.stubs(:team_id => "5")
+
     @stat_sorter = StatSorter.new(games, teams)
   end
 
   def test_it_exists
     assert_instance_of StatSorter, @stat_sorter
+  end
+
+  def test_it_can_group_teams_by_id
+    expected = {
+      "1" => team_1,
+      "2" => team_2,
+      "3" => team_3,
+      "4" => team_4,
+      "5" => team_5
+    }
+
+    assert_equal expected, @stat_sorter.teams_by_id
   end
 
 end
