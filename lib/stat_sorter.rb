@@ -36,4 +36,24 @@ class StatSorter
     end
   end
 
+  def preseason_home(game)
+    team = teams_by_id[game.home_team_id]
+    team.preseason[:goals] += game.home_goals
+    team.preseason[:games] += 1
+    team.preseason[:goals_against] += game.away_goals
+    if game.home_goals > game.away_goals
+      team.preseason[:wins] += 1
+    end
+  end
+
+  def preseason_away(game)
+    team = teams_by_id[game.away_team_id]
+    team.preseason[:goals] += game.away_goals
+    team.preseason[:games] += 1
+    team.preseason[:goals_against] += game.home_goals
+    if game.away_goals > game.home_goals
+      team.preseason[:wins] += 1
+    end
+  end
+
 end
