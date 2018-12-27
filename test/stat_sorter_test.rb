@@ -367,7 +367,7 @@ class StatSorterTest < Minitest::Test
   def test_it_can_update_teams_with_all_games
     @stat_sorter.update_stats
 
-    expected = expected = {
+    expected = {
       wins: 0,
       goals: 2,
       games: 1,
@@ -375,7 +375,7 @@ class StatSorterTest < Minitest::Test
     }
     assert_equal expected, @team_1.preseason
 
-    expected = expected = {
+    expected = {
       wins: 1,
       goals: 4,
       games: 1,
@@ -383,7 +383,7 @@ class StatSorterTest < Minitest::Test
     }
     assert_equal expected, @team_1.regular
 
-    expected = expected = {
+    expected = {
       wins: 0,
       goals: 2,
       games: 1,
@@ -391,13 +391,143 @@ class StatSorterTest < Minitest::Test
     }
     assert_equal expected, @team_1.home
 
-    expected = expected = {
+    expected = {
       wins: 1,
       goals: 4,
       games: 1,
       goals_against: 2
     }
     assert_equal expected, @team_1.away
+
+    expected = {
+      wins: 1,
+      goals: 3,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_2.preseason
+
+    expected = {
+      wins: 1,
+      goals: 3,
+      games: 1,
+      goals_against: 1
+    }
+    assert_equal expected, @team_2.regular
+
+    expected = {
+      wins: 1,
+      goals: 3,
+      games: 1,
+      goals_against: 1
+    }
+    assert_equal expected, @team_2.home
+
+    expected = {
+      wins: 1,
+      goals: 3,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_2.away
+
+
+    expected = {
+      wins: 1,
+      goals: 4,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_3.preseason
+
+    expected = {
+      wins: 0,
+      goals: 1,
+      games: 1,
+      goals_against: 3
+    }
+    assert_equal expected, @team_3.regular
+
+    expected = {
+      wins: 1,
+      goals: 4,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_3.home
+
+    expected = {
+      wins: 0,
+      goals: 1,
+      games: 1,
+      goals_against: 3
+    }
+    assert_equal expected, @team_3.away
+
+
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 4
+    }
+    assert_equal expected, @team_4.preseason
+
+    expected = {
+      wins: 0,
+      goals: 1,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_4.regular
+
+    expected = {
+      wins: 0,
+      goals: 1,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_4.home
+
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 4
+    }
+    assert_equal expected, @team_4.away
+
+    expected = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    assert_equal expected, @team_5.preseason
+
+    expected = {
+      wins: 1,
+      goals: 4,
+      games: 2,
+      goals_against: 5
+    }
+    assert_equal expected, @team_5.regular
+
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 4
+    }
+    assert_equal expected, @team_5.home
+
+    expected = {
+      wins: 1,
+      goals: 2,
+      games: 1,
+      goals_against: 1
+    }
+    assert_equal expected, @team_5.away
   end
 
 end
