@@ -252,6 +252,13 @@ class StatSorterTest < Minitest::Test
   def test_it_can_update_home_game_stats
     expected = {
       wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    assert_equal expected, @team_1.home
+    expected = {
+      wins: 0,
       goals: 2,
       games: 1,
       goals_against: 3
@@ -262,6 +269,14 @@ class StatSorterTest < Minitest::Test
 
   def test_it_can_update_away_game_stats
     expected = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    assert_equal expected, @team_2.away
+
+    expected = {
       wins: 1,
       goals: 3,
       games: 1,
@@ -269,6 +284,25 @@ class StatSorterTest < Minitest::Test
     }
     @stat_sorter.away_team(@game_1)
     assert_equal expected, @team_2.away
+  end
+
+  def test_it_can_update_preseason_stats
+    expected = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    assert_equal expected, @team_1.preseason
+
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 3
+    }
+    @stat_sorter.preseason_team(@game_1)
+    assert_equal expected, @team_1.preseason
   end
 
 end
