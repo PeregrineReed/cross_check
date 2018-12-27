@@ -249,7 +249,7 @@ class StatSorterTest < Minitest::Test
     assert_equal expected, @stat_sorter.teams_by_id
   end
 
-  def test_it_can_access_home_game_stats
+  def test_it_can_update_home_game_stats
     expected = {
       wins: 0,
       goals: 2,
@@ -258,6 +258,17 @@ class StatSorterTest < Minitest::Test
     }
     @stat_sorter.home_team(@game_1)
     assert_equal expected, @team_1.home
+  end
+
+  def test_it_can_update_away_game_stats
+    expected = {
+      wins: 1,
+      goals: 3,
+      games: 1,
+      goals_against: 2
+    }
+    @stat_sorter.away_team(@game_1)
+    assert_equal expected, @team_2.away
   end
 
 end
