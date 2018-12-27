@@ -364,4 +364,40 @@ class StatSorterTest < Minitest::Test
     assert_equal expected, @team_1.regular
   end
 
+  def test_it_can_update_teams_with_all_games
+    @stat_sorter.update_stats
+
+    expected = expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 3
+    }
+    assert_equal expected, @team_1.preseason
+
+    expected = expected = {
+      wins: 1,
+      goals: 4,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_1.regular
+
+    expected = expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 3
+    }
+    assert_equal expected, @team_1.home
+
+    expected = expected = {
+      wins: 1,
+      goals: 4,
+      games: 1,
+      goals_against: 2
+    }
+    assert_equal expected, @team_1.away
+  end
+
 end
