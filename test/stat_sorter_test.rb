@@ -263,6 +263,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
+    @stat_sorter.preseason_home(@game_1)
     @stat_sorter.home_team(@game_1)
     assert_equal expected, @team_1.home
   end
@@ -282,6 +283,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
+    @stat_sorter.preseason_away(@game_1)
     @stat_sorter.away_team(@game_1)
     assert_equal expected, @team_2.away
   end
