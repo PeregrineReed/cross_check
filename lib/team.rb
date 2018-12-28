@@ -8,26 +8,13 @@ class Team
               :abbreviation,
               :link
 
-attr_accessor :home_wins,
-              :away_wins,
-              :total_wins,
-
-              :away_goals,
-              :home_goals,
-              :total_goals,
-
-              :away_games,
-              :home_games,
-              :total_games,
-
-              :total_goals_allowed,
-
-              :preseason_wins,
-              :preseason_games,
-              :preseason_goals,
-              :preseason_goals_allowed
+  attr_accessor :home,
+                :away,
+                :preseason,
+                :regular
 
   def initialize(data)
+    @team_info = data
     @team_id = data[:team_id]
     @franchise_id = data[:franchiseid]
     @short_name = data[:shortname]
@@ -35,45 +22,51 @@ attr_accessor :home_wins,
     @abbreviation = data[:abbreviation]
     @link = data[:link]
 
-    @team_info = {
-      team_id: team_id,
-      franchise_id: franchise_id,
-      short_name: short_name,
-      team_name: team_name,
-      abbreviation: abbreviation,
-      link: link
+    @home = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
     }
+    @away = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @preseason = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+    @regular = {
+      wins: 0,
+      goals: 0,
+      games: 0,
+      goals_against: 0
+    }
+  end
 
-    @home_wins = 0
-    @away_wins = 0
-    @total_wins = 0
-
-    @away_goals = 0
-    @home_goals = 0
-    @total_goals = 0
-
-    @away_games = 0
-    @home_games = 0
-    @total_games = 0
-
-    @total_goals_allowed = 0
-
-    @preseason_wins = 0
-    @preseason_games = 0
-    @preseason_goals = 0
-    @preseason_goals_allowed = 0
+  def total
+    {
+      wins: @home[:wins] + @away[:wins],
+      goals: @home[:goals] + @away[:goals],
+      games: @home[:games] + @away[:games],
+      goals_against: @home[:goals_against] + @away[:goals_against]
+    }
   end
 
   def win_percentage
-    (total_wins / total_games.to_f).round(2)
+    (total[:wins] / total[:games].to_f).round(2)
   end
 
   def home_win_percentage
-    (home_wins / home_games.to_f).round(2)
+    (home[:wins] / home[:games].to_f).round(2)
   end
 
   def away_win_percentage
-    (away_wins / away_games.to_f).round(2)
+    (away[:wins] / away[:games].to_f).round(2)
   end
 
   def fans_rating
@@ -81,23 +74,23 @@ attr_accessor :home_wins,
   end
 
   def away_average_goals
-    (away_goals / away_games.to_f).round(2)
+    (away[:goals] / away[:games].to_f).round(2)
   end
 
   def home_average_goals
-    (home_goals / home_games.to_f).round(2)
+    (home[:goals] / home[:games].to_f).round(2)
   end
 
   def calculate_offense
-    (total_goals / total_games.to_f).round(2)
+    (total[:goals] / total[:games].to_f).round(2)
   end
 
   def calculate_defense
-    (total_goals_allowed / total_games.to_f).round(2)
+    (total[:goals_against] / total[:games].to_f).round(2)
   end
 
   def preseason_win_percentage
-    (preseason_wins / preseason_games.to_f).round(2)
+    (preseason[:wins] / preseason[:games].to_f).round(2)
   end
 
 end
