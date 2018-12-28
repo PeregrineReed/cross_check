@@ -135,7 +135,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_worst_defense
-    assert_equal "Jets", @stat_tracker.worst_defense
+    assert_equal "Hurricanes", @stat_tracker.worst_defense
   end
 
 end
