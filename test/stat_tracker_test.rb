@@ -119,7 +119,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_count_all_teams
-    # binding.pry
     assert_equal 8, @stat_tracker.count_of_teams
   end
 
