@@ -123,7 +123,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_the_best_offense
-
     assert_equal "Lightning", @stat_tracker.best_offense
   end
 
