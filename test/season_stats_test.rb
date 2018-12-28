@@ -1,7 +1,9 @@
 require './test/test_helper'
 require './lib/team'
+require './lib/season_stats'
 
-class TeamTest < Minitest::Test
+
+class SeasonStatsTest < Minitest::Test
 
   def setup
     team_1_info = {
@@ -29,14 +31,33 @@ class TeamTest < Minitest::Test
               @team_1,
               @team_4,
              ]
+
+    @season_1 = SeasonStats.new("20122013")
   end
 
   def test_it_exists
-    assert_instance_of Team, @team_1
+    assert_instance_of SeasonStats, @season_1
+  end
+
+  def test_it_has_id
+    assert_equal "20122013", @season_1.season_id
+  end
+
+  #Before stat_sorter is called, these team attributes will start at 0.
+  def test_season_stats_start_with_0
+    assert_equal 0, @season_1.preseason[:wins]
+    assert_equal 0, @season_1.preseason[:games]
+    assert_equal 0, @season_1.preseason[:goals]
+    assert_equal 0, @season_1.preseason[:goals_against]
+    assert_equal 0, @season_1.regular[:wins]
+    assert_equal 0, @season_1.regular[:games]
+    assert_equal 0, @season_1.regular[:goals]
+    assert_equal 0, @season_1.regular[:goals_against]
   end
 
   #Season statistic team methods
   def test_it_calculates_team_preseason_win_percentage
+    skip
     @team_1.history[:preseason][:wins] = 5
     @team_1.history[:preseason][:games] = 9
 
