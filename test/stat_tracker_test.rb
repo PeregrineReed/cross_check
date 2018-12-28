@@ -118,7 +118,6 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_count_all_teams
-    # binding.pry
     assert_equal 8, @stat_tracker.count_of_teams
   end
 
@@ -128,7 +127,7 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_worst_offense
-    assert_equal "Devils", @stat_tracker.worst_offense
+    assert_equal "Rangers", @stat_tracker.worst_offense
   end
 
 end
