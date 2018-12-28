@@ -35,6 +35,7 @@ attr_accessor :home_wins,
     @abbreviation = data[:abbreviation]
     @link = data[:link]
 
+
     @team_info = {
       team_id: team_id,
       franchise_id: franchise_id,
@@ -43,6 +44,9 @@ attr_accessor :home_wins,
       abbreviation: abbreviation,
       link: link
     }
+
+    #Same thing as above?
+    #@team_info = {data}
 
     @home_wins = 0
     @away_wins = 0

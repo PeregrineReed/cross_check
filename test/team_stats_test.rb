@@ -88,7 +88,8 @@ class TeamStatsTest < Minitest::Test
     @team_23 = Team.new(team_23_info)
     @team_52 = Team.new(team_52_info)
 
-    @teams = [
+    @teams =
+    [
       @team_3,
       @team_6,
       @team_10,
@@ -404,7 +405,6 @@ class TeamStatsTest < Minitest::Test
       :venue_time_zone_offset=>"-4",
       :venue_time_zone_tz=>"EDT"
     }
-
 
     @game_1 = Game.new(game_1_info)
     @game_2 = Game.new(game_2_info)

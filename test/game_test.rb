@@ -91,7 +91,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_has_a_score_difference
-    assert_equal -1, @game_1.score_difference
+    assert_equal (-1), @game_1.score_difference
   end
 
   def test_it_has_a_blowout
