@@ -6,9 +6,12 @@ class StatTracker
 
   def initialize(files)
     @files = files
-    @game_stats = compile_game_stats
-    @team_stats = compile_team_stats
-    @league_stats = compile_league_stats
+    @games = convert_files.games
+    @teams = convert_files.teams
+    @game_stats = compile_stats[:games]
+    @team_stats = compile_stats[:teams]
+    @league_stats = compile_stats[:league]
+    @league_stats.update_stats
   end
 
   def self.from_csv(files)
@@ -21,24 +24,16 @@ class StatTracker
     FileConverter.new(files)
   end
 
-  def compile_game_stats
-    games = convert_files.games
-    GameStats.new(games)
+  def compile_stats
+    {
+    games: GameStats.new(@games),
+    teams: TeamStats.new(@teams),
+    league: LeagueStats.new(@games, @teams)
+    }
   end
 
-  def compile_team_stats
-    teams = convert_files.teams
-    TeamStats.new(teams)
-  end
-
-  def compile_league_stats
-    games = convert_files.games
-    teams = convert_files.teams
-    LeagueStats.new(games, teams)
-  end
-#Compile season stats, game teams stats
+# Game Statistics
 # ======================================
-
   def highest_total_score
     game_stats.max_score
   end
@@ -85,6 +80,20 @@ class StatTracker
 
   def average_goals_by_season
     game_stats.average_goals_by_season
+  end
+
+  # League Statistics
+  # ======================================
+  def count_of_teams
+    team_stats.teams.count
+  end
+
+  def best_offense
+    league_stats.highest_offense
+  end
+
+  def worst_offense
+    league_stats.lowest_offense
   end
 
 end

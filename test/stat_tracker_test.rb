@@ -3,6 +3,7 @@ require './lib/game'
 require './lib/game_stats'
 require './lib/team'
 require './lib/team_stats'
+require './lib/stat_sorter'
 require './lib/league_stats'
 require './lib/file_converter'
 require './lib/stat_tracker'
@@ -44,11 +45,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_compile_game_stats
-    assert_instance_of GameStats, @stat_tracker.compile_game_stats
+    assert_instance_of GameStats, @stat_tracker.compile_stats[:games]
   end
 
   def test_it_can_compile_team_stats
-    assert_instance_of TeamStats, @stat_tracker.compile_team_stats
+    assert_instance_of TeamStats, @stat_tracker.compile_stats[:teams]
   end
 
   def test_it_can_compile_game_team_stats
@@ -57,7 +58,8 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_compile_league_stats
-    assert_instance_of LeagueStats, @stat_tracker.compile_league_stats
+    skip
+    assert_instance_of LeagueStats, @stat_tracker.compile_stats[:league]
   end
 
   def test_it_has_stats_as_attributes
@@ -114,6 +116,20 @@ class StatTrackerTest < Minitest::Test
   def test_it_can_average_goals_by_season
     expected = {"20122013" => 5.0, "20162017" => 9.0, "20172018" => 5.5}
     assert_equal expected, @stat_tracker.average_goals_by_season
+  end
+
+  def test_it_can_count_all_teams
+    # binding.pry
+    assert_equal 8, @stat_tracker.count_of_teams
+  end
+
+  def test_it_can_determine_the_best_offense
+
+    assert_equal "Lightning", @stat_tracker.best_offense
+  end
+
+  def test_it_can_determine_worst_offense
+    assert_equal "Panthers", @stat_tracker.worst_offense
   end
 
 end
