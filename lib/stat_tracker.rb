@@ -96,4 +96,8 @@ class StatTracker
     league_stats.lowest_offense
   end
 
+  def best_defense
+    league_stats.highest_defense
+  end
+
 end
