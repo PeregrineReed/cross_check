@@ -8,10 +8,8 @@ class Team
               :abbreviation,
               :link
 
-  attr_accessor :home,
-                :away,
-                :preseason,
-                :regular
+  attr_accessor :seasons,
+                :history
 
   def initialize(data)
     @team_info = data
@@ -22,38 +20,41 @@ class Team
     @abbreviation = data[:abbreviation]
     @link = data[:link]
 
-    @home = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @away = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @preseason = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @regular = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
+    @seasons = {}
+    @history = {
+                home: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                away: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                preseason: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                regular: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                }
   end
 
   def total
     {
-      wins: @home[:wins] + @away[:wins],
-      goals: @home[:goals] + @away[:goals],
-      games: @home[:games] + @away[:games],
-      goals_against: @home[:goals_against] + @away[:goals_against]
+      wins: history[:home][:wins] + history[:away][:wins],
+      goals: history[:home][:goals] + history[:away][:goals],
+      games: history[:home][:games] + history[:away][:games],
+      goals_against: history[:home][:goals_against] + history[:away][:goals_against]
     }
   end
 
@@ -62,11 +63,11 @@ class Team
   end
 
   def home_win_percentage
-    (home[:wins] / home[:games].to_f).round(2)
+    (history[:home][:wins] / history[:home][:games].to_f).round(2)
   end
 
   def away_win_percentage
-    (away[:wins] / away[:games].to_f).round(2)
+    (history[:away][:wins] / history[:away][:games].to_f).round(2)
   end
 
   def fans_rating
@@ -74,11 +75,11 @@ class Team
   end
 
   def away_average_goals
-    (away[:goals] / away[:games].to_f).round(2)
+    (history[:away][:goals] / history[:away][:games].to_f).round(2)
   end
 
   def home_average_goals
-    (home[:goals] / home[:games].to_f).round(2)
+    (history[:home][:goals] / history[:home][:games].to_f).round(2)
   end
 
   def calculate_offense
@@ -90,7 +91,7 @@ class Team
   end
 
   def preseason_win_percentage
-    (preseason[:wins] / preseason[:games].to_f).round(2)
+    (history[:preseason][:wins] / history[:preseason][:games].to_f).round(2)
   end
 
 end
