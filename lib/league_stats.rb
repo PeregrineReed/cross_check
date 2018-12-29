@@ -62,7 +62,11 @@ class LeagueStats < StatSorter
   end
 
   def lowest_scoring_when_home
-    @teams.min_by do |team|
+    teams = @teams.reject do |team|
+      team.average_goals(team.home).to_s == 'NaN'
+    end
+
+    teams.min_by do |team|
       team.average_goals(team.home)
     end.team_name
   end
