@@ -57,60 +57,54 @@ class SeasonStatsTest < Minitest::Test
 
   #Season statistic team methods
   def test_it_calculates_team_preseason_win_percentage
-    skip
-    @team_1.history[:preseason][:wins] = 5
-    @team_1.history[:preseason][:games] = 9
+    @season_1.preseason[:wins] = 5
+    @season_1.preseason[:games] = 9
 
-    assert_equal 0.56, @team_1.preseason_win_percentage
+    assert_equal 0.56, @season_1.preseason_win_percentage
   end
 
-  def test_it_calculates_bust
-    skip # No Method Error
-    @team_1.history[:preseason][:wins] = 5
-    @team_1.history[:preseason][:games] = 9
-    @team_1.history[:total][:wins] = 13
-    @team_1.history[:total][:games] = 205
+  def test_it_calculates_team_regular_season_win_percentage
+    @season_1.regular[:wins] = 35
+    @season_1.regular[:games] = 40
 
-    assert_equal 0.46, @team_1.calculate_bust
+    assert_equal 0.88, @season_1.regular_season_win_percentage
   end
 
-  def test_it_calculates_surprise
-    skip # No Method Error
-    @team_1.history[:preseason][:wins] = 5
-    @team_1.history[:preseason][:games] = 9
-    @team_1.histoy[:regular][:wins] = 187
-    @team_1.histoy[:regular][:games] = 205
+  def test_it_calculates_win_differential
+    @season_1.preseason[:wins] = 5
+    @season_1.preseason[:games] = 9
+    @season_1.regular[:wins] = 193
+    @season_1.regular[:games] = 205
 
-    assert_equal 0.46, @team_1.calculate_surprise
+    assert_equal 0.38, @season_1.win_differential
   end
 
   def test_it_makes_season_summary
-    skip #No Method Error
-    @team_1.history[:preseason][:wins] = 5
-    @team_1.history[:preseason][:games] = 9
-    @team_1.history[:preseason][:goals] = 18
-    @team_1.history[:preseason][:goals_against] = 16
-    @team_1.history[:total][:wins] = 187
-    @team_1.history[:total][:games] = 205
-    @team_1.history[:total][:goals] = 412
-    @team_1.history[:total][:goals_against] = 363
+    @season_1.preseason[:wins] = 5
+    @season_1.preseason[:games] = 9
+    @season_1.preseason[:goals] = 18
+    @season_1.preseason[:goals_against] = 16
+    @season_1.regular[:wins] = 187
+    @season_1.regular[:games] = 205
+    @season_1.regular[:goals] = 412
+    @season_1.regular[:goals_against] = 363
 
     expected = {
       preseason:
         {
-          win_percentage: 0.6,
+          win_percentage: 0.56,
           goals_scored: 18,
           goals_against: 16
         },
       regular_season:
         {
-          win_percentage: 0.93,
+          win_percentage: 0.91,
           goals_scored: 412,
           goals_against: 363
         }
       }
 
-    assert_equal expected, @team_1.season_summary
+    assert_equal expected, @season_1.season_summary
   end
 
 end
