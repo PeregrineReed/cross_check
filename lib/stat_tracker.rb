@@ -134,5 +134,54 @@ class StatTracker
 
   # Season Statistics
   # ======================================
+
+  def biggest_bust
+  end
+
+  def biggest_surprise
+  end
+
+  def season_summary
+  end
+
+  #Team Statistics
+  # ======================================
+
+  def team_info
+  end
+
+  def best_season
+  end
+
+  def worst_season
+  end
+
+  def average_win_percentage
+  end
+
+  def most_goals_scored
+  end
+
+  def fewest_goals_scored
+  end
+
+  def favorite_opponent
+  end
+
+  def rival
+  end
+
+  def biggest_team_blowout
+  end
+
+  def worst_loss
+  end
+
+  def head_to_head
+  end
+
+
+  def seasonal_summary
+  end
   
 end
