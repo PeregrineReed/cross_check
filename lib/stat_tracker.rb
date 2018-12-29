@@ -124,4 +124,8 @@ class StatTracker
     league_stats.highest_win_percentage
   end
 
+  def best_fans
+    league_stats.highest_fans_rating
+  end
+
 end
