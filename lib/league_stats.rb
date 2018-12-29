@@ -82,7 +82,11 @@ class LeagueStats < StatSorter
   end
 
   def highest_fans_rating
-    @teams.max_by do |team|
+    teams = @teams.reject do |team|
+      team.win_percentage(team.home).to_s == 'NaN' || team.win_percentage(team.away).to_s == 'NaN'
+    end
+
+    teams.max_by do |team|
       team.fans_rating
     end.team_name
   end
