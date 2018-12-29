@@ -52,7 +52,11 @@ class LeagueStats < StatSorter
   end
 
   def lowest_scoring_when_away
-    @teams.min_by do |team|
+    teams = @teams.reject do |team|
+      team.average_goals(team.away).to_s == 'NaN'
+    end
+
+    teams.min_by do |team|
       team.average_goals(team.away)
     end.team_name
   end
