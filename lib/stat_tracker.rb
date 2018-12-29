@@ -128,4 +128,11 @@ class StatTracker
     league_stats.highest_fans_rating
   end
 
+  def worst_fans
+    league_stats.bad_fan_teams
+  end
+
+  # Season Statistics
+  # ======================================
+  
 end
