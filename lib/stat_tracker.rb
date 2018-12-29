@@ -116,4 +116,8 @@ class StatTracker
     league_stats.lowest_scoring_when_away
   end
 
+  def lowest_scoring_home_team
+    league_stats.lowest_scoring_when_home
+  end
+
 end
