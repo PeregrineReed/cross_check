@@ -26,7 +26,6 @@ class LeagueStats < StatSorter
   end
 
   def lowest_defense
-
     @teams.min_by do |team|
       team.calculate_defense
     end.team_name
@@ -36,13 +35,18 @@ class LeagueStats < StatSorter
     teams = @teams.reject do |team|
       team.average_goals(team.away).to_s == 'NaN'
     end
+
     teams.max_by do |team|
       team.average_goals(team.away)
     end.team_name
   end
 
   def highest_scoring_when_home
-    @teams.max_by do |team|
+    teams = @teams.reject do |team|
+      team.average_goals(team.home).to_s == 'NaN'
+    end
+
+    teams.max_by do |team|
       team.average_goals(team.home)
     end.team_name
   end
