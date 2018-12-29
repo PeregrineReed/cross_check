@@ -108,4 +108,8 @@ class StatTracker
     league_stats.highest_scoring_when_away
   end
 
+  def highest_scoring_home_team
+    league_stats.highest_scoring_when_home
+  end
+
 end
