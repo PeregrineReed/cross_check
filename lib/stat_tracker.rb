@@ -120,4 +120,8 @@ class StatTracker
     league_stats.lowest_scoring_when_home
   end
 
+  def winningest_team
+    league_stats.highest_win_percentage
+  end
+
 end
