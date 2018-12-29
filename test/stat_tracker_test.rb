@@ -146,4 +146,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Lightning", @stat_tracker.highest_scoring_home_team
   end
 
+  def test_it_can_determine_lowest_scoring_visitor
+    assert_equal "Panthers", @stat_tracker.lowest_scoring_visitor
+  end
+
 end
