@@ -18,6 +18,35 @@ class SeasonStats
     }
   end
 
+  def preseason_win_percentage
+    (@preseason[:wins] / @preseason[:games].to_f).round(2)
+  end
+
+  def regular_season_win_percentage
+    (@regular[:wins] / @regular[:games].to_f).round(2)
+  end
+
+  def win_differential
+    (regular_season_win_percentage - preseason_win_percentage).round(2)
+  end
+
+  def season_summary
+    summary = {}
+    preseason_sum = {}
+    regular_sum = {}
+    preseason_sum[:win_percentage] = preseason_win_percentage
+    preseason_sum[:goals_scored] = @preseason[:goals]
+    preseason_sum[:goals_against] = @preseason[:goals_against]
+    regular_sum[:win_percentage] = regular_season_win_percentage
+    regular_sum[:goals_scored] = @regular[:goals]
+    regular_sum[:goals_against] = @regular[:goals_against]
+
+    summary[:preseason] = preseason_sum
+    summary[:regular_season] = regular_sum
+
+    return summary
+  end
+
 
   # def games_by_season
   #   @games.group_by do |game|
