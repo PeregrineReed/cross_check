@@ -9,13 +9,13 @@ class LeagueStats < StatSorter
 
   def highest_offense
     @teams.max_by do |team|
-      team.calculate_offense
+      team.average_goals(team.total)
     end.team_name
   end
 
   def lowest_offense
     @teams.min_by do |team|
-      team.calculate_offense
+      team.average_goals(team.total)
     end.team_name
   end
 
@@ -26,38 +26,42 @@ class LeagueStats < StatSorter
   end
 
   def lowest_defense
+
     @teams.min_by do |team|
       team.calculate_defense
     end.team_name
   end
 
   def highest_scoring_when_away
-    @teams.max_by do |team|
-      team.away_average_goals
+    teams = @teams.reject do |team|
+      team.average_goals(team.away).to_s == 'NaN'
+    end
+    teams.max_by do |team|
+      team.average_goals(team.away)
     end.team_name
   end
 
   def highest_scoring_when_home
     @teams.max_by do |team|
-      team.home_average_goals
+      team.average_goals(team.home)
     end.team_name
   end
 
   def lowest_scoring_when_away
     @teams.min_by do |team|
-      team.away_average_goals
+      team.average_goals(team.away)
     end.team_name
   end
 
   def lowest_scoring_when_home
     @teams.min_by do |team|
-      team.home_average_goals
+      team.average_goals(team.home)
     end.team_name
   end
 
   def highest_win_percentage
     @teams.max_by do |team|
-      team.win_percentage
+      team.win_percentage(team.total)
     end.team_name
   end
 

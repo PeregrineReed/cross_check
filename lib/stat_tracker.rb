@@ -104,4 +104,8 @@ class StatTracker
     league_stats.lowest_defense
   end
 
+  def highest_scoring_visitor
+    league_stats.highest_scoring_when_away
+  end
+
 end

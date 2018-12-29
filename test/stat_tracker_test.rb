@@ -138,4 +138,8 @@ class StatTrackerTest < Minitest::Test
     assert_equal "Hurricanes", @stat_tracker.worst_defense
   end
 
+  def test_it_can_determine_highest_scoring_visitor
+    assert_equal "Maple Leafs", @stat_tracker.highest_scoring_visitor
+  end
+
 end

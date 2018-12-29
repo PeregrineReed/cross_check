@@ -78,21 +78,21 @@ class TeamTest < Minitest::Test
     @team_1.away[:wins] = 3
     @team_1.away[:games] = 9
 
-    assert_equal 0.33, @team_1.win_percentage
+    assert_equal 0.33, @team_1.win_percentage(@team_1.total)
   end
 
   def test_it_calculates_team_home_win_percentage
     @team_1.home[:wins] = 4
     @team_1.home[:games] = 10
 
-    assert_equal 0.4, @team_1.home_win_percentage
+    assert_equal 0.4, @team_1.win_percentage(@team_1.home)
   end
 
   def test_it_calculates_team_away_win_percentage
     @team_1.away[:wins] = 2
     @team_1.away[:games] = 3
 
-    assert_equal 0.67, @team_1.away_win_percentage
+    assert_equal 0.67, @team_1.win_percentage(@team_1.away)
   end
 
   def test_it_calculates_fan_rating
@@ -108,21 +108,21 @@ class TeamTest < Minitest::Test
     @team_1.away[:goals] = 1
     @team_1.away[:games] = 4
 
-    assert_equal 0.25, @team_1.away_average_goals
+    assert_equal 0.25, @team_1.average_goals(@team_1.away)
   end
 
   def test_it_calculates_team_home_average_goals
     @team_1.home[:goals] = 16
     @team_1.home[:games] = 18
 
-    assert_equal 0.89, @team_1.home_average_goals
+    assert_equal 0.89, @team_1.average_goals(@team_1.home)
   end
 
   def test_it_calculates_offense
     @team_1.home[:goals] = 100
     @team_1.away[:games] = 205
 
-    assert_equal 0.49, @team_1.calculate_offense
+    assert_equal 0.49, @team_1.average_goals(@team_1.total)
   end
 
   def test_it_calculates_defense
@@ -137,7 +137,7 @@ class TeamTest < Minitest::Test
     @team_1.preseason[:wins] = 5
     @team_1.preseason[:games] = 9
 
-    assert_equal 0.56, @team_1.preseason_win_percentage
+    assert_equal 0.56, @team_1.win_percentage(@team_1.preseason)
   end
 
   def test_it_calculates_bust

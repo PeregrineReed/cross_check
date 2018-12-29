@@ -57,40 +57,20 @@ class Team
     }
   end
 
-  def win_percentage
-    (total[:wins] / total[:games].to_f).round(2)
-  end
-
-  def home_win_percentage
-    (home[:wins] / home[:games].to_f).round(2)
-  end
-
-  def away_win_percentage
-    (away[:wins] / away[:games].to_f).round(2)
+  def win_percentage(type)
+    (type[:wins] / type[:games].to_f).round(2)
   end
 
   def fans_rating
-    (home_win_percentage - away_win_percentage.to_f).round(2)
+    (win_percentage(home) - win_percentage(away)).round(2)
   end
 
-  def away_average_goals
-    (away[:goals] / away[:games].to_f).round(2)
-  end
-
-  def home_average_goals
-    (home[:goals] / home[:games].to_f).round(2)
-  end
-
-  def calculate_offense
-    (total[:goals] / total[:games].to_f).round(2)
+  def average_goals(type)
+    (type[:goals] / type[:games].to_f).round(2)
   end
 
   def calculate_defense
     (total[:goals_against] / total[:games].to_f).round(2)
-  end
-
-  def preseason_win_percentage
-    (preseason[:wins] / preseason[:games].to_f).round(2)
   end
 
 end
