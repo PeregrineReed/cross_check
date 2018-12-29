@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/stat_sorter'
+require './lib/season_stats'
 
 class StatSorterTest < Minitest::Test
 
@@ -20,6 +21,7 @@ class StatSorterTest < Minitest::Test
 
     @game_1.stubs(
       :type => "P",
+      :season => "20122013",
       :home_team_id => "1",
       :away_team_id => "2",
       :home_goals => 2,
@@ -27,6 +29,7 @@ class StatSorterTest < Minitest::Test
     )
     @game_2.stubs(
       :type => "P",
+      :season => "20122013",
       :home_team_id => "3",
       :away_team_id => "4",
       :home_goals => 4,
@@ -34,6 +37,7 @@ class StatSorterTest < Minitest::Test
     )
     @game_3.stubs(
       :type => "R",
+      :season => "20122013",
       :home_team_id => "5",
       :away_team_id => "1",
       :home_goals => 2,
@@ -41,6 +45,7 @@ class StatSorterTest < Minitest::Test
     )
     @game_4.stubs(
       :type => "R",
+      :season => "20132014",
       :home_team_id => "2",
       :away_team_id => "3",
       :home_goals => 3,
@@ -48,6 +53,7 @@ class StatSorterTest < Minitest::Test
     )
     @game_5.stubs(
       :type => "R",
+      :season => "20132014",
       :home_team_id => "4",
       :away_team_id => "5",
       :home_goals => 1,
@@ -191,38 +197,53 @@ class StatSorterTest < Minitest::Test
 
     @team_1.stubs(
       :team_id => "1",
-      :home => @team_1_home,
-      :away => @team_1_away,
-      :preseason => @team_1_preseason,
-      :regular => @team_1_regular
+      :seasons => {},
+      :history => {
+        :home => @team_1_home,
+        :away => @team_1_away,
+        :preseason => @team_1_preseason,
+        :regular => @team_1_regular
+        }
     )
     @team_2.stubs(
       :team_id => "2",
-      :home => @team_2_home,
-      :away => @team_2_away,
-      :preseason => @team_2_preseason,
-      :regular => @team_2_regular
+      :seasons => {},
+      :history => {
+        :home => @team_2_home,
+        :away => @team_2_away,
+        :preseason => @team_2_preseason,
+        :regular => @team_2_regular
+        }
     )
     @team_3.stubs(
       :team_id => "3",
-      :home => @team_3_home,
-      :away => @team_3_away,
-      :preseason => @team_3_preseason,
-      :regular => @team_3_regular
+      :seasons => {},
+      :history => {
+        :home => @team_3_home,
+        :away => @team_3_away,
+        :preseason => @team_3_preseason,
+        :regular => @team_3_regular
+        }
     )
     @team_4.stubs(
       :team_id => "4",
-      :home => @team_4_home,
-      :away => @team_4_away,
-      :preseason => @team_4_preseason,
-      :regular => @team_4_regular
+      :seasons => {},
+      :history => {
+        :home => @team_4_home,
+        :away => @team_4_away,
+        :preseason => @team_4_preseason,
+        :regular => @team_4_regular
+        }
     )
     @team_5.stubs(
       :team_id => "5",
-      :home => @team_5_home,
-      :away => @team_5_away,
-      :preseason => @team_5_preseason,
-      :regular => @team_5_regular
+      :seasons => {},
+      :history => {
+        :home => @team_5_home,
+        :away => @team_5_away,
+        :preseason => @team_5_preseason,
+        :regular => @team_5_regular
+        }
     )
 
     @stat_sorter = StatSorter.new(@games, @teams)
@@ -249,53 +270,45 @@ class StatSorterTest < Minitest::Test
     assert_equal expected, @stat_sorter.teams_by_id
   end
 
-  def test_it_can_update_home_game_stats
+  def test_it_can_group_team_ids_in_select_games
+    games_2 = [@game_1, @game_2]
+
+    assert_equal ["1", "2", "3", "4"], @stat_sorter.list_team_ids_in_games(games_2)
+  end
+
+  def test_it_can_group_games_by_season
+    expected = {"20122013" => [@game_1, @game_2, @game_3], "20132014" => [@game_4, @game_5]}
+
+    assert_equal expected, @stat_sorter.games_by_season
+  end
+
+  def test_it_can_add_seasons_to_teams
+    @stat_sorter.add_seasons_to_teams
+
+    assert_instance_of SeasonStats, @team_1.seasons["20122013"]
+    assert_equal "20122013", @team_1.seasons["20122013"].season_id
+    assert_equal 0, @team_1.seasons["20122013"].preseason[:wins]
+    assert_equal 0, @team_1.seasons["20122013"].regular[:goals]
+    assert_instance_of SeasonStats, @team_2.seasons["20132014"]
+    assert_equal "20132014", @team_2.seasons["20132014"].season_id
+    assert_equal 2, @team_2.seasons.count
+  end
+
+  def test_it_can_update_preseason_home_game_stats
+    @stat_sorter.add_seasons_to_teams
+
     expected = {
       wins: 0,
       goals: 0,
       games: 0,
       goals_against: 0
     }
-    assert_equal expected, @team_1.home
-    expected = {
-      wins: 0,
-      goals: 2,
-      games: 1,
-      goals_against: 3
-    }
+    #binding.pry
+    assert_equal expected, @team_1.history[:home]
+    assert_equal expected, @team_1.seasons["20122013"].preseason
+
     @stat_sorter.preseason_home(@game_1)
     @stat_sorter.home_team(@game_1)
-    assert_equal expected, @team_1.home
-  end
-
-  def test_it_can_update_away_game_stats
-    expected = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    assert_equal expected, @team_2.away
-
-    expected = {
-      wins: 1,
-      goals: 3,
-      games: 1,
-      goals_against: 2
-    }
-    @stat_sorter.preseason_away(@game_1)
-    @stat_sorter.away_team(@game_1)
-    assert_equal expected, @team_2.away
-  end
-
-  def test_it_can_update_preseason_home_game_stats
-    expected = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    assert_equal expected, @team_1.preseason
 
     expected = {
       wins: 0,
@@ -303,37 +316,50 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
-    @stat_sorter.preseason_home(@game_1)
-    assert_equal expected, @team_1.preseason
+
+    assert_equal expected, @team_1.history[:home]
+    assert_equal expected, @team_1.seasons["20122013"].preseason
   end
 
-  def test_it_can_update_preseason_home_game_stats
+  def test_it_can_update_preseason_away_game_stats
+    @stat_sorter.add_seasons_to_teams
+
     expected = {
       wins: 0,
       goals: 0,
       games: 0,
       goals_against: 0
     }
-    assert_equal expected, @team_1.preseason
 
+    assert_equal expected, @team_2.history[:away]
+    assert_equal expected, @team_2.seasons["20122013"].preseason
+
+    @stat_sorter.preseason_away(@game_1)
+    @stat_sorter.away_team(@game_1)
     expected = {
       wins: 1,
       goals: 3,
       games: 1,
       goals_against: 2
     }
-    @stat_sorter.preseason_away(@game_1)
-    assert_equal expected, @team_2.preseason
+
+    assert_equal expected, @team_2.history[:away]
+    assert_equal expected, @team_2.seasons["20122013"].preseason
   end
 
-  def test_it_can_update_regular_home_games
+  def test_it_can_update_regular_season_home_games
+    @stat_sorter.add_seasons_to_teams
+
     expected = {
       wins: 0,
       goals: 0,
       games: 0,
       goals_against: 0
     }
-    assert_equal expected, @team_5.regular
+
+    assert_equal expected, @team_5.seasons["20122013"].regular
+
+    @stat_sorter.regular_home(@game_3)
 
     expected = {
       wins: 0,
@@ -341,18 +367,23 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 4
     }
-    @stat_sorter.regular_home(@game_3)
-    assert_equal expected, @team_5.regular
+
+    assert_equal expected, @team_5.seasons["20122013"].regular
   end
 
-  def test_it_can_update_regular_away_games
+  def test_it_can_update_regular_season_away_games
+    @stat_sorter.add_seasons_to_teams
+
     expected = {
       wins: 0,
       goals: 0,
       games: 0,
       goals_against: 0
     }
-    assert_equal expected, @team_1.regular
+
+    assert_equal expected, @team_1.seasons["20122013"].regular
+
+    @stat_sorter.regular_away(@game_3)
 
     expected = {
       wins: 1,
@@ -360,11 +391,12 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    @stat_sorter.regular_away(@game_3)
-    assert_equal expected, @team_1.regular
+
+    assert_equal expected, @team_1.seasons["20122013"].regular
   end
 
-  def test_it_can_update_teams_with_all_games
+  def test_it_can_update_stats_with_all_games
+    @stat_sorter.add_seasons_to_teams
     @stat_sorter.update_stats
 
     expected = {
@@ -373,7 +405,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
-    assert_equal expected, @team_1.preseason
+    assert_equal expected, @team_1.seasons["20122013"].preseason
 
     expected = {
       wins: 1,
@@ -381,7 +413,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_1.regular
+    assert_equal expected, @team_1.seasons["20122013"].regular
 
     expected = {
       wins: 0,
@@ -389,7 +421,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
-    assert_equal expected, @team_1.home
+    assert_equal expected, @team_1.history[:home]
 
     expected = {
       wins: 1,
@@ -397,7 +429,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_1.away
+    assert_equal expected, @team_1.history[:away]
 
     expected = {
       wins: 1,
@@ -405,7 +437,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_2.preseason
+    assert_equal expected, @team_2.seasons["20122013"].preseason
 
     expected = {
       wins: 1,
@@ -413,7 +445,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 1
     }
-    assert_equal expected, @team_2.regular
+    assert_equal expected, @team_2.seasons["20132014"].regular
 
     expected = {
       wins: 1,
@@ -421,7 +453,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 1
     }
-    assert_equal expected, @team_2.home
+    assert_equal expected, @team_2.history[:home]
 
     expected = {
       wins: 1,
@@ -429,7 +461,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_2.away
+    assert_equal expected, @team_2.history[:away]
 
 
     expected = {
@@ -438,7 +470,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_3.preseason
+    assert_equal expected, @team_3.seasons["20122013"].preseason
 
     expected = {
       wins: 0,
@@ -446,7 +478,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
-    assert_equal expected, @team_3.regular
+    assert_equal expected, @team_3.seasons["20132014"].regular
 
     expected = {
       wins: 1,
@@ -454,7 +486,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_3.home
+    assert_equal expected, @team_3.history[:home]
 
     expected = {
       wins: 0,
@@ -462,7 +494,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 3
     }
-    assert_equal expected, @team_3.away
+    assert_equal expected, @team_3.history[:away]
 
 
     expected = {
@@ -471,7 +503,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 4
     }
-    assert_equal expected, @team_4.preseason
+    assert_equal expected, @team_4.seasons["20122013"].preseason
 
     expected = {
       wins: 0,
@@ -479,7 +511,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_4.regular
+    assert_equal expected, @team_4.seasons["20132014"].regular
 
     expected = {
       wins: 0,
@@ -487,7 +519,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 2
     }
-    assert_equal expected, @team_4.home
+    assert_equal expected, @team_4.history[:home]
 
     expected = {
       wins: 0,
@@ -495,7 +527,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 4
     }
-    assert_equal expected, @team_4.away
+    assert_equal expected, @team_4.history[:away]
 
     expected = {
       wins: 0,
@@ -503,15 +535,7 @@ class StatSorterTest < Minitest::Test
       games: 0,
       goals_against: 0
     }
-    assert_equal expected, @team_5.preseason
-
-    expected = {
-      wins: 1,
-      goals: 4,
-      games: 2,
-      goals_against: 5
-    }
-    assert_equal expected, @team_5.regular
+    assert_equal expected, @team_5.seasons["20122013"].preseason
 
     expected = {
       wins: 0,
@@ -519,7 +543,7 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 4
     }
-    assert_equal expected, @team_5.home
+    assert_equal expected, @team_5.seasons["20122013"].regular
 
     expected = {
       wins: 1,
@@ -527,7 +551,24 @@ class StatSorterTest < Minitest::Test
       games: 1,
       goals_against: 1
     }
-    assert_equal expected, @team_5.away
+    assert_equal expected, @team_5.seasons["20132014"].regular
+
+
+    expected = {
+      wins: 0,
+      goals: 2,
+      games: 1,
+      goals_against: 4
+    }
+    assert_equal expected, @team_5.history[:home]
+
+    expected = {
+      wins: 1,
+      goals: 2,
+      games: 1,
+      goals_against: 1
+    }
+    assert_equal expected, @team_5.history[:away]
   end
 
 end
