@@ -72,7 +72,11 @@ class LeagueStats < StatSorter
   end
 
   def highest_win_percentage
-    @teams.max_by do |team|
+    teams = @teams.reject do |team|
+      team.win_percentage(team.total).to_s == 'NaN'
+    end
+
+    teams.max_by do |team|
       team.win_percentage(team.total)
     end.team_name
   end
