@@ -4,7 +4,7 @@ require './lib/game'
 require './lib/stat_sorter'
 require './lib/league_stats'
 
-class MockStatTracker < StatSorter
+class MockLeagueTracker < StatSorter
 
   include LeagueStats
 
@@ -456,7 +456,7 @@ class LeagueStatsTest < Minitest::Test
       @game_17
      ]
 
-    @league_stats = MockStatTracker.new(@games, @teams)
+    @league_stats = MockLeagueTracker.new(@games, @teams)
     @league_stats.update_stats
   end
 
