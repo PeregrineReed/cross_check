@@ -375,8 +375,8 @@ class SeasonStatsTest < Minitest::Test
      :season=>"20122013",
      :type=>"P",
      :date_time=>"2013-05-21",
-     :away_team_id=>"6",
-     :home_team_id=>"3",
+     :away_team_id=>"3",
+     :home_team_id=>"6",
      :away_goals=>"1",
      :home_goals=>"2",
      :outcome=>"away win REG",
@@ -393,8 +393,8 @@ class SeasonStatsTest < Minitest::Test
      :season=>"20122013",
      :type=>"P",
      :date_time=>"2013-05-21",
-     :away_team_id=>"6",
-     :home_team_id=>"3",
+     :away_team_id=>"3",
+     :home_team_id=>"6",
      :away_goals=>"2",
      :home_goals=>"1",
      :outcome=>"away win REG",
@@ -466,7 +466,29 @@ class SeasonStatsTest < Minitest::Test
   end
 
   def test_it_calculates_biggest_bust
-    assert_equal "Lightning", @season_stats.biggest_bust("20122013")
+    assert_equal "Rangers", @season_stats.biggest_bust("20122013")
+  end
+
+  def test_it_calculates_biggest_surprise
+    assert_equal "Bruins", @season_stats.biggest_surprise("20122013")
+  end
+
+  def test_it_calculates_season_summary_for_team
+    expected = {
+      preseason:
+        {
+          win_percentage: 0.56,
+          goals_scored: 18,
+          goals_against: 16
+        },
+      regular_season:
+        {
+          win_percentage: 0.91,
+          goals_scored: 412,
+          goals_against: 363
+        }
+      }
+    assert_equal expected, @season_stats.season_summary("20122013", "3")
   end
 
 end
