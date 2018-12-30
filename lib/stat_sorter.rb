@@ -35,18 +35,11 @@ class StatSorter
     games_by_season.each do |season, games|
       list_team_ids_in_games(games).each do |team_id|
         team = teams_by_id[team_id]
-        team.seasons[season] = SeasonStats.new(season)
+        team.seasons[season] = Season.new(season)
       end
     end
   end
 
-  # def update_stats_by_season
-  #   games_by_season.each do |season, games|
-  #     update_stats_by_game(season, games)
-  #   end
-  # end
-
-  # def update_stats_by_game(season, games)
   def update_stats
     @games.each do |game|
       if game.type == "P"

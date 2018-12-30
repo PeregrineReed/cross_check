@@ -1,6 +1,6 @@
 require './test/test_helper'
 require './lib/stat_sorter'
-require './lib/season_stats'
+require './lib/season'
 
 class StatSorterTest < Minitest::Test
 
@@ -285,11 +285,11 @@ class StatSorterTest < Minitest::Test
   def test_it_can_add_seasons_to_teams
     @stat_sorter.add_seasons_to_teams
 
-    assert_instance_of SeasonStats, @team_1.seasons["20122013"]
+    assert_instance_of Season, @team_1.seasons["20122013"]
     assert_equal "20122013", @team_1.seasons["20122013"].season_id
     assert_equal 0, @team_1.seasons["20122013"].preseason[:wins]
     assert_equal 0, @team_1.seasons["20122013"].regular[:goals]
-    assert_instance_of SeasonStats, @team_2.seasons["20132014"]
+    assert_instance_of Season, @team_2.seasons["20132014"]
     assert_equal "20132014", @team_2.seasons["20132014"].season_id
     assert_equal 2, @team_2.seasons.count
   end
@@ -303,7 +303,7 @@ class StatSorterTest < Minitest::Test
       games: 0,
       goals_against: 0
     }
-    #binding.pry
+
     assert_equal expected, @team_1.history[:home]
     assert_equal expected, @team_1.seasons["20122013"].preseason
 
