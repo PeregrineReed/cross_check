@@ -61,8 +61,13 @@ class StatSorter
     team.seasons[game.season].preseason[:games] += 1
     team.seasons[game.season].preseason[:goals_against] += game.away_goals
 
+    team.history[:preseason][:goals] += game.home_goals
+    team.history[:preseason][:games] += 1
+    team.history[:preseason][:goals_against] += game.away_goals
+
     if game.home_goals > game.away_goals
       team.seasons[game.season].preseason[:wins] += 1
+      team.history[:preseason][:wins] += 1
     end
   end
 
@@ -72,8 +77,13 @@ class StatSorter
     team.seasons[game.season].preseason[:goals] += game.away_goals
     team.seasons[game.season].preseason[:games] += 1
     team.seasons[game.season].preseason[:goals_against] += game.home_goals
+
+    team.history[:preseason][:goals] += game.away_goals
+    team.history[:preseason][:games] += 1
+    team.history[:preseason][:goals_against] += game.home_goals
     if game.away_goals > game.home_goals
       team.seasons[game.season].preseason[:wins] += 1
+      team.history[:preseason][:wins] += 1
     end
   end
 
@@ -83,8 +93,15 @@ class StatSorter
     team.seasons[game.season].regular[:goals] += game.home_goals
     team.seasons[game.season].regular[:games] += 1
     team.seasons[game.season].regular[:goals_against] += game.away_goals
+
+    team.history[:regular][:goals] += game.home_goals
+    team.history[:regular][:games] += 1
+    team.history[:regular][:goals_against] += game.away_goals
+
     if game.home_goals > game.away_goals
       team.seasons[game.season].regular[:wins] += 1
+      team.history[:regular][:wins] += 1
+
     end
   end
 
@@ -94,8 +111,14 @@ class StatSorter
     team.seasons[game.season].regular[:goals] += game.away_goals
     team.seasons[game.season].regular[:games] += 1
     team.seasons[game.season].regular[:goals_against] += game.home_goals
+
+    team.history[:regular][:goals] += game.away_goals
+    team.history[:regular][:games] += 1
+    team.history[:regular][:goals_against] += game.home_goals
+
     if game.away_goals > game.home_goals
       team.seasons[game.season].regular[:wins] += 1
+      team.history[:regular][:wins] += 1
     end
   end
 
