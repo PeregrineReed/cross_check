@@ -477,15 +477,15 @@ class SeasonStatsTest < Minitest::Test
     expected = {
       preseason:
         {
-          win_percentage: 0.56,
-          goals_scored: 18,
-          goals_against: 16
+          win_percentage: 0.75,
+          goals_scored: 13,
+          goals_against: 8
         },
       regular_season:
         {
-          win_percentage: 0.91,
-          goals_scored: 412,
-          goals_against: 363
+          win_percentage: 0.0,
+          goals_scored: 5,
+          goals_against: 10
         }
       }
     assert_equal expected, @season_stats.season_summary("20122013", "3")
