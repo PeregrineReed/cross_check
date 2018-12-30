@@ -4,6 +4,19 @@ require './lib/game'
 require './lib/stat_sorter'
 require './lib/league_stats'
 
+class MockStatTracker < StatSorter
+
+  include LeagueStats
+
+  attr_reader :games,
+              :teams
+
+  def initialize(games, teams)
+    super(games, teams)
+  end
+
+end
+
 class LeagueStatsTest < Minitest::Test
 
   def setup
@@ -443,16 +456,13 @@ class LeagueStatsTest < Minitest::Test
       @game_17
      ]
 
-    @league_stats = LeagueStats.new(@games, @teams)
+    @league_stats = MockStatTracker.new(@games, @teams)
     @league_stats.update_stats
   end
 
-  def test_it_exists
-    assert_instance_of LeagueStats, @league_stats
-  end
-
-  def test_it_inherits_from_stat_sorter
-    assert_equal StatSorter, LeagueStats.superclass
+  def test_it_includes_league_stats_module
+    expected = @league_stats.class.included_modules.include?(LeagueStats)
+    assert_equal true, expected
   end
 
   def test_it_has_games
@@ -462,7 +472,7 @@ class LeagueStatsTest < Minitest::Test
   def test_it_has_teams
     assert_equal @teams, @league_stats.teams
   end
-  
+
   def test_it_calculates_highest_offense
     assert_equal "Lightning", @league_stats.best_offense
   end

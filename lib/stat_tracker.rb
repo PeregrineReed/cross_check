@@ -1,4 +1,6 @@
-class StatTracker
+class StatTracker < StatSorter
+
+  include LeagueStats
 
   attr_reader :files,
               :game_stats,
@@ -11,8 +13,8 @@ class StatTracker
     @teams = convert_files.teams
     @game_stats = compile_stats[:games]
     @team_stats = compile_stats[:teams]
-    @league_stats = compile_stats[:league]
-    @league_stats.update_stats
+    # @league_stats = compile_stats[:league]
+    update_stats
   end
 
   def self.from_csv(files)
@@ -27,7 +29,7 @@ class StatTracker
     {
     games: GameStats.new(@games),
     teams: TeamStats.new(@teams),
-    league: LeagueStats.new(@games, @teams)
+    # league: LeagueStats.new(@games, @teams)
     }
   end
 
@@ -86,50 +88,50 @@ class StatTracker
   def count_of_teams
     @teams.count
   end
-
-  def best_offense
-    league_stats.best_offense
-  end
-
-  def worst_offense
-    league_stats.worst_offense
-  end
-
-  def best_defense
-    league_stats.best_defense
-  end
-
-  def worst_defense
-    league_stats.worst_defense
-  end
-
-  def highest_scoring_visitor
-    league_stats.highest_scoring_visitor
-  end
-
-  def highest_scoring_home_team
-    league_stats.highest_scoring_home_team
-  end
-
-  def lowest_scoring_visitor
-    league_stats.lowest_scoring_visitor
-  end
-
-  def lowest_scoring_home_team
-    league_stats.lowest_scoring_home_team
-  end
-
-  def winningest_team
-    league_stats.winningest_team
-  end
-
-  def best_fans
-    league_stats.best_fans
-  end
-
-  def worst_fans
-    league_stats.worst_fans
-  end
+  #
+  # def best_offense
+  #   league_stats.best_offense
+  # end
+  #
+  # def worst_offense
+  #   league_stats.worst_offense
+  # end
+  #
+  # def best_defense
+  #   league_stats.best_defense
+  # end
+  #
+  # def worst_defense
+  #   league_stats.worst_defense
+  # end
+  #
+  # def highest_scoring_visitor
+  #   league_stats.highest_scoring_visitor
+  # end
+  #
+  # def highest_scoring_home_team
+  #   league_stats.highest_scoring_home_team
+  # end
+  #
+  # def lowest_scoring_visitor
+  #   league_stats.lowest_scoring_visitor
+  # end
+  #
+  # def lowest_scoring_home_team
+  #   league_stats.lowest_scoring_home_team
+  # end
+  #
+  # def winningest_team
+  #   league_stats.winningest_team
+  # end
+  #
+  # def best_fans
+  #   league_stats.best_fans
+  # end
+  #
+  # def worst_fans
+  #   league_stats.worst_fans
+  # end
 
   # Season Statistics
   # ======================================

@@ -1,11 +1,4 @@
-class LeagueStats < StatSorter
-
-  attr_accessor :games,
-                :teams
-
-  def initialize(games, teams)
-    super(games, teams)
-  end
+module LeagueStats
 
   def best_offense
     @teams.max_by do |team|
