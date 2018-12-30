@@ -1,7 +1,7 @@
 class SeasonStats < StatSorter
 
-  attr_accessor :games,
-                :teams
+  attr_reader :games,
+              :teams
 
   def initialize(games, teams)
     super(games, teams)
