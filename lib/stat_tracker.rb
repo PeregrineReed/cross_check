@@ -1,4 +1,5 @@
 class StatTracker
+
   attr_reader :files,
               :game_stats,
               :team_stats,
@@ -18,8 +19,6 @@ class StatTracker
     new(files)
   end
 
-  # StatCompiler superclass
-  # ======================================
   def convert_files
     FileConverter.new(files)
   end
@@ -85,51 +84,51 @@ class StatTracker
   # League Statistics
   # ======================================
   def count_of_teams
-    team_stats.teams.count
+    @teams.count
   end
 
   def best_offense
-    league_stats.highest_offense
+    league_stats.best_offense
   end
 
   def worst_offense
-    league_stats.lowest_offense
+    league_stats.worst_offense
   end
 
   def best_defense
-    league_stats.highest_defense
+    league_stats.best_defense
   end
 
   def worst_defense
-    league_stats.lowest_defense
+    league_stats.worst_defense
   end
 
   def highest_scoring_visitor
-    league_stats.highest_scoring_when_away
+    league_stats.highest_scoring_visitor
   end
 
   def highest_scoring_home_team
-    league_stats.highest_scoring_when_home
+    league_stats.highest_scoring_home_team
   end
 
   def lowest_scoring_visitor
-    league_stats.lowest_scoring_when_away
+    league_stats.lowest_scoring_visitor
   end
 
   def lowest_scoring_home_team
-    league_stats.lowest_scoring_when_home
+    league_stats.lowest_scoring_home_team
   end
 
   def winningest_team
-    league_stats.highest_win_percentage
+    league_stats.winningest_team
   end
 
   def best_fans
-    league_stats.highest_fans_rating
+    league_stats.best_fans
   end
 
   def worst_fans
-    league_stats.bad_fan_teams
+    league_stats.worst_fans
   end
 
   # Season Statistics
@@ -180,8 +179,7 @@ class StatTracker
   def head_to_head
   end
 
-
   def seasonal_summary
   end
-  
+
 end
