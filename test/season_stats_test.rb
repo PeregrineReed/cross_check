@@ -5,6 +5,19 @@ require './lib/season'
 require './lib/stat_sorter'
 require './lib/season_stats'
 
+class SeasonRepo < StatSorter
+
+  include SeasonStats
+
+  attr_reader :games,
+              :teams
+
+  def initialize(games, teams)
+    super(games, teams)
+  end
+
+end
+
 class SeasonStatsTest < Minitest::Test
 
   def setup
@@ -444,17 +457,14 @@ class SeasonStatsTest < Minitest::Test
       @game_17
      ]
 
-    @season_stats = SeasonStats.new(@games, @teams)
+    @season_stats = SeasonRepo.new(@games, @teams)
     @season_stats.add_seasons_to_teams
     @season_stats.update_stats
   end
 
-  def test_it_exists
-    assert_instance_of SeasonStats, @season_stats
-  end
-
-  def test_it_inherits_from_stat_sorter
-    assert_equal StatSorter, SeasonStats.superclass
+  def test_it_includes_season_stats_module
+    expected = SeasonRepo.included_modules.include?(SeasonStats)
+    assert_equal true, expected
   end
 
   def test_it_has_games

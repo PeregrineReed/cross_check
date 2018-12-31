@@ -1,3 +1,5 @@
+require './lib/season'
+
 class StatSorter
 
   attr_reader :games,
