@@ -457,6 +457,7 @@ class LeagueStatsTest < Minitest::Test
      ]
 
     @league_stats = LeagueRepo.new(@games, @teams)
+    @league_stats.add_seasons_to_teams
     @league_stats.update_stats
   end
 

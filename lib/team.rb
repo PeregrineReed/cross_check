@@ -63,7 +63,7 @@ class Team
   end
 
   def fans_rating
-    (win_percentage(home) - win_percentage(away)).round(2)
+    (win_percentage(history[:home]) - win_percentage(history[:away])).round(2)
   end
 
   def average_goals(type)

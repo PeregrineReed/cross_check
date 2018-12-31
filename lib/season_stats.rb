@@ -1,11 +1,4 @@
-class SeasonStats < StatSorter
-
-  attr_reader :games,
-              :teams
-
-  def initialize(games, teams)
-    super(games, teams)
-  end
+module SeasonStats
 
   def biggest_bust(season)
     teams_with_season_games(season).min_by do |team|

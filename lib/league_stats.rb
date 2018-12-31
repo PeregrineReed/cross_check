@@ -26,41 +26,41 @@ module LeagueStats
 
   def highest_scoring_visitor
     teams = @teams.reject do |team|
-      team.average_goals(team.away).to_s == 'NaN'
+      team.average_goals(team.history[:away]).to_s == 'NaN'
     end
 
     teams.max_by do |team|
-      team.average_goals(team.away)
+      team.average_goals(team.history[:away])
     end.team_name
   end
 
   def highest_scoring_home_team
     teams = @teams.reject do |team|
-      team.average_goals(team.home).to_s == 'NaN'
+      team.average_goals(team.history[:home]).to_s == 'NaN'
     end
 
     teams.max_by do |team|
-      team.average_goals(team.home)
+      team.average_goals(team.history[:home])
     end.team_name
   end
 
   def lowest_scoring_visitor
     teams = @teams.reject do |team|
-      team.average_goals(team.away).to_s == 'NaN'
+      team.average_goals(team.history[:away]).to_s == 'NaN'
     end
 
     teams.min_by do |team|
-      team.average_goals(team.away)
+      team.average_goals(team.history[:away])
     end.team_name
   end
 
   def lowest_scoring_home_team
     teams = @teams.reject do |team|
-      team.average_goals(team.home).to_s == 'NaN'
+      team.average_goals(team.history[:home]).to_s == 'NaN'
     end
 
     teams.min_by do |team|
-      team.average_goals(team.home)
+      team.average_goals(team.history[:home])
     end.team_name
   end
 
@@ -76,7 +76,7 @@ module LeagueStats
 
   def best_fans
     teams = @teams.reject do |team|
-      team.win_percentage(team.home).to_s == 'NaN' || team.win_percentage(team.away).to_s == 'NaN'
+      team.win_percentage(team.history[:home]).to_s == 'NaN' || team.win_percentage(team.history[:away]).to_s == 'NaN'
     end
 
     teams.max_by do |team|
