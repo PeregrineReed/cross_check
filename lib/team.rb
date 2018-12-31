@@ -8,10 +8,8 @@ class Team
               :abbreviation,
               :link
 
-  attr_accessor :home,
-                :away,
-                :preseason,
-                :regular
+  attr_accessor :seasons,
+                :history
 
   def initialize(data)
     @team_info = data
@@ -22,75 +20,58 @@ class Team
     @abbreviation = data[:abbreviation]
     @link = data[:link]
 
-    @home = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @away = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @preseason = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @regular = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
+    @seasons = {}
+    @history = {
+                home: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                away: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                preseason: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                regular: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                }
   end
 
   def total
     {
-      wins: @home[:wins] + @away[:wins],
-      goals: @home[:goals] + @away[:goals],
-      games: @home[:games] + @away[:games],
-      goals_against: @home[:goals_against] + @away[:goals_against]
+      wins: history[:home][:wins] + history[:away][:wins],
+      goals: history[:home][:goals] + history[:away][:goals],
+      games: history[:home][:games] + history[:away][:games],
+      goals_against: history[:home][:goals_against] + history[:away][:goals_against]
     }
   end
 
-  def win_percentage
-    (total[:wins] / total[:games].to_f).round(2)
-  end
-
-  def home_win_percentage
-    (home[:wins] / home[:games].to_f).round(2)
-  end
-
-  def away_win_percentage
-    (away[:wins] / away[:games].to_f).round(2)
+  def win_percentage(type)
+    (type[:wins] / type[:games].to_f).round(2)
   end
 
   def fans_rating
-    (home_win_percentage - away_win_percentage.to_f).round(2)
+    (win_percentage(history[:home]) - win_percentage(history[:away])).round(2)
   end
 
-  def away_average_goals
-    (away[:goals] / away[:games].to_f).round(2)
-  end
-
-  def home_average_goals
-    (home[:goals] / home[:games].to_f).round(2)
-  end
-
-  def calculate_offense
-    (total[:goals] / total[:games].to_f).round(2)
+  def average_goals(type)
+    (type[:goals] / type[:games].to_f).round(2)
   end
 
   def calculate_defense
     (total[:goals_against] / total[:games].to_f).round(2)
-  end
-
-  def preseason_win_percentage
-    (preseason[:wins] / preseason[:games].to_f).round(2)
   end
 
 end

@@ -1,12 +1,13 @@
 require './test/test_helper'
 require './lib/team'
 require './lib/game'
+require './lib/season'
 require './lib/stat_sorter'
-require './lib/league_stats'
+require './lib/season_stats'
 
-class LeagueRepo < StatSorter
+class SeasonRepo < StatSorter
 
-  include LeagueStats
+  include SeasonStats
 
   attr_reader :games,
               :teams
@@ -17,7 +18,7 @@ class LeagueRepo < StatSorter
 
 end
 
-class LeagueStatsTest < Minitest::Test
+class SeasonStatsTest < Minitest::Test
 
   def setup
     team_3_info = {
@@ -387,8 +388,8 @@ class LeagueStatsTest < Minitest::Test
      :season=>"20122013",
      :type=>"P",
      :date_time=>"2013-05-21",
-     :away_team_id=>"6",
-     :home_team_id=>"3",
+     :away_team_id=>"3",
+     :home_team_id=>"6",
      :away_goals=>"1",
      :home_goals=>"2",
      :outcome=>"away win REG",
@@ -405,8 +406,8 @@ class LeagueStatsTest < Minitest::Test
      :season=>"20122013",
      :type=>"P",
      :date_time=>"2013-05-21",
-     :away_team_id=>"6",
-     :home_team_id=>"3",
+     :away_team_id=>"3",
+     :home_team_id=>"6",
      :away_goals=>"2",
      :home_goals=>"1",
      :outcome=>"away win REG",
@@ -456,66 +457,48 @@ class LeagueStatsTest < Minitest::Test
       @game_17
      ]
 
-    @league_stats = LeagueRepo.new(@games, @teams)
-    @league_stats.add_seasons_to_teams
-    @league_stats.update_stats
+    @season_stats = SeasonRepo.new(@games, @teams)
+    @season_stats.add_seasons_to_teams
+    @season_stats.update_stats
   end
 
-  def test_it_includes_league_stats_module
-    expected = LeagueRepo.included_modules.include?(LeagueStats)
+  def test_it_includes_season_stats_module
+    expected = SeasonRepo.included_modules.include?(SeasonStats)
     assert_equal true, expected
   end
 
   def test_it_has_games
-    assert_equal @games, @league_stats.games
+    assert_equal @games, @season_stats.games
   end
 
   def test_it_has_teams
-    assert_equal @teams, @league_stats.teams
+    assert_equal @teams, @season_stats.teams
   end
 
-  def test_it_calculates_highest_offense
-    assert_equal "Lightning", @league_stats.best_offense
+  def test_it_calculates_biggest_bust
+    assert_equal "Rangers", @season_stats.biggest_bust("20122013")
   end
 
-  def test_it_calculates_lowest_offense
-    assert_equal "Canucks", @league_stats.worst_offense
+  def test_it_calculates_biggest_surprise
+    assert_equal "Bruins", @season_stats.biggest_surprise("20122013")
   end
 
-  def test_it_calculates_highest_defense
-    assert_equal "Maple Leafs", @league_stats.best_defense
-  end
-
-  def test_it_calculates_lowest_defense
-    assert_equal "Jets", @league_stats.worst_defense
-  end
-
-  def test_it_calculates_highest_scoring_away_team
-    assert_equal "Maple Leafs", @league_stats.highest_scoring_visitor
-  end
-
-  def test_it_calculates_highest_scoring_home_team
-    assert_equal "Lightning", @league_stats.highest_scoring_home_team
-  end
-
-  def test_it_calculates_lowest_scoring_away_team
-    assert_equal "Panthers", @league_stats.lowest_scoring_visitor
-  end
-
-  def test_it_calculates_lowest_scoring_home_team
-    assert_equal "Rangers", @league_stats.lowest_scoring_home_team
-  end
-
-  def test_it_calculates_highest_league_win_percentage
-    assert_equal "Hurricanes", @league_stats.winningest_team
-  end
-
-  def test_it_calculates_best_fans
-    assert_equal "Lightning", @league_stats.best_fans
-  end
-
-  def test_it_lists_bad_fan_teams
-    assert_equal ["Rangers", "Bruins"], @league_stats.worst_fans
+  def test_it_calculates_season_summary_for_team
+    expected = {
+      preseason:
+        {
+          win_percentage: 0.75,
+          goals_scored: 13,
+          goals_against: 8
+        },
+      regular_season:
+        {
+          win_percentage: 0.0,
+          goals_scored: 5,
+          goals_against: 10
+        }
+      }
+    assert_equal expected, @season_stats.season_summary("20122013", "3")
   end
 
 end
