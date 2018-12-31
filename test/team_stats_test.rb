@@ -418,6 +418,24 @@ class TeamStatsTest < Minitest::Test
      :venue_time_zone_tz=>"EDT"
     }
 
+    game_18_info = {
+      :game_id=>"test6",
+      :season=>"20142015",
+      :type=>"P",
+      :date_time=>"2013-05-21",
+      :away_team_id=>"6",
+      :home_team_id=>"3",
+      :away_goals=>"2",
+      :home_goals=>"1",
+      :outcome=>"away win REG",
+      :home_rink_side_start=>"right",
+      :venue=>"Madison Square Garden",
+      :venue_link=>"/api/v1/	venues/null",
+      :venue_time_zone_id=>"America/new_York",
+      :venue_time_zone_offset=>"-4",
+      :venue_time_zone_tz=>"EDT"
+     }
+
     @game_1 = Game.new(game_1_info)
     @game_2 = Game.new(game_2_info)
     @game_3 = Game.new(game_3_info)
@@ -435,6 +453,7 @@ class TeamStatsTest < Minitest::Test
     @game_15 = Game.new(game_15_info)
     @game_16 = Game.new(game_16_info)
     @game_17 = Game.new(game_17_info)
+    @game_18 = Game.new(game_18_info)
 
     @games = [
       @game_1,
@@ -453,7 +472,8 @@ class TeamStatsTest < Minitest::Test
       @game_14,
       @game_15,
       @game_16,
-      @game_17
+      @game_17,
+      @game_18
      ]
 
     @team_stats = TeamRepo.new(@games, @teams)
@@ -472,6 +492,72 @@ class TeamStatsTest < Minitest::Test
 
   def test_it_has_teams
     assert_equal @teams, @team_stats.teams
+  end
+
+  def test_it_makes_single_season_summary
+    expected = {
+      preseason:
+        {
+          win_percentage: 0.75,
+          total_goals_scored: 13,
+          total_goals_against: 8,
+          average_goals_scored: 3.25,
+          average_goals_against: 2.0
+        },
+      regular_season:
+        {
+          win_percentage: 0.0,
+          total_goals_scored: 5,
+          total_goals_against: 10,
+          average_goals_scored: 1.67,
+          average_goals_against: 3.33
+        }
+      }
+    assert_equal expected, @team_stats.single_seasonal_summary(@team_3, "20122013")
+  end
+
+  def test_it_makes_seasonal_summary
+    expected = {
+      "20122013" =>
+        {
+          preseason:
+            {
+              :win_percentage=>0.75,
+              :total_goals_scored=>13,
+              :total_goals_against=>8,
+              :average_goals_scored=>3.25,
+              :average_goals_against=>2.0
+            },
+          regular_season:
+            {
+              :win_percentage=>0.0,
+              :total_goals_scored=>5,
+              :total_goals_against=>10,
+              :average_goals_scored=>1.67,
+              :average_goals_against=>3.33
+            }
+          },
+      "20142015" =>
+        {
+          preseason:
+            {
+              :win_percentage=>0,
+              :total_goals_scored=>1,
+              :total_goals_against=>2,
+              :average_goals_scored=>1.0,
+              :average_goals_against=>2.0
+            },
+          regular_season:
+            {
+              :win_percentage=>1.0,
+              :total_goals_scored=>1,
+              :total_goals_against=>0,
+              :average_goals_scored=>1.0,
+              :average_goals_against=>0.0
+            }
+        }
+      }
+    assert_equal expected, @team_stats.seasonal_summary("3")
   end
 
 end
