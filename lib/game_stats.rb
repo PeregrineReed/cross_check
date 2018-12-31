@@ -1,4 +1,4 @@
-class GameStats
+class GameStats < StatSorter
 
   attr_reader :games
 
