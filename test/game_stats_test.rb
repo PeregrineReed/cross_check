@@ -1,4 +1,5 @@
 require './test/test_helper'
+require './lib/stat_sorter'
 require './lib/game_stats'
 
 class GameRepo

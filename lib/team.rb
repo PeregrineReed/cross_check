@@ -8,10 +8,8 @@ class Team
               :abbreviation,
               :link
 
-  attr_accessor :home,
-                :away,
-                :preseason,
-                :regular
+  attr_accessor :seasons,
+                :history
 
   def initialize(data)
     @team_info = data
@@ -22,38 +20,41 @@ class Team
     @abbreviation = data[:abbreviation]
     @link = data[:link]
 
-    @home = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @away = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @preseason = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
-    @regular = {
-      wins: 0,
-      goals: 0,
-      games: 0,
-      goals_against: 0
-    }
+    @seasons = {}
+    @history = {
+                home: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                away: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                preseason: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                regular: {
+                  wins: 0,
+                  goals: 0,
+                  games: 0,
+                  goals_against: 0
+                  },
+                }
   end
 
   def total
     {
-      wins: @home[:wins] + @away[:wins],
-      goals: @home[:goals] + @away[:goals],
-      games: @home[:games] + @away[:games],
-      goals_against: @home[:goals_against] + @away[:goals_against]
+      wins: history[:home][:wins] + history[:away][:wins],
+      goals: history[:home][:goals] + history[:away][:goals],
+      games: history[:home][:games] + history[:away][:games],
+      goals_against: history[:home][:goals_against] + history[:away][:goals_against]
     }
   end
 
