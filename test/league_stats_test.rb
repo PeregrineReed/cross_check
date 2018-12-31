@@ -4,6 +4,19 @@ require './lib/game'
 require './lib/stat_sorter'
 require './lib/league_stats'
 
+class LeagueRepo < StatSorter
+
+  include LeagueStats
+
+  attr_reader :games,
+              :teams
+
+  def initialize(games, teams)
+    super(games, teams)
+  end
+
+end
+
 class LeagueStatsTest < Minitest::Test
 
   def setup
@@ -443,16 +456,13 @@ class LeagueStatsTest < Minitest::Test
       @game_17
      ]
 
-    @league_stats = LeagueStats.new(@games, @teams)
+    @league_stats = LeagueRepo.new(@games, @teams)
     @league_stats.update_stats
   end
 
-  def test_it_exists
-    assert_instance_of LeagueStats, @league_stats
-  end
-
-  def test_it_inherits_from_stat_sorter
-    assert_equal StatSorter, LeagueStats.superclass
+  def test_it_includes_league_stats_module
+    expected = LeagueRepo.included_modules.include?(LeagueStats)
+    assert_equal true, expected
   end
 
   def test_it_has_games
@@ -463,77 +473,48 @@ class LeagueStatsTest < Minitest::Test
     assert_equal @teams, @league_stats.teams
   end
 
-# Team 3 and team 6 are not being tested equally
-  # def test_it_sorts_team_league_games
-  #   @league_stats.sort_stats
-  #
-  #   assert_equal 2, @team_6.home[:wins]
-  #   assert_equal 1, @team_6.away[:wins]
-  #   assert_equal 3, @team_6.total[:wins]
-  #   assert_equal 2, @team_6.away[:goals]
-  #   assert_equal 8, @team_6.home[:goals]
-  #
-  #   assert_equal 2, @team_3.away[:games]
-  #   assert_equal 1, @team_3.home[:games]
-  #   assert_equal 3, @team_3.total[:games]
-  #   assert_equal 5, @team_3.total[:goals]
-  #   assert_equal 10, @team_3.total[:goals_against]
-  # end
-  #
-  # def test_it_sorts_team_season_games
-  #   @league_stats.sort_stats
-  #
-  #   assert_equal 3, @team_3.preseason[:wins]
-  #   assert_equal 1, @team_6.preseason[:wins]
-  #   assert_equal 4, @team_3.preseason[:games]
-  #   assert_equal 4, @team_6.preseason[:games]
-  #   assert_equal 13, @team_3.preseason[:goals]
-  #   assert_equal 8, @team_6.preseason[:goals]
-  #   assert_equal 8, @team_3.preseason[:goals_against]
-  #   assert_equal 13, @team_6.preseason[:goals_against]
-  # end
   def test_it_calculates_highest_offense
-    assert_equal "Lightning", @league_stats.highest_offense
+    assert_equal "Lightning", @league_stats.best_offense
   end
 
   def test_it_calculates_lowest_offense
-    assert_equal "Canucks", @league_stats.lowest_offense
+    assert_equal "Canucks", @league_stats.worst_offense
   end
 
   def test_it_calculates_highest_defense
-    assert_equal "Maple Leafs", @league_stats.highest_defense
+    assert_equal "Maple Leafs", @league_stats.best_defense
   end
 
   def test_it_calculates_lowest_defense
-    assert_equal "Jets", @league_stats.lowest_defense
+    assert_equal "Jets", @league_stats.worst_defense
   end
 
   def test_it_calculates_highest_scoring_away_team
-    assert_equal "Maple Leafs", @league_stats.highest_scoring_when_away
+    assert_equal "Maple Leafs", @league_stats.highest_scoring_visitor
   end
 
   def test_it_calculates_highest_scoring_home_team
-    assert_equal "Lightning", @league_stats.highest_scoring_when_home
+    assert_equal "Lightning", @league_stats.highest_scoring_home_team
   end
 
   def test_it_calculates_lowest_scoring_away_team
-    assert_equal "Panthers", @league_stats.lowest_scoring_when_away
+    assert_equal "Panthers", @league_stats.lowest_scoring_visitor
   end
 
   def test_it_calculates_lowest_scoring_home_team
-    assert_equal "Rangers", @league_stats.lowest_scoring_when_home
+    assert_equal "Rangers", @league_stats.lowest_scoring_home_team
   end
 
   def test_it_calculates_highest_league_win_percentage
-    assert_equal "Hurricanes", @league_stats.highest_win_percentage
+    assert_equal "Hurricanes", @league_stats.winningest_team
   end
 
   def test_it_calculates_best_fans
-    assert_equal "Lightning", @league_stats.highest_fans_rating
+    assert_equal "Lightning", @league_stats.best_fans
   end
 
   def test_it_lists_bad_fan_teams
-    assert_equal ["Rangers", "Bruins"], @league_stats.bad_fan_teams
+    assert_equal ["Rangers", "Bruins"], @league_stats.worst_fans
   end
 
 end

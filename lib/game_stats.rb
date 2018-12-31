@@ -1,10 +1,10 @@
-class GameStats < StatSorter
+module GameStats
 
-  attr_reader :games
-
-  def initialize(games)
-    @games = games
-  end
+  # attr_reader :games
+  #
+  # def initialize(games)
+  #   @games = games
+  # end
 
   def list_seasons
     @games.map do |game|
@@ -18,7 +18,7 @@ class GameStats < StatSorter
     end
   end
 
-  def list_season_games
+  def count_of_games_by_season
     season_games = {}
     games_by_season.each do |season, games|
       season_games[season] = games.count
@@ -27,24 +27,24 @@ class GameStats < StatSorter
   end
 
   def season_with_most_games
-    most_games = list_season_games.values.max
-    list_season_games.key(most_games)
+    most_games = count_of_games_by_season.values.max
+    count_of_games_by_season.key(most_games)
   end
 
   def season_with_fewest_games
-    fewest_games = list_season_games.values.min
-    list_season_games.key(fewest_games)
+    fewest_games = count_of_games_by_season.values.min
+    count_of_games_by_season.key(fewest_games)
   end
 
   def total_scores
     @games.map { |game| game.total_score }
   end
 
-  def max_score
+  def highest_total_score
     total_scores.max
   end
 
-  def min_score
+  def lowest_total_score
     total_scores.min
   end
 
@@ -60,7 +60,7 @@ class GameStats < StatSorter
     end
   end
 
-  def blowout
+  def biggest_blowout
     @games.map do |game|
       game.blowout
     end.max
@@ -86,12 +86,12 @@ class GameStats < StatSorter
     venues
   end
 
-  def venue_with_most_games
+  def most_popular_venue
     most_games = list_games_by_venue.values.max
     list_games_by_venue.key(most_games)
   end
 
-  def venue_with_fewest_games
+  def least_popular_venue
     fewest_games = list_games_by_venue.values.min
     list_games_by_venue.key(fewest_games)
   end
@@ -115,7 +115,7 @@ class GameStats < StatSorter
     season_average
   end
 
-  def average_game_goals
+  def average_goals_per_game
     (total_scores.sum / @games.size.to_f).round(2)
   end
 

@@ -1,10 +1,9 @@
-class TeamStats < StatSorter
-  attr_reader :games,
-              :teams
-
-  def initialize(games, teams)
-    super(games, teams)
-  end
+module TeamStats
+  # attr_reader :teams
+  #
+  # def initialize(teams)
+  #   @teams = teams
+  # end
 
   def seasonal_summary(team_id)
     team = teams_by_id[team_id]

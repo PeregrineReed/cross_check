@@ -45,28 +45,10 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of FileConverter, @stat_tracker.convert_files
   end
 
-  def test_it_can_compile_game_stats
-    assert_instance_of GameStats, @stat_tracker.compile_stats[:games]
-  end
-
-  def test_it_can_compile_team_stats
-    assert_instance_of TeamStats, @stat_tracker.compile_stats[:teams]
-  end
-
-  def test_it_can_compile_game_team_stats
-    skip
-    assert_instance_of GameTeamStats, @stat_tracker.compile_game_team_stats
-  end
-
-  def test_it_can_compile_league_stats
-    skip
-    assert_instance_of LeagueStats, @stat_tracker.compile_stats[:league]
-  end
-
   def test_it_has_stats_as_attributes
-    assert_instance_of GameStats, @stat_tracker.game_stats
-    assert_instance_of TeamStats, @stat_tracker.team_stats
-    assert_instance_of LeagueStats, @stat_tracker.league_stats
+    # assert_instance_of GameStats, @stat_tracker.game_stats
+    # assert_instance_of TeamStats, @stat_tracker.team_stats
+    # assert_instance_of LeagueStats, @stat_tracker.league_stats
   end
 
   def test_it_can_determine_highest_total_score
@@ -120,17 +102,51 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_count_all_teams
-    # binding.pry
     assert_equal 8, @stat_tracker.count_of_teams
   end
 
   def test_it_can_determine_the_best_offense
-
     assert_equal "Lightning", @stat_tracker.best_offense
   end
 
   def test_it_can_determine_worst_offense
     assert_equal "Panthers", @stat_tracker.worst_offense
+  end
+
+  def test_it_can_determine_best_defense
+    assert_equal "Maple Leafs", @stat_tracker.best_defense
+  end
+
+  def test_it_can_determine_worst_defense
+    assert_equal "Hurricanes", @stat_tracker.worst_defense
+  end
+
+  def test_it_can_determine_highest_scoring_visitor
+    assert_equal "Maple Leafs", @stat_tracker.highest_scoring_visitor
+  end
+
+  def test_it_can_determine_highest_scoring_home_team
+    assert_equal "Lightning", @stat_tracker.highest_scoring_home_team
+  end
+
+  def test_it_can_determine_lowest_scoring_visitor
+    assert_equal "Panthers", @stat_tracker.lowest_scoring_visitor
+  end
+
+  def test_it_can_determine_lowest_scoring_home_team
+    assert_equal "Rangers", @stat_tracker.lowest_scoring_home_team
+  end
+
+  def test_it_can_determine_winningest_team
+    assert_equal "Bruins", @stat_tracker.winningest_team
+  end
+
+  def test_it_can_determine_best_fans
+    assert_equal "Rangers", @stat_tracker.best_fans
+  end
+
+  def test_it_can_determine_worst_fans
+    assert_equal [], @stat_tracker.worst_fans
   end
 
 end

@@ -2,6 +2,18 @@ require './test/test_helper'
 require './lib/stat_sorter'
 require './lib/game_stats'
 
+class GameRepo
+
+  include GameStats
+
+  attr_reader :games
+
+  def initialize(games)
+    @games = games
+  end
+
+end
+
 class GameStatsTest < Minitest::Test
 
   def setup
@@ -19,7 +31,7 @@ class GameStatsTest < Minitest::Test
       @game_5,
       @game_6
     ]
-    @game_stats = GameStats.new(@games)
+    @game_stats = GameRepo.new(@games)
     @game_1.stubs(
       :season => "20122013",
       :total_score => 5,
@@ -77,7 +89,8 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_exists
-    assert_instance_of GameStats, @game_stats
+    expected = GameRepo.included_modules.include?(GameStats)
+    assert_equal true, expected
   end
 
   def test_it_has_games
@@ -92,7 +105,7 @@ class GameStatsTest < Minitest::Test
   def test_it_can_count_games_by_season
     expected = {"20122013" => 3,"20162017" => 1, "20172018" => 2}
 
-    assert_equal expected, @game_stats.list_season_games
+    assert_equal expected, @game_stats.count_of_games_by_season
   end
 
   def test_it_can_determine_season_with_most_games
@@ -109,15 +122,15 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_find_the_max_game_score
-    assert_equal 9, @game_stats.max_score
+    assert_equal 9, @game_stats.highest_total_score
   end
 
   def test_it_can_find_the_min_game_score
-    assert_equal 3, @game_stats.min_score
+    assert_equal 3, @game_stats.lowest_total_score
   end
 
   def test_it_can_find_the_largest_difference_in_scores
-    assert_equal 3, @game_stats.blowout
+    assert_equal 3, @game_stats.biggest_blowout
   end
 
   def test_it_can_list_away_game_scores
@@ -141,11 +154,11 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_determine_venue_with_most_games
-    assert_equal "TD Garden", @game_stats.venue_with_most_games
+    assert_equal "TD Garden", @game_stats.most_popular_venue
   end
 
   def test_it_can_determine_venue_with_fewest_games
-    assert_equal "Amalie Arena", @game_stats.venue_with_fewest_games
+    assert_equal "Amalie Arena", @game_stats.least_popular_venue
   end
 
   def test_it_can_total_goals_by_season
@@ -161,7 +174,7 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_average_goals_per_game
-    assert_equal 5.83, @game_stats.average_game_goals
+    assert_equal 5.83, @game_stats.average_goals_per_game
   end
 
   def test_it_can_calculate_percentage_of_home_wins
