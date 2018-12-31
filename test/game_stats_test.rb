@@ -1,7 +1,7 @@
 require './test/test_helper'
 require './lib/game_stats'
 
-class MockGameTracker
+class GameRepo
 
   include GameStats
 
@@ -30,7 +30,7 @@ class GameStatsTest < Minitest::Test
       @game_5,
       @game_6
     ]
-    @game_stats = MockGameTracker.new(@games)
+    @game_stats = GameRepo.new(@games)
     @game_1.stubs(
       :season => "20122013",
       :total_score => 5,
@@ -87,9 +87,10 @@ class GameStatsTest < Minitest::Test
     )
   end
 
-  # def test_it_exists
-  #   assert_instance_of GameStats, @game_stats
-  # end
+  def test_it_exists
+    expected = GameRepo.included_modules.include?(GameStats)
+    assert_equal true, expected
+  end
 
   def test_it_has_games
     assert_equal @games, @game_stats.games

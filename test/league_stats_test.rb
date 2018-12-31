@@ -4,7 +4,7 @@ require './lib/game'
 require './lib/stat_sorter'
 require './lib/league_stats'
 
-class MockLeagueTracker < StatSorter
+class LeagueRepo < StatSorter
 
   include LeagueStats
 
@@ -456,12 +456,12 @@ class LeagueStatsTest < Minitest::Test
       @game_17
      ]
 
-    @league_stats = MockLeagueTracker.new(@games, @teams)
+    @league_stats = LeagueRepo.new(@games, @teams)
     @league_stats.update_stats
   end
 
   def test_it_includes_league_stats_module
-    expected = @league_stats.class.included_modules.include?(LeagueStats)
+    expected = LeagueRepo.included_modules.include?(LeagueStats)
     assert_equal true, expected
   end
 
