@@ -70,6 +70,24 @@ class SeasonTest < Minitest::Test
     assert_equal 0.88, @season_1.regular_season_win_percentage
   end
 
+  def test_it_calculates_team_preseason_average_goals
+    @season_1.preseason[:goals] = 3
+    @season_1.preseason[:goals_against] = 6
+    @season_1.preseason[:games] = 9
+
+    assert_equal 0.33, @season_1.preseason_average_goals(:goals)
+    assert_equal 0.67, @season_1.preseason_average_goals(:goals_against)
+  end
+
+  def test_it_calculates_team_regular_season_average_goals
+    @season_1.regular[:goals] = 35
+    @season_1.regular[:goals_against] = 15
+    @season_1.regular[:games] = 40
+
+    assert_equal 0.88, @season_1.regular_season_average_goals(:goals)
+    assert_equal 0.38, @season_1.regular_season_average_goals(:goals_against)
+  end
+
   def test_it_calculates_win_differential
     @season_1.preseason[:wins] = 5
     @season_1.preseason[:games] = 9
