@@ -1,6 +1,7 @@
 class StatTracker < StatSorter
 
   include GameStats
+  include TeamStats
   include LeagueStats
 
   attr_reader :files,
@@ -13,7 +14,7 @@ class StatTracker < StatSorter
     @games = convert_files.games
     @teams = convert_files.teams
     # @game_stats = compile_stats[:games]
-    @team_stats = compile_stats[:teams]
+    # @team_stats = compile_stats[:teams]
     # @league_stats = compile_stats[:league]
     update_stats
   end
@@ -29,7 +30,7 @@ class StatTracker < StatSorter
   def compile_stats
     {
     # games: GameStats.new(@games),
-    teams: TeamStats.new(@teams),
+    # teams: TeamStats.new(@teams),
     # league: LeagueStats.new(@games, @teams)
     }
   end

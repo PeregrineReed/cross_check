@@ -44,28 +44,9 @@ class StatTrackerTest < Minitest::Test
     assert_instance_of FileConverter, @stat_tracker.convert_files
   end
 
-  def test_it_can_compile_game_stats
-    skip
-    assert_instance_of GameStats, @stat_tracker.compile_stats[:games]
-  end
-
-  def test_it_can_compile_team_stats
-    assert_instance_of TeamStats, @stat_tracker.compile_stats[:teams]
-  end
-
-  def test_it_can_compile_game_team_stats
-    skip
-    assert_instance_of GameTeamStats, @stat_tracker.compile_game_team_stats
-  end
-
-  def test_it_can_compile_league_stats
-    skip
-    assert_instance_of LeagueStats, @stat_tracker.compile_stats[:league]
-  end
-
   def test_it_has_stats_as_attributes
     # assert_instance_of GameStats, @stat_tracker.game_stats
-    assert_instance_of TeamStats, @stat_tracker.team_stats
+    # assert_instance_of TeamStats, @stat_tracker.team_stats
     # assert_instance_of LeagueStats, @stat_tracker.league_stats
   end
 
