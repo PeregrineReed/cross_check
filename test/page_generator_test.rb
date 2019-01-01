@@ -33,4 +33,8 @@ class PageGeneratorTest < Minitest::Test
     assert_instance_of PageGenerator, @page_generator
   end
 
+  def test_it_has_a_template
+    assert_equal @template, @page_generator.template
+  end
+
 end
