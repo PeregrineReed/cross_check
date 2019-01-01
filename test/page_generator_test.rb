@@ -48,4 +48,13 @@ class PageGeneratorTest < Minitest::Test
     assert_instance_of String, @page_generator.render
   end
 
+  def test_can_save_its_rendered_template
+    time_of_test = Time.now.to_s
+    @page_generator.save
+    expected = File.mtime('./site/index.html').to_s
+
+    check_for_file_mod = expected == time_of_test
+    assert_equal true, check_for_file_mod
+  end
+
 end
