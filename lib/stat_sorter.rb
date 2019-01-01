@@ -37,6 +37,10 @@ class StatSorter
     team_games
   end
 
+  def team_games(team_id)
+    games_by_team[team_id]
+  end
+
   def games_by_season
     @games.group_by do |game|
       game.season
