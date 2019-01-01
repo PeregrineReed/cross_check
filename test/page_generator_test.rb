@@ -37,4 +37,8 @@ class PageGeneratorTest < Minitest::Test
     assert_equal @template, @page_generator.template
   end
 
+  def test_it_can_render_its_template
+    assert_instance_of String, @page_generator.render
+  end
+
 end
