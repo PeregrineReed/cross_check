@@ -494,6 +494,67 @@ class TeamStatsTest < Minitest::Test
     assert_equal @teams, @team_stats.teams
   end
 
+
+
+  def test_it_has_best_season
+    assert_equal "20142015", @team_stats.best_season("3")
+    assert_equal "20122013", @team_stats.best_season("6")
+  end
+
+  def test_it_has_worst_season
+    assert_equal "20122013", @team_stats.best_season("3")
+    assert_equal "20142015", @team_stats.best_season("6")
+  end
+
+  def test_it_has_average_win_percentage
+    assert_equal 0.5, @team_stats.average_win_percentage("3")
+  end
+
+  def test_it_has_most_goals_scored
+    assert_equal 2, @team_stats.most_goals_scored("3")
+    assert_equal 5, @team_stats.most_goals_scored("6")
+  end
+
+  def test_it_has_fewest_goals_scored
+    assert_equal 1, @team_stats.fewest_goals_scored("3")
+    assert_equal 2, @team_stats.fewest_goals_scored("6")
+  end
+
+  def test_it_has_favorite_opponent
+    assert_equal "Jets", @team_stats.favorite_opponent("3")
+    assert_equal "Canucks", @team_stats.favorite_opponent("52")
+  end
+
+  def test_it_has_rival
+    assert_equal "Bruins", @team_stats.rival("3")
+    assert_equal "Rangers", @team_stats.rival("52")
+  end
+
+  def test_it_has_biggest_team_blowout
+    assert_equal 1, @team_stats.biggest_team_blowout("3")
+    assert_equal 6, @team_stats.biggest_team_blowout("6")
+  end
+
+  def test_it_has_worst_loss
+    assert_equal 3, @team_stats.worst_loss("3")
+    assert_equal 1, @team_stats.worst_loss("52")
+  end
+
+  def test_it_has_head_to_head
+    expected =
+      {
+      "6": "0 - 3",
+      "10": "0 - 3",
+      "12": "0 - 3",
+      "13": "0 - 3",
+      "14": "0 - 3",
+      "23": "0 - 3",
+      "52": "0 - 3",
+      }
+
+    assert_equal expected, @team_stats.head_to_head("3")
+  end
+
   def test_it_makes_single_season_summary
     expected = {
       preseason:
