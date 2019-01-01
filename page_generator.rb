@@ -6,4 +6,8 @@ class PageGenerator
     @template = template
   end
 
+  def render
+    ERB.new(template).result(binding)
+  end
+
 end
