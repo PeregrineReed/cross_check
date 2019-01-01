@@ -37,6 +37,12 @@ class PageGeneratorTest < Minitest::Test
     assert_equal @template, @page_generator.template
   end
 
+  def test_it_has_a_file_path
+    expected = ENV['PWD'] + '/site/index.html'
+
+    assert_equal expected, @page_generator.file_path
+  end
+
   def test_it_can_render_its_template
     assert_instance_of String, @page_generator.render
   end
