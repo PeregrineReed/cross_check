@@ -34,7 +34,8 @@ class PageGeneratorTest < Minitest::Test
   end
 
   def test_it_has_a_template
-    assert_equal @template, @page_generator.template
+    expected = File.open(@template, 'rb', &:read)
+    assert_equal expected, @page_generator.template
   end
 
   def test_it_has_a_file_path
