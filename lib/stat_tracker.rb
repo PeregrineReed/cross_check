@@ -28,13 +28,13 @@ class StatTracker < StatSorter
     FileConverter.new(files)
   end
 
-  def compile_stats
-    {
-    # games: GameStats.new(@games),
-    # teams: TeamStats.new(@teams),
-    # league: LeagueStats.new(@games, @teams)
-    }
-  end
+  # def compile_stats
+  #   {
+  #   # games: GameStats.new(@games),
+  #   # teams: TeamStats.new(@teams),
+  #   # league: LeagueStats.new(@games, @teams)
+  #   }
+  # end
 
 # Game Statistics
 # ======================================
@@ -138,15 +138,15 @@ class StatTracker < StatSorter
 
   # Season Statistics
   # ======================================
-
-  def biggest_bust
-  end
-
-  def biggest_surprise
-  end
-
-  def season_summary
-  end
+  #
+  # def biggest_bust
+  # end
+  #
+  # def biggest_surprise
+  # end
+  #
+  # def season_summary
+  # end
 
   #Team Statistics
   # ======================================
