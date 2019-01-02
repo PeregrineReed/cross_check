@@ -46,13 +46,13 @@ class FileConverterTest < Minitest::Test
     assert_equal true, all_teams
   end
 
-  def test_it_has_game_teams
-    skip
-    all_game_teams @file_converter.game_teams.all? do |game_team|
-      game_team.class == GameTeam
-    end
-
-    assert_equal true, all_game_teams
-  end
+  # def test_it_has_game_teams
+  #   skip
+  #   all_game_teams @file_converter.game_teams.all? do |game_team|
+  #     game_team.class == GameTeam
+  #   end
+  #
+  #   assert_equal true, all_game_teams
+  # end
 
 end
