@@ -1,3 +1,15 @@
+require_relative '../test/test_helper'
+require_relative '../lib/game'
+require_relative '../lib/game_stats'
+require_relative '../lib/team'
+require_relative '../lib/season'
+require_relative '../lib/team_stats'
+require_relative '../lib/stat_sorter'
+require_relative '../lib/league_stats'
+require_relative '../lib/file_converter'
+require_relative '../lib/stat_tracker'
+require 'csv'
+
 class StatTracker < StatSorter
 
   include GameStats
