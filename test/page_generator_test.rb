@@ -23,10 +23,9 @@ class PageGeneratorTest < Minitest::Test
     teams: @teams_path,
     game_teams: @game_teams_path
     }
-    @stat_tracker = StatTracker.new(@files)
 
     @template = './site/template.erb'
-    @page_generator = PageGenerator.new(@template)
+    @page_generator = PageGenerator.new(@template, @files)
   end
 
   def test_it_exists
@@ -36,6 +35,10 @@ class PageGeneratorTest < Minitest::Test
   def test_it_has_a_template
     expected = File.open(@template, 'rb', &:read)
     assert_equal expected, @page_generator.template
+  end
+
+  def test_it_has_a_stat_tracker
+    assert_instance_of StatTracker, @page_generator.stat_tracker
   end
 
   def test_it_has_a_file_path
