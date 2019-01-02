@@ -1,5 +1,9 @@
 module TeamStats
 
+  def team_info(team_id)
+    team = teams_by_id[team_id]
+    team.team_info
+  end
 
 
   def best_season(team_id)
@@ -18,10 +22,11 @@ module TeamStats
 
   def average_win_percentage(team_id)
     team = teams_by_id[team_id]
-    win_percent_sum = team.seasons.values.inject(0) do |sum, season|
-      sum + season.regular_season_win_percentage
-    end
-    win_percent_sum / team.seasons.count
+    (team.total[:wins] / team.total[:games].to_f).round(2)
+    # win_percent_sum = team.seasons.values.inject(0) do |sum, season|
+    #   sum + season.total_win_percentage
+    # end
+    # (win_percent_sum / team.seasons.count).round(2)
   end
 
   def goals_scored(team_id)

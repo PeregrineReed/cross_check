@@ -1,13 +1,13 @@
-require_relative '../test/test_helper'
-require_relative '../lib/game'
-require_relative '../lib/game_stats'
-require_relative '../lib/team'
-require_relative '../lib/season'
-require_relative '../lib/team_stats'
-require_relative '../lib/stat_sorter'
-require_relative '../lib/league_stats'
-require_relative '../lib/file_converter'
-require_relative '../lib/stat_tracker'
+require_relative './game'
+require_relative './game_stats'
+require_relative './team'
+require_relative './season'
+require_relative './team_stats'
+require_relative './stat_sorter'
+require_relative './league_stats'
+require_relative './season_stats'
+require_relative './file_converter'
+require_relative './stat_tracker'
 require 'csv'
 
 class StatTracker < StatSorter
@@ -15,6 +15,7 @@ class StatTracker < StatSorter
   include GameStats
   include TeamStats
   include LeagueStats
+  include SeasonStats
 
   attr_reader :files,
               :game_stats,
@@ -151,52 +152,52 @@ class StatTracker < StatSorter
   # Season Statistics
   # ======================================
 
-  def biggest_bust
-  end
-
-  def biggest_surprise
-  end
-
-  def season_summary
-  end
-
-  #Team Statistics
-  # ======================================
-
-  def team_info
-  end
-
-  def best_season
-  end
-
-  def worst_season
-  end
-
-  def average_win_percentage
-  end
-
-  def most_goals_scored
-  end
-
-  def fewest_goals_scored
-  end
-
-  def favorite_opponent
-  end
-
-  def rival
-  end
-
-  def biggest_team_blowout
-  end
-
-  def worst_loss
-  end
-
-  def head_to_head
-  end
-
-  def seasonal_summary
-  end
+  # def biggest_bust
+  # end
+  #
+  # def biggest_surprise
+  # end
+  #
+  # def season_summary
+  # end
+  #
+  # #Team Statistics
+  # # ======================================
+  #
+  # def team_info
+  # end
+  #
+  # def best_season
+  # end
+  #
+  # def worst_season
+  # end
+  #
+  # def average_win_percentage
+  # end
+  #
+  # def most_goals_scored
+  # end
+  #
+  # def fewest_goals_scored
+  # end
+  #
+  # def favorite_opponent
+  # end
+  #
+  # def rival
+  # end
+  #
+  # def biggest_team_blowout
+  # end
+  #
+  # def worst_loss
+  # end
+  #
+  # def head_to_head
+  # end
+  #
+  # def seasonal_summary
+  # end
 
 end

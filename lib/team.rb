@@ -12,13 +12,21 @@ class Team
                 :history
 
   def initialize(data)
-    @team_info = data
     @team_id = data[:team_id]
     @franchise_id = data[:franchiseid]
     @short_name = data[:shortname]
     @team_name = data[:teamname]
     @abbreviation = data[:abbreviation]
     @link = data[:link]
+
+    @team_info = {
+      'team_id' => team_id,
+      'franchise_id' => franchise_id,
+      'short_name' => short_name,
+      'team_name' => team_name,
+      'abbreviation' => abbreviation,
+      'link' => link
+    }
 
     @seasons = {}
     @history = {
