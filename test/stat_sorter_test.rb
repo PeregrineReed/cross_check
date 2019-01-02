@@ -276,6 +276,24 @@ class StatSorterTest < Minitest::Test
     assert_equal ["1", "2", "3", "4"], @stat_sorter.list_team_ids_in_games(games_2)
   end
 
+  def test_it_can_group_games_by_team
+    expected = {
+                "1" => [@game_1, @game_3],
+                "2" => [@game_4, @game_1],
+                "3" => [@game_2, @game_4],
+                "4" => [@game_5, @game_2],
+                "5" => [@game_3, @game_5]
+                }
+
+    assert_equal expected, @stat_sorter.games_by_team
+  end
+
+  def test_it_can_group_specific_teams_games
+    assert_equal [@game_1, @game_3], @stat_sorter.team_games("1")
+    assert_equal [@game_4, @game_1], @stat_sorter.team_games("2")
+    assert_equal [@game_2, @game_4], @stat_sorter.team_games("3")
+  end
+
   def test_it_can_group_games_by_season
     expected = {"20122013" => [@game_1, @game_2, @game_3], "20132014" => [@game_4, @game_5]}
 
