@@ -13,6 +13,7 @@ class FileConverter
     @teams_file = files[:teams]
     @teams = convert_teams
     @game_teams_file = files[:game_teams]
+    @seasons
   end
 
   def parse_csv(file)

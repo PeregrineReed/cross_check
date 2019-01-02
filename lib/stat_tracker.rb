@@ -16,6 +16,7 @@ class StatTracker < StatSorter
     # @game_stats = compile_stats[:games]
     # @team_stats = compile_stats[:teams]
     # @league_stats = compile_stats[:league]
+    add_seasons_to_teams
     update_stats
   end
 
