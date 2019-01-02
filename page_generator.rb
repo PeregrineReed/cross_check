@@ -1,10 +1,12 @@
 class PageGenerator
 
   attr_reader :template,
+              :stat_tracker,
               :file_path
 
-  def initialize(template)
+  def initialize(template, files)
     @template = File.open(template, 'rb', &:read)
+    @stat_tracker = StatTracker.from_csv(files)
 
     ENV['SITE'] = ENV['PWD'] + '/site'
     @file_path = File.join(ENV['SITE'], 'index.html'
