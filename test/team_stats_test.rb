@@ -497,15 +497,13 @@ class TeamStatsTest < Minitest::Test
 
 
   def test_it_has_best_season
-    skip
     assert_equal "20142015", @team_stats.best_season("3")
-    assert_equal "20122013", @team_stats.best_season("6")
+    assert_equal "20142015", @team_stats.best_season("6")
   end
 
   def test_it_has_worst_season
-    skip
-    assert_equal "20122013", @team_stats.best_season("3")
-    assert_equal "20142015", @team_stats.best_season("6")
+    assert_equal "20122013", @team_stats.worst_season("3")
+    assert_equal "20122013", @team_stats.worst_season("6")
   end
 
   def test_it_has_average_win_percentage

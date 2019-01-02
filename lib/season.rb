@@ -26,6 +26,10 @@ class Season
     (@regular[:wins] / @regular[:games].to_f).round(2)
   end
 
+  def total_win_percentage
+    ((@regular[:wins] + @preseason[:wins]) / (@regular[:games] + @preseason[:games]).to_f.round(2))
+  end
+
   def preseason_average_goals(type)
     (@preseason[type] / @preseason[:games].to_f).round(2)
   end

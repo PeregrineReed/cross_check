@@ -2,6 +2,20 @@ module TeamStats
 
 
 
+  def best_season(team_id)
+    team = teams_by_id[team_id]
+    team.seasons.max_by do |season|
+      season[1].total_win_percentage
+    end[0]
+  end
+
+  def worst_season(team_id)
+    team = teams_by_id[team_id]
+    team.seasons.min_by do |season|
+      season[1].total_win_percentage
+    end[0]
+  end
+
   def average_win_percentage(team_id)
     team = teams_by_id[team_id]
     win_percent_sum = team.seasons.values.inject(0) do |sum, season|
