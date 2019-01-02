@@ -1,3 +1,13 @@
+require_relative './team'
+require_relative './game'
+require_relative './season'
+require_relative './stat_sorter'
+require_relative './game_stats'
+require_relative './team_stats'
+require_relative './league_stats'
+require_relative './file_converter'
+require 'csv'
+
 class StatTracker < StatSorter
 
   include GameStats

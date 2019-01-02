@@ -1,7 +1,5 @@
 module TeamStats
 
-
-
   def best_season(team_id)
     team = teams_by_id[team_id]
     team.seasons.max_by do |season|

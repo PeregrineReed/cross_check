@@ -1,4 +1,4 @@
-require './lib/season'
+require_relative './season'
 
 class StatSorter
 
