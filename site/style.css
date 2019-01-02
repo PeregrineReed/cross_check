@@ -1,9 +1,48 @@
 html {
-  height: 100%;
   background-color: PapayaWhip;
-  font-size: 1px;
 }
 
 header {
+  display: grid;
   font-family: Arial;
+  justify-content: flex-start;
+  color: Blue;
+  grid-area: 3 / 5 / 7 / 10;
+  border: 2px Blue solid;
+  margin: 10px;
+}
+
+body {
+  justify-content: center;
+}
+
+.box {
+  display: grid;
+  grid-template: repeat(35, 1fr) / repeat(8, 2fr);
+  border: 2px Red solid;
+  margin: 10px;
+}
+
+h2 {
+  justify-content: center;
+  padding: 50px;
+  margin: 20px;
+  background-color: DodgerBlue;
+}
+
+.game_stats {
+  grid-area: 2 / 1 / 4 / 3;
+  display: 
+}
+
+.league_stats {
+  grid-area: 2 / 3 / span 2 / span 2;
+}
+
+.season_stats {
+  grid-area: 2 / 5 / span 2 / span 2;
+}
+
+.team_stats {
+  grid-area: 2 / 7 / span 2 / span 2;
 }
