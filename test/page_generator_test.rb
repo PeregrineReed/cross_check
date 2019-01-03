@@ -8,7 +8,7 @@ require './lib/stat_sorter'
 require './lib/league_stats'
 require './lib/file_converter'
 require './lib/stat_tracker'
-require './page_generator'
+require './lib/page_generator'
 require 'csv'
 require 'erb'
 
