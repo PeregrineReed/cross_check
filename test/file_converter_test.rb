@@ -9,12 +9,12 @@ class FileConverterTest < Minitest::Test
   def setup
     @games_data = './test/test_data/game_test.csv'
     @teams_data = './test/test_data/team_info_test.csv'
-    @game_teams_data = './test/test_data/game_teams_stats_test.csv'
+    #@game_teams_data = './test/test_data/game_teams_stats_test.csv'
 
     @files = {
       games: @games_data,
       teams: @teams_data,
-      game_teams: @game_teams_data
+      #game_teams: @game_teams_data
     }
 
     @file_converter = FileConverter.new(@files)
@@ -46,13 +46,13 @@ class FileConverterTest < Minitest::Test
     assert_equal true, all_teams
   end
 
-  def test_it_has_game_teams
-    skip
-    all_game_teams @file_converter.game_teams.all? do |game_team|
-      game_team.class == GameTeam
-    end
-
-    assert_equal true, all_game_teams
-  end
+  # def test_it_has_game_teams
+  #   skip
+  #   all_game_teams @file_converter.game_teams.all? do |game_team|
+  #     game_team.class == GameTeam
+  #   end
+  #
+  #   assert_equal true, all_game_teams
+  # end
 
 end

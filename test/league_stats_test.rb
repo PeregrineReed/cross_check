@@ -483,11 +483,11 @@ class LeagueStatsTest < Minitest::Test
   end
 
   def test_it_calculates_highest_defense
-    assert_equal "Maple Leafs", @league_stats.best_defense
+    assert_equal "Jets", @league_stats.best_defense
   end
 
   def test_it_calculates_lowest_defense
-    assert_equal "Jets", @league_stats.worst_defense
+    assert_equal "Maple Leafs", @league_stats.worst_defense
   end
 
   def test_it_calculates_highest_scoring_away_team

@@ -123,6 +123,6 @@ module GameStats
     wins = @games.reject do |game|
       game.outcome[0..3] != site
     end
-    (wins.size / @games.size.to_f * 100).round(2)
+    (wins.size / @games.size.to_f).round(2)
   end
 end

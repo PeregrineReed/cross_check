@@ -1,5 +1,10 @@
 module TeamStats
 
+  def team_info(team_id)
+    team = teams_by_id[team_id]
+    team.team_info
+  end
+
   def best_season(team_id)
     team = teams_by_id[team_id]
     team.seasons.max_by do |season|
@@ -14,12 +19,17 @@ module TeamStats
     end[0]
   end
 
+  # def average_win_percentage(team_id)
+  #   team = teams_by_id[team_id]
+  #   win_percent_sum = team.seasons.values.inject(0) do |sum, season|
+  #     sum + season.regular_season_win_percentage
+  #   end
+  #   win_percent_sum / team.seasons.count
+  # end
+
   def average_win_percentage(team_id)
     team = teams_by_id[team_id]
-    win_percent_sum = team.seasons.values.inject(0) do |sum, season|
-      sum + season.regular_season_win_percentage
-    end
-    win_percent_sum / team.seasons.count
+    (team.total[:wins] / team.total[:games].to_f).round(2)
   end
 
   def goals_scored(team_id)
@@ -125,11 +135,13 @@ module TeamStats
     blowout_games = []
     games.each do |game|
       if outcome == "win"
-        if team_win?(team_id, game) && game.type == "R"
+        if team_win?(team_id, game)
+          #&& game.type == "R"
           blowout_games << game
         end
       elsif outcome == "loss"
-        if !team_win?(team_id, game) && game.type == "R"
+        if !team_win?(team_id, game)
+          #&& game.type == "R"
           blowout_games << game
         end
       end
@@ -153,12 +165,12 @@ module TeamStats
 
   def head_to_head(team_id)
     #Check if only regular season games
-    opponent_games = team_games_by_opponent(team_id, "R")
+    opponent_games = team_games_by_opponent(team_id, "all")
     record = {}
     opponent_games.each do |opponent_id, games|
       wins = win_count_against_opponent(team_id, games)
-      losses = games.count - wins
-      record[opponent_id] = "#{wins} - #{losses}"
+      opponent = teams_by_id[opponent_id]
+      record[opponent.team_name] = (wins / games.count.to_f).round(2)
     end
     record
   end

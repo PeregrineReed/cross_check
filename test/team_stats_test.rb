@@ -494,7 +494,18 @@ class TeamStatsTest < Minitest::Test
     assert_equal @teams, @team_stats.teams
   end
 
+  def test_it_has_team_info
+    expected = {
+      "team_id"=> "3",
+      "franchise_id"=> "10",
+      "short_name"=> "NY Rangers",
+      "team_name"=> "Rangers",
+      "abbreviation"=> "NYR",
+      "link"=> "/api/v1/teams/3"
+    }
 
+    assert_equal expected, @team_stats.team_info("3")
+  end
 
   def test_it_has_best_season
     assert_equal "20142015", @team_stats.best_season("3")
@@ -507,7 +518,7 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_it_has_average_win_percentage
-    assert_equal 0.5, @team_stats.average_win_percentage("3")
+    assert_equal 0.44, @team_stats.average_win_percentage("3")
   end
 
   def test_it_has_most_goals_scored
@@ -559,7 +570,7 @@ class TeamStatsTest < Minitest::Test
   end
 
   def test_it_has_biggest_team_blowout
-    assert_equal 1, @team_stats.biggest_team_blowout("3")
+    assert_equal 4, @team_stats.biggest_team_blowout("3")
     assert_equal 6, @team_stats.biggest_team_blowout("6")
   end
 
@@ -571,8 +582,8 @@ class TeamStatsTest < Minitest::Test
   def test_it_has_head_to_head
     expected =
       {
-      "6"=> "0 - 3",
-      "52"=> "1 - 0"
+      "Bruins"=> 0.38,
+      "Jets"=> 1.0
       }
 
     assert_equal expected, @team_stats.head_to_head("3")

@@ -47,12 +47,12 @@ class TeamTest < Minitest::Test
   #A hash with key/value pairs for each of the attributes of a team.
   def test_it_has_team_info
     expected = {
-      team_id:  "1",
-      franchiseid: "23",
-      shortname: "New Jersey",
-      teamname: "Devils",
-      abbreviation: "NJD",
-      link: "/api/v1/teams/1"
+      "team_id"=>  "1",
+      "franchise_id"=> "23",
+      "short_name"=> "New Jersey",
+      "team_name"=> "Devils",
+      "abbreviation"=> "NJD",
+      "link"=> "/api/v1/teams/1"
     }
 
     assert_equal expected, @team_1.team_info

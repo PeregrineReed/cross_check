@@ -72,11 +72,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_percentage_home_wins
-    assert_equal 83.33, @stat_tracker.percentage_home_wins
+    assert_equal 0.83, @stat_tracker.percentage_home_wins
   end
 
   def test_it_can_determine_percentage_visitor_wins
-    assert_equal 16.67, @stat_tracker.percentage_visitor_wins
+    assert_equal 0.17, @stat_tracker.percentage_visitor_wins
   end
 
   def test_it_can_determine_season_with_most_games
@@ -114,11 +114,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_best_defense
-    assert_equal "Maple Leafs", @stat_tracker.best_defense
+    assert_equal "Hurricanes", @stat_tracker.best_defense
   end
 
   def test_it_can_determine_worst_defense
-    assert_equal "Hurricanes", @stat_tracker.worst_defense
+    assert_equal "Maple Leafs", @stat_tracker.worst_defense
   end
 
   def test_it_can_determine_highest_scoring_visitor
