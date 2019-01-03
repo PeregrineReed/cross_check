@@ -46,9 +46,17 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_has_stats_as_attributes
-    # assert_instance_of GameStats, @stat_tracker.game_stats
-    # assert_instance_of TeamStats, @stat_tracker.team_stats
-    # assert_instance_of LeagueStats, @stat_tracker.league_stats
+    assert_equal @files, @stat_tracker.files
+
+    all_games = @stat_tracker.games.all? do |game|
+      game.class == Game
+    end
+    all_teams = @stat_tracker.teams.all? do |team|
+      team.class == Team
+    end
+
+    assert_equal true, all_games
+    assert_equal true, all_teams
   end
 
   def test_it_can_determine_highest_total_score
