@@ -1,11 +1,5 @@
 module GameStats
 
-  # attr_reader :games
-  #
-  # def initialize(games)
-  #   @games = games
-  # end
-
   def list_seasons
     @games.map do |game|
       game.season

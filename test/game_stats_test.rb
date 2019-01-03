@@ -178,11 +178,11 @@ class GameStatsTest < Minitest::Test
   end
 
   def test_it_can_calculate_percentage_of_home_wins
-    assert_equal 83.33, @game_stats.wins_percentage("home")
+    assert_equal 0.83, @game_stats.wins_percentage("home")
   end
 
   def test_it_can_calculate_percentage_of_away_wins
-    assert_equal 16.67, @game_stats.wins_percentage("away")
+    assert_equal 0.17, @game_stats.wins_percentage("away")
   end
 
 end

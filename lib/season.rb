@@ -19,10 +19,16 @@ class Season
   end
 
   def preseason_win_percentage
+    if @preseason[:games] == 0
+      return 0.0
+    end
     (@preseason[:wins] / @preseason[:games].to_f).round(2)
   end
 
   def regular_season_win_percentage
+    if @regular[:games] == 0
+      return 0.0
+    end
     (@regular[:wins] / @regular[:games].to_f).round(2)
   end
 
@@ -31,10 +37,16 @@ class Season
   end
 
   def preseason_average_goals(type)
+    if @preseason[:games] == 0
+      return 0.0
+    end
     (@preseason[type] / @preseason[:games].to_f).round(2)
   end
 
   def regular_season_average_goals(type)
+    if @regular[:games] == 0
+      return 0.0
+    end
     (@regular[type] / @regular[:games].to_f).round(2)
   end
 
