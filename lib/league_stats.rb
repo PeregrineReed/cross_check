@@ -1,25 +1,41 @@
 module LeagueStats
 
   def best_offense
-    @teams.max_by do |team|
+    teams = @teams.reject do |team|
+      team.average_goals(team.total).to_s == 'NaN'
+    end
+
+    teams.max_by do |team|
       team.average_goals(team.total)
     end.team_name
   end
 
   def worst_offense
-    @teams.min_by do |team|
+    teams = @teams.reject do |team|
+      team.average_goals(team.total).to_s == 'NaN'
+    end
+
+    teams.min_by do |team|
       team.average_goals(team.total)
     end.team_name
   end
 
   def best_defense
-    @teams.min_by do |team|
+    teams = @teams.reject do |team|
+      team.calculate_defense.to_s == 'NaN'
+    end
+
+    teams.min_by do |team|
       team.calculate_defense
     end.team_name
   end
 
   def worst_defense
-    @teams.max_by do |team|
+    teams = @teams.reject do |team|
+      team.calculate_defense.to_s == 'NaN'
+    end
+
+    teams.max_by do |team|
       team.calculate_defense
     end.team_name
   end

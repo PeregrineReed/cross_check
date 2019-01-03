@@ -17,39 +17,161 @@
         <ul>
           <li>Highest Total Score:<br>
             <%= stat_tracker.highest_total_score %>
-<<<<<<< HEAD
-          </br><br></br></li>
+            </br><br></br>
+          </li>
           <li>Lowest Total Score:<br>
             <%= stat_tracker.lowest_total_score %>
-          </br><br></br></li>
+            </br><br></br>
+          </li>
           <li>Biggest Blowout:<br>
             <%= stat_tracker.biggest_blowout %>
-          </br><br></br></li>
+            </br><br></br>
+          </li>
           <li>Most Popular Venue:<br>
             <%= stat_tracker.most_popular_venue %>
-          </br><br></br></li>
+            </br><br></br>
+          </li>
           <li>Least Popular Venue:<br>
             <%= stat_tracker.least_popular_venue %>
+            </br><br></br>
+          </li>
+          <li>Percentage Home Wins:<br>
+            <%= stat_tracker.percentage_home_wins %>
+            </br><br></br>
+          </li>
+          <li>Percentage Visitor Wins:<br>
+            <%= stat_tracker.percentage_visitor_wins %>
+              </br><br></br>
+            </li>
+          <li>Season with the Most Games:<br>
+            <%= stat_tracker.season_with_most_games %>
+            </br><br></br>
+          </li>
+          <li>Season with the Fewest Games:<br>
+            <%= stat_tracker.season_with_fewest_games %>
             </br><br></br></li>
-=======
-          </br></li>
-          <li>Lowest Total Score:<br>
-            <%= stat_tracker.lowest_total_score %>
-          </br></li>
-          <li>Biggest Blowout:<br>
-            <%= stat_tracker.biggest_blowout %>
-          </br></li>
-          <li>Most Popular Venue:<br>
-            <%= stat_tracker.most_popular_venue %>
-          </br></li>
-          <li>Least Popular Venue:<br>
-            <%= stat_tracker.least_popular_venue %>
-            </br></li>
->>>>>>> c6009e753ba331ad4723b8039eee82998bb9e8f4
-          </ul></h2>
-      <h2 class='league_stats'>League Statistics</h2>
-      <h2 class='season_stats'>Season Statistics</h2>
-      <h2 class='team_stats'>Team Statistics</h2>
+          <li>Count of Games by Season:<br>
+            <% stat_tracker.count_of_games_by_season.each do |season, game_count| %>
+              <%= "#{season}: #{game_count}" %>
+            <% end %>
+            </br><br></br>
+          </li>
+          <li>Average Goals per Game:<br>
+            <%= stat_tracker.average_goals_per_game %>
+            </br><br></br>
+          </li>
+          <li>Average Goals by Season:<br>
+            <% stat_tracker.average_goals_by_season.each do |season, average| %>
+              <%= "#{season}: #{average}" %>
+            <% end %>
+          </br><br></br></li>
+        </ul>
+      </h2>
+      <h2 class='league_stats'>League Statistics
+        <ul>
+          <li>Count of Teams:<br>
+            <%= stat_tracker.count_of_teams %>
+            </br><br></br>
+          </li>
+          <li>Best Offense:<br>
+            <%= stat_tracker.best_offense %>
+            </br><br></br>
+          </li>
+          <li>Worst Offense:<br>
+            <%= stat_tracker.worst_offense %>
+            </br><br></br>
+          </li>
+          <li>Best Defense:<br>
+            <%= stat_tracker.best_defense %>
+            </br><br></br>
+          </li>
+          <li>Worst Defense:<br>
+            <%= stat_tracker.worst_defense %>
+            </br><br></br>
+          </li>
+          <li>Highest Scoring Visitor:<br>
+            <%= stat_tracker.highest_scoring_visitor %>
+            </br><br></br>
+          </li>
+          <li>Highest Scoring Home Team:<br>
+            <%= stat_tracker.highest_scoring_home_team %>
+            </br><br></br>
+          </li>
+          <li>Lowest Scoring Visitor:<br>
+            <%= stat_tracker.lowest_scoring_visitor %>
+            </br><br></br>
+          </li>
+          <li>Lowest Scoring Home Team:<br>
+            <%= stat_tracker.lowest_scoring_home_team %>
+            </br><br></br>
+          </li>
+          <li>Winningest Team:<br>
+            <%= stat_tracker.winningest_team %>
+            </br><br></br>
+          </li>
+          <li>Best Fans:<br>
+            <%= stat_tracker.best_fans %>
+            </br><br></br></li>
+          <li>Worst Fans:<br>
+            <% if stat_tracker.worst_fans == [] %>
+              <%= "n/a" %>
+            <% else %>
+              <%= stat_tracker.worst_fans %>
+            <% end %>
+            </br><br></br>
+          </li>
+        </ul>
+      </h2>
+      <h2 class='season_stats'>Season Statistics
+        <ul>
+          <li>Biggest Bust per Season:<br>
+            <% stat_tracker.list_seasons.each do |season| %>
+              <%= "#{season}:  #{stat_tracker.biggest_bust(season)}" %>
+            <% end %>
+            </br><br></br>
+          </li>
+          <li>Biggest Surprise per Season:<br>
+            <% stat_tracker.list_seasons.each do |season| %>
+              <%= "#{season}:  #{stat_tracker.biggest_surprise(season)}" %>
+            <% end %>
+            </br><br></br>
+          </li>
+          <li>Season Summaries by Team:<br>
+            <% stat_tracker.teams.each do |team| %>
+              <% team.seasons.each do |season| %>
+                <br></br>
+                <%= "#{team}:  #{stat_tracker.season_summary(season[1].season_id, team.team_id)}" %>
+                <br></br>
+              <% end %>
+            <% end %>
+            </br><br></br>
+          </li>
+        </ul>
+      </h2>
+      <h2 class='team_stats'>Team Statistics
+        <ul>
+          <li>Team Info<br>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= stat_tracker.team_info(team.team_id) %>
+              <br></br>
+            <% end %>
+            </br><br></br>
+          </li>
+          <li>Best Season</li>
+            
+          <li>Worst Season</li>
+          <li>Average Win Percentage</li>
+          <li>Most Goals Scored</li>
+          <li>Fewest Goals Scored</li>
+          <li>Favorite Opponent</li>
+          <li>Rival</li>
+          <li>Biggest Team Blowout</li>
+          <li>Worst Loss</li>
+          <li>Head to Head</li>
+          <li>Seasonal Summary</li>
+        </ul>
+      </h2>
     </div>
   </body>
 </html>
