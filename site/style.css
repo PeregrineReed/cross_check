@@ -1,0 +1,62 @@
+html {
+  background-color: PapayaWhip;
+}
+
+header {
+  display: grid;
+  font-family: Arial;
+  justify-content: flex-start;
+  color: Blue;
+  grid-area: 3 / 5 / 7 / 10;
+  border: 2px Blue solid;
+  margin: 10px;
+}
+
+body {
+  justify-content: center;
+}
+
+ul {
+  display: table;
+  background-color: PapayaWhip;
+  font-family: Arial;
+  height: 500px;
+  border-radius: 10%;
+  font-weight: lighter;
+  font-size: 0.8em;
+  border: 2px Red solid;
+}
+
+.box {
+  display: grid;
+  grid-template: repeat(35, 1fr) / repeat(8, 2fr);
+  border: 2px Red solid;
+  margin: 10px;
+}
+
+h2 {
+  justify-content: center;
+  padding: 50px;
+  margin: 20px;
+  background-color: DodgerBlue;
+  border-radius: 10%;
+  width: 25%;
+  font-family: Arial;
+}
+
+.game_stats {
+  grid-column 1, 3;
+  display:
+}
+
+.league_stats {
+  grid-area: 1 / 3 / auto / span 2;
+}
+
+.season_stats {
+  grid-area: 1 / 5 / auto / span 2;
+}
+
+.team_stats {
+  grid-area: 1 / 7 / auto / span 2;
+}
