@@ -12,7 +12,7 @@ module SeasonStats
     end.team_name
   end
 
-  #This methods only needed for incomplete data sets (if team didn't play
+  #This method only needed for incomplete data sets (if team didn't play
   #preseason and regular season games during the given season.)
   def teams_with_season_games(season)
     season_teams = []
