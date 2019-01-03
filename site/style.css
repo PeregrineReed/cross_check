@@ -22,9 +22,12 @@ ul {
   font-family: Arial;
   height: 500px;
   border-radius: 10%;
+<<<<<<< HEAD
   font-weight: lighter;
   font-size: 0.8em;
   border: 2px Red solid;
+=======
+>>>>>>> c6009e753ba331ad4723b8039eee82998bb9e8f4
 }
 
 .box {
@@ -40,8 +43,11 @@ h2 {
   margin: 20px;
   background-color: DodgerBlue;
   border-radius: 10%;
+<<<<<<< HEAD
   width: 25%;
   font-family: Arial;
+=======
+>>>>>>> c6009e753ba331ad4723b8039eee82998bb9e8f4
 }
 
 .game_stats {
