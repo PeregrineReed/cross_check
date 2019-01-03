@@ -13,13 +13,24 @@
       </h1>
     </header>
     <div class='box'>
-      <h2 class='game_stats'>Game Statistics</h2>
-        <ul class='game_stats'>
-          <li>Highest Total Score:<br><%= stat_tracker.highest_total_score %></br></li>
-          <li>Lowest Total Score:<br><%= stat_tracker.lowest_total_score %></br></li>
-          <li>Biggest Blowout:<br><%= stat_tracker.biggest_blowout %></br></li>
-          <li>Most Popular Venue:<br><%= stat_tracker.most_popular_venue %></br></li>
-          </ul>
+      <h2 class='game_stats'>Game Statistics
+        <ul>
+          <li>Highest Total Score:<br>
+            <%= stat_tracker.highest_total_score %>
+          </br></li>
+          <li>Lowest Total Score:<br>
+            <%= stat_tracker.lowest_total_score %>
+          </br></li>
+          <li>Biggest Blowout:<br>
+            <%= stat_tracker.biggest_blowout %>
+          </br></li>
+          <li>Most Popular Venue:<br>
+            <%= stat_tracker.most_popular_venue %>
+          </br></li>
+          <li>Least Popular Venue:<br>
+            <%= stat_tracker.least_popular_venue %>
+            </br></li>
+          </ul></h2>
       <h2 class='league_stats'>League Statistics</h2>
       <h2 class='season_stats'>Season Statistics</h2>
       <h2 class='team_stats'>Team Statistics</h2>
