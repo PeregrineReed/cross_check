@@ -16,10 +16,6 @@ class FileConverter
     @seasons
   end
 
-  def parse_csv(file)
-    CSV.open(file, headers: true, header_converters: :symbol)
-  end
-
   def convert_games
     game_data = parse_csv(@games_file)
     game_data.map do |game|
@@ -32,6 +28,10 @@ class FileConverter
     teams_data.map do |team|
       Team.new(team)
     end
+  end
+
+  def parse_csv(file)
+    CSV.open(file, headers: true, header_converters: :symbol)
   end
 
 end
