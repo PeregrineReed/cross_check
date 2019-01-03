@@ -16,25 +16,22 @@ class StatTracker < StatSorter
   include LeagueStats
   include SeasonStats
 
-  attr_reader :files,
-              :game_stats,
+  attr_reader :game_stats,
               :team_stats,
               :league_stats
 
-  def initialize(files)
-    @files = files
-    @games = convert_files.games
-    @teams = convert_files.teams
+  def initialize(games, teams)
+    @games = games
+    @teams = teams
     add_seasons_to_teams
     update_stats
   end
 
   def self.from_csv(files)
-    new(files)
-  end
-
-  def convert_files
-    FileConverter.new(files)
+    converter = FileConverter.new(files)
+    games = converter.games
+    teams = converter.teams
+    StatTracker.new(games, teams)
   end
 
   def percentage_home_wins
@@ -48,5 +45,5 @@ class StatTracker < StatSorter
   def count_of_teams
     @teams.count
   end
-  
+
 end
