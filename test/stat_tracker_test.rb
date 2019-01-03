@@ -46,9 +46,17 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_has_stats_as_attributes
-    # assert_instance_of GameStats, @stat_tracker.game_stats
-    # assert_instance_of TeamStats, @stat_tracker.team_stats
-    # assert_instance_of LeagueStats, @stat_tracker.league_stats
+    assert_equal @files, @stat_tracker.files
+
+    all_games = @stat_tracker.games.all? do |game|
+      game.class == Game
+    end
+    all_teams = @stat_tracker.teams.all? do |team|
+      team.class == Team
+    end
+
+    assert_equal true, all_games
+    assert_equal true, all_teams
   end
 
   def test_it_can_determine_highest_total_score
@@ -72,11 +80,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_percentage_home_wins
-    assert_equal 83.33, @stat_tracker.percentage_home_wins
+    assert_equal 0.83, @stat_tracker.percentage_home_wins
   end
 
   def test_it_can_determine_percentage_visitor_wins
-    assert_equal 16.67, @stat_tracker.percentage_visitor_wins
+    assert_equal 0.17, @stat_tracker.percentage_visitor_wins
   end
 
   def test_it_can_determine_season_with_most_games
@@ -114,11 +122,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_best_defense
-    assert_equal "Maple Leafs", @stat_tracker.best_defense
+    assert_equal "Hurricanes", @stat_tracker.best_defense
   end
 
   def test_it_can_determine_worst_defense
-    assert_equal "Hurricanes", @stat_tracker.worst_defense
+    assert_equal "Maple Leafs", @stat_tracker.worst_defense
   end
 
   def test_it_can_determine_highest_scoring_visitor

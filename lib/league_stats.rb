@@ -13,13 +13,13 @@ module LeagueStats
   end
 
   def best_defense
-    @teams.max_by do |team|
+    @teams.min_by do |team|
       team.calculate_defense
     end.team_name
   end
 
   def worst_defense
-    @teams.min_by do |team|
+    @teams.max_by do |team|
       team.calculate_defense
     end.team_name
   end

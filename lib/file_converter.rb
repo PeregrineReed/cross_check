@@ -17,7 +17,7 @@ class FileConverter
   end
 
   def parse_csv(file)
-    CSV.open(file, headers: true, header_converters: :symbol) #converters: :numeric
+    CSV.open(file, headers: true, header_converters: :symbol)
   end
 
   def convert_games
