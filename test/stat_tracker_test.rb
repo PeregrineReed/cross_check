@@ -13,41 +13,29 @@ require 'csv'
 class StatTrackerTest < Minitest::Test
 
   def setup
-    @games_path = './test/test_data/game_test.csv'
-    @teams_path = './test/test_data/team_info_test.csv'
-    @game_teams_path = './test/test_data/game_teams_stats_test.csv'
+    games_path = './test/test_data/game_test.csv'
+    teams_path = './test/test_data/team_info_test.csv'
+    game_teams_path = './test/test_data/game_teams_stats_test.csv'
 
     @files = {
-    games: @games_path,
-    teams: @teams_path,
-    game_teams: @game_teams_path
+    games: games_path,
+    teams: teams_path,
+    game_teams: game_teams_path
     }
 
-    @stat_tracker = StatTracker.new(@files)
+    @stat_tracker = StatTracker.from_csv(@files)
   end
 
   def test_it_exists
+    stat_tracker_generic = StatTracker.new([], [])
+    assert_instance_of StatTracker, stat_tracker_generic
+  end
+
+  def test_it_exists_from_csv
     assert_instance_of StatTracker, @stat_tracker
   end
 
-  def test_it_can_create_an_instance_from_csv
-    stats_from_csv = StatTracker.from_csv(@files)
-    assert_instance_of StatTracker, stats_from_csv
-  end
-
-  def test_it_can_store_files
-    assert_equal @games_path, @stat_tracker.files[:games]
-    assert_equal @teams_path, @stat_tracker.files[:teams]
-    assert_equal @game_teams_path, @stat_tracker.files[:game_teams]
-  end
-
-  def test_it_can_convert_files
-    assert_instance_of FileConverter, @stat_tracker.convert_files
-  end
-
   def test_it_has_stats_as_attributes
-    assert_equal @files, @stat_tracker.files
-
     all_games = @stat_tracker.games.all? do |game|
       game.class == Game
     end
@@ -57,6 +45,11 @@ class StatTrackerTest < Minitest::Test
 
     assert_equal true, all_games
     assert_equal true, all_teams
+  end
+
+  def test_it_converts_files_from_csv
+    assert_equal "2012030221", @stat_tracker.games[0].game_id
+    assert_equal "3", @stat_tracker.teams[0].team_id
   end
 
   def test_it_can_determine_highest_total_score
@@ -88,11 +81,11 @@ class StatTrackerTest < Minitest::Test
   end
 
   def test_it_can_determine_season_with_most_games
-    assert_equal "20122013", @stat_tracker.season_with_most_games
+    assert_equal 20122013, @stat_tracker.season_with_most_games
   end
 
   def test_it_can_determine_season_with_fewest_games
-    assert_equal "20162017", @stat_tracker.season_with_fewest_games
+    assert_equal 20162017, @stat_tracker.season_with_fewest_games
   end
 
   def test_it_can_determine_count_of_games_by_season

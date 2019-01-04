@@ -22,12 +22,12 @@ module GameStats
 
   def season_with_most_games
     most_games = count_of_games_by_season.values.max
-    count_of_games_by_season.key(most_games)
+    count_of_games_by_season.key(most_games).to_i
   end
 
   def season_with_fewest_games
     fewest_games = count_of_games_by_season.values.min
-    count_of_games_by_season.key(fewest_games)
+    count_of_games_by_season.key(fewest_games).to_i
   end
 
   def total_scores

@@ -1,4 +1,4 @@
-html {
+/* html {
   background-color: PapayaWhip;
 }
 
@@ -22,6 +22,9 @@ ul {
   font-family: Arial;
   height: 500px;
   border-radius: 10%;
+  font-weight: lighter;
+  font-size: 12px;
+  border: 2px Red solid;
 }
 
 .box {
@@ -29,14 +32,18 @@ ul {
   grid-template: repeat(35, 1fr) / repeat(8, 2fr);
   border: 2px Red solid;
   margin: 10px;
+  justify-content: center;
 }
 
 h2 {
   justify-content: center;
-  padding: 50px;
+  padding: 80px;
   margin: 20px;
   background-color: DodgerBlue;
   border-radius: 10%;
+  width: 20%;
+  height: 30px;
+  font-family: Arial;
 }
 
 .game_stats {
@@ -54,4 +61,4 @@ h2 {
 
 .team_stats {
   grid-area: 1 / 7 / auto / span 2;
-}
+} */

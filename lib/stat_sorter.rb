@@ -10,12 +10,19 @@ class StatSorter
     @teams = teams
   end
 
-  def teams_by_id
-    teams = {}
-    @teams.each do |team|
-      teams[team.team_id] = team
+  def add_seasons_to_teams
+    games_by_season.each do |season, games|
+      list_team_ids_in_games(games).each do |team_id|
+        team = teams_by_id[team_id]
+        team.seasons[season] = Season.new(season)
+      end
     end
-    teams
+  end
+
+  def games_by_season
+    @games.group_by do |game|
+      game.season
+    end
   end
 
   def list_team_ids_in_games(games)
@@ -27,33 +34,12 @@ class StatSorter
     team_ids.uniq.sort!
   end
 
-  def games_by_team
-    team_games = @games.group_by do |game|
-      game.home_team_id
+  def teams_by_id
+    teams = {}
+    @teams.each do |team|
+      teams[team.team_id] = team
     end
-    @games.each do |game|
-      team_games[game.away_team_id] << game
-    end
-    team_games
-  end
-
-  def team_games(team_id)
-    games_by_team[team_id]
-  end
-
-  def games_by_season
-    @games.group_by do |game|
-      game.season
-    end
-  end
-
-  def add_seasons_to_teams
-    games_by_season.each do |season, games|
-      list_team_ids_in_games(games).each do |team_id|
-        team = teams_by_id[team_id]
-        team.seasons[season] = Season.new(season)
-      end
-    end
+    teams
   end
 
   def update_stats
@@ -117,7 +103,6 @@ class StatSorter
     if game.home_goals > game.away_goals
       team.seasons[game.season].regular[:wins] += 1
       team.history[:regular][:wins] += 1
-
     end
   end
 
@@ -158,6 +143,20 @@ class StatSorter
     if game.away_goals > game.home_goals
       team.history[:away][:wins] += 1
     end
+  end
+
+  def games_by_team
+    team_games = @games.group_by do |game|
+      game.home_team_id
+    end
+    @games.each do |game|
+      team_games[game.away_team_id] << game
+    end
+    team_games
+  end
+
+  def team_games(team_id)
+    games_by_team[team_id]
   end
 
 end

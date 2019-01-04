@@ -20,13 +20,13 @@ class Team
     @link = data[:link]
 
     @team_info = {
-                  "team_id"=> @team_id,
-                  "franchise_id"=> @franchise_id,
-                  "short_name"=> @short_name,
-                  "team_name"=> @team_name,
-                  "abbreviation"=> @abbreviation,
-                  "link"=> @link
-                }
+      'team_id' => team_id,
+      'franchise_id' => franchise_id,
+      'short_name' => short_name,
+      'team_name' => team_name,
+      'abbreviation' => abbreviation,
+      'link' => link
+    }
 
     @seasons = {}
     @history = {

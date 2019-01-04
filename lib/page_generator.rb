@@ -9,8 +9,7 @@ class PageGenerator
     @stat_tracker = StatTracker.from_csv(files)
 
     ENV['SITE'] = ENV['PWD'] + '/site'
-    @file_path = File.join(ENV['SITE'], 'index.html'
-    )
+    @file_path = File.join(ENV['SITE'], 'index.html')
   end
 
   def render
