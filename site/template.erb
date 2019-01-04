@@ -140,9 +140,9 @@
             <% stat_tracker.teams.each do |team| %>
               <% team.seasons.each do |season| %>
                 <br></br>
-                <%= "#{team}:  #{stat_tracker.season_summary(season[1].season_id, team.team_id)}" %>
-                <br></br>
+                <%= "#{team.team_name} / #{season[1].season_id}:  #{stat_tracker.season_summary(season[1].season_id, team.team_id)}" %>
               <% end %>
+              <br></br>
             <% end %>
             </br><br></br>
           </li>
@@ -153,23 +153,136 @@
           <li>Team Info<br>
             <% stat_tracker.teams.each do |team| %>
               <br></br>
+              <%= team.team_name + ": " %>
               <%= stat_tracker.team_info(team.team_id) %>
               <br></br>
             <% end %>
             </br><br></br>
           </li>
           <li>Best Season</li>
-            
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.seasons.keys != [] %>
+                <%= stat_tracker.best_season(team.team_id) %>
+              <% else %>
+                <%= 'no seasons played' %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Worst Season</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.seasons.keys != [] %>
+                <%= stat_tracker.worst_season(team.team_id) %>
+              <% else %>
+                <%= 'no seasons played' %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Average Win Percentage</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <%= stat_tracker.average_win_percentage(team.team_id) %>
+                <br></br>
+            <% end %>
+            </br><br></br>
           <li>Most Goals Scored</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if stat_tracker.team_games(team.team_id) != nil %>
+                <%= stat_tracker.most_goals_scored(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Fewest Goals Scored</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if stat_tracker.team_games(team.team_id) != nil %>
+                <%= stat_tracker.fewest_goals_scored(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Favorite Opponent</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.total[:games] != 0 %>
+                <%= stat_tracker.favorite_opponent(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Rival</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.total[:games] != 0 %>
+                <%= stat_tracker.rival(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Biggest Team Blowout</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.total[:games] != 0 %>
+                <%= stat_tracker.biggest_team_blowout(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Worst Loss</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.total[:games] != 0 %>
+                <%= stat_tracker.worst_loss(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Head to Head</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <% if team.total[:games] != 0 %>
+                <%= stat_tracker.head_to_head(team.team_id) %>
+              <% else %>
+                <%= 0 %>
+              <% end %>
+              <br></br>
+            <% end %>
+            </br><br></br>
           <li>Seasonal Summary</li>
+            <% stat_tracker.teams.each do |team| %>
+              <br></br>
+              <%= team.team_name + ": " %>
+              <%= stat_tracker.seasonal_summary(team.team_id) %>
+                <br></br>
+            <% end %>
+            </br><br></br>
         </ul>
       </h2>
     </div>
