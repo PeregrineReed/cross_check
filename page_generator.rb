@@ -10,7 +10,6 @@ require './lib/stat_tracker'
 require './lib/page_generator'
 require 'csv'
 require 'erb'
-require 'pry'
 
 games_path = './data/game.csv'
 teams_path = './data/team_info.csv'

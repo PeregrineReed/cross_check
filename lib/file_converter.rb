@@ -13,11 +13,6 @@ class FileConverter
     @teams_file = files[:teams]
     @teams = convert_teams
     @game_teams_file = files[:game_teams]
-    @seasons
-  end
-
-  def parse_csv(file)
-    CSV.open(file, headers: true, header_converters: :symbol)
   end
 
   def convert_games
@@ -32,6 +27,10 @@ class FileConverter
     teams_data.map do |team|
       Team.new(team)
     end
+  end
+
+  def parse_csv(file)
+    CSV.open(file, headers: true, header_converters: :symbol)
   end
 
 end

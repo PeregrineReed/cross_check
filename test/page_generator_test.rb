@@ -15,9 +15,9 @@ require 'erb'
 class PageGeneratorTest < Minitest::Test
 
   def setup
-    @games_path = './test/test_data/game_test.csv'
-    @teams_path = './test/test_data/team_info_test.csv'
-    @game_teams_path = './test/test_data/game_teams_stats_test.csv'
+    @games_path = './data/game.csv'
+    @teams_path = './data/team_info.csv'
+    @game_teams_path = './data/game_teams_stats.csv'
     @files = {
     games: @games_path,
     teams: @teams_path,
